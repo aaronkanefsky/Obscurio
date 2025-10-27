@@ -15,10 +15,14 @@ class Button {
         this.size = size;
         this.font = font;
         this.backgroundColor = backgroundColor;
-        this.darkened = color(
+        this.backgroundColorHovered = color(
             red(this.backgroundColor) * 0.8,
             green(this.backgroundColor) * 0.8,
             blue(this.backgroundColor) * 0.8);
+        this.backgroundColorClicked = color(
+            red(this.backgroundColor) * 0.6,
+            green(this.backgroundColor) * 0.6,
+            blue(this.backgroundColor) * 0.6);
         this.currentColor = this.backgroundColor;
         this.clickedState = ButtonStates.UP;
     }
@@ -46,7 +50,7 @@ class Button {
         this.mouseHover();
         switch (this.clickedState) {
             case ButtonStates.HOVER:
-                this.currentColor = this.darkened;
+                this.currentColor = this.backgroundColorHovered;
                 cursor('pointer');
                 break;
 
