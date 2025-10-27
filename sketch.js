@@ -24,7 +24,8 @@ function draw() {
   textFont(myFont);
   textSize(40);
   text("The quick brown fox jumped", 10, 200)
-  text("over the lazy dog!", 30, 235)
+  text("over the lazy dog!", 30, 235);
+  myButton.updateButton();
   myButton.drawButton();
 }
 
