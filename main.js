@@ -162,8 +162,6 @@ function draw() {
         button7players.drawButton();
         button8players.drawButton();
 
-        Button.updateCursor();
-
         if (button2players.released) {
             myGame.playerCount = 2;
             myGame.currScreen = 2;
@@ -261,6 +259,5 @@ function draw() {
 
     // Do for every screen
     noCursor();
-    let cursorImg = Button.anyHovered ? cursorPointer : cursorDefault
-    image(cursorImg, mouseX - 14, mouseY - 14);
+    image(cursorDefault, mouseX - 14, mouseY - 14);
 }

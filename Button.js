@@ -5,7 +5,7 @@ const ButtonStates = {
 };
 
 class Button {
-  static anyHovered = false;
+
   constructor(x, y, width, height, bodyText, size, font, backgroundColor) {
     // Button details
     this.x = x;
@@ -33,7 +33,7 @@ class Button {
     this.currentColor = this.backgroundColor;
     this.clickState = ButtonStates.UP;
 
-    // Output states (like Qt)
+    // Output states
     this.pressed = false;
     this.released = false;
 
@@ -59,7 +59,7 @@ class Button {
 
     // Determine hover and click states
     if (this.isMouseOver()) {
-      Button.anyHovered = true;
+      
       if (mouseIsPressed) {
         this.clickState = ButtonStates.CLICKED;
 
@@ -82,6 +82,7 @@ class Button {
         this._wasPressed = false;
       }
       this.clickState = ButtonStates.UP;
+  
     }
 
     // Visuals & cursor
@@ -117,9 +118,6 @@ class Button {
     pop();
   }
 
-  static updateCursor() {
-    cursor(Button.anyHovered ? 'pointer' : 'default');
-    Button.anyHovered = false; // reset for next frame
-  }
+  
 }
 

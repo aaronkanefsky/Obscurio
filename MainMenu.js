@@ -6,7 +6,7 @@
  */
 class MainMenu{
     constructor(game){
-        this.backgroundImage = loadImage('assets/images/background.png')
+        this.backgroundImage = loadImage('assets/images/title_screen.png')
         this.game = game; // Reference to current game
         this.instructionsButton;
         this.optionsButton;
@@ -21,11 +21,11 @@ class MainMenu{
     enter(){
         
         // Init all buttons
-        this.instructionsButton = new Button(250, 550, 100, 40, 'Instructions', 20, this.menuFont, this.buttonColor);
-        this.optionsButton = new Button(100, 550, 100, 40, 'Options', 20, this.menuFont, this.buttonColor);
-        this.playButton = new Button(300, 100, 100, 40, 'Play', 20, this.menuFont, this.buttonColor);
+        this.instructionsButton = new Button(350, 570, 160, 40, 'Instructions', 20, this.menuFont, this.buttonColor);
+        this.optionsButton = new Button(170, 570, 100, 40, 'Options', 20, this.menuFont, this.buttonColor);
+        this.playButton = new Button(300, 240, 100, 40, 'Play', 20, this.menuFont, this.buttonColor);
 
-        // Set the background to be the correct image
+        
     }
 
     /**
@@ -52,7 +52,7 @@ class MainMenu{
      * @description Draws the main menu to the screen
      */
     drawMainMenu(){
-        image(this.backgroundImage, 0, 0)
+        image(this.backgroundImage, 0, 0, 600, 600)
         this.instructionsButton.drawButton();
         this.optionsButton.drawButton();
         this.playButton.drawButton();
