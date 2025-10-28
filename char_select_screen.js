@@ -127,14 +127,14 @@ function setup() {
   for(i = 0; i < 8; i++) {
     myGame.characters.push(new characterObj(i));
   }
-  titleImg = loadImage('title_screen.png');
-  img0 = loadImage('character0.png');
-  img1 = loadImage('character1.png');
-  img2 = loadImage('character2.png');
-  img3 = loadImage('character3.png');
-  img4 = loadImage('character4.png');
-  img5 = loadImage('character5.png');
-  img6 = loadImage('character6.png');
+  titleImg = loadImage('assets/images/title_screen.png');
+  img0 = loadImage('assets/images/character0.png');
+  img1 = loadImage('assets/images/character1.png');
+  img2 = loadImage('assets/images/character2.png');
+  img3 = loadImage('assets/images/character3.png');
+  img4 = loadImage('assets/images/character4.png');
+  img5 = loadImage('assets/images/character5.png');
+  img6 = loadImage('assets/images/character6.png');
 }
 
 function draw() {
