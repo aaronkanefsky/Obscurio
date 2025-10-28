@@ -116,7 +116,6 @@ function setup() {
     cursorPointer = loadImage('assets/images/cursor_pointer.png');
     
 
-    // myButton = new Button(100, 100, 80, 30, buttonText, 14, 'Arial', buttonColor);
     // Buttons for character select
     buttonColor = color(0, 50, 200)
     button2players = new Button(300, 100, 400, 40, '2 Players', 25, 'Arial', buttonColor);
