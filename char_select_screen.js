@@ -1,33 +1,4 @@
 
-class playerObj {
-  constructor(player_num, char_num) {
-    this.playerId = player_num;
-    this.character = char_num;
-    this.playerType = null;
-  }
-}
-
-class characterObj {
-  constructor(charID) {
-    this.characterID = charID;
-    this.characterTaken = false;
-    this.characterImg = null;
-  }
-}
-
-class gameObj {
-  constructor() {
-    this.playerCount = 2;
-    this.players = [];
-    this.characters = [];
-    //this.screen = [new titleScreen(), new playCountScreen(), new charSelectScreen()];
-    this.currScreen = 0;
-  }
-  
-  changeScreen(x) {
-    this.currScreen = x;
-  }
-}
 class charSelectScreen {
   constructor(num_players) {
     this.playerCount = num_players;
@@ -78,37 +49,37 @@ function mouseClicked() {
   }
   else if(myGame.currScreen == 2) {
     if(mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205 && myGame.characters[0].characterTaken == false) {
-      myGame.players.push(new playerObj(num, 0));
+      myGame.players.push(new Player(num, 0));
       myGame.characters[0].characterTaken = true;
       num++;
     }
     else if(mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205 && myGame.characters[1].characterTaken == false) {
-      myGame.players.push(new playerObj(num, 1));
+      myGame.players.push(new Player(num, 1));
       myGame.characters[1].characterTaken = true;
       num++;
     }
     else if(mouseX >= 415 && mouseX <= 515 && mouseY >= 65 && mouseY <= 205 && myGame.characters[2].characterTaken == false) {
-      myGame.players.push(new playerObj(num, 2));
+      myGame.players.push(new Player(num, 2));
       myGame.characters[2].characterTaken = true;
       num++;
     }
     else if(mouseX >= 85 && mouseX <= 185 && mouseY >= 230 && mouseY <= 370 && myGame.characters[3].characterTaken == false) {
-      myGame.players.push(new playerObj(num, 3));
+      myGame.players.push(new Player(num, 3));
       myGame.characters[3].characterTaken = true;
       num++;
     }
     else if(mouseX >= 250 && mouseX <= 350 && mouseY >= 230 && mouseY <= 370 && myGame.characters[4].characterTaken == false) {
-      myGame.players.push(new playerObj(num, 4));
+      myGame.players.push(new Player(num, 4));
       myGame.characters[4].characterTaken = true;
       num++;
     }
     else if(mouseX >= 415 && mouseX <= 515 && mouseY >= 230 && mouseY <= 370 && myGame.characters[5].characterTaken == false) {
-      myGame.players.push(new playerObj(num, 5));
+      myGame.players.push(new Player(num, 5));
       myGame.characters[5].characterTaken = true;
       num++;
     }
     else if(mouseX >= 250 && mouseX <= 350 && mouseY >= 395 && mouseY <= 535 && myGame.characters[6].characterTaken == false) {
-      myGame.players.push(new playerObj(num, 6));
+      myGame.players.push(new Player(num, 6));
       myGame.characters[6].characterTaken = true;
       num++;
     }
@@ -125,7 +96,7 @@ function setup() {
   myGame = new gameObj();
   num = 0;
   for(i = 0; i < 8; i++) {
-    myGame.characters.push(new characterObj(i));
+    myGame.characters.push(new Character(i));
   }
   titleImg = loadImage('assets/images/title_screen.png');
   img0 = loadImage('assets/images/character0.png');
