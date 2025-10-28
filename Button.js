@@ -7,6 +7,8 @@ const ButtonStates = {
 
 class Button {
     constructor(x, y, width, height, bodyText, size, font, backgroundColor) {
+
+        // Button Details
         this.x = x;
         this.y = y;
         this.width = width;
@@ -14,6 +16,8 @@ class Button {
         this.bodyText = bodyText;
         this.size = size;
         this.font = font;
+
+        // Button Color
         this.backgroundColor = backgroundColor;
         this.backgroundColorHovered = color(
             red(this.backgroundColor) * 0.8,
@@ -24,7 +28,13 @@ class Button {
             green(this.backgroundColor) * 0.6,
             blue(this.backgroundColor) * 0.6);
         this.currentColor = this.backgroundColor;
-        this.clickedState = ButtonStates.UP;
+
+        // Internal Button State
+        this.clickState = ButtonStates.UP;
+
+        // Button output states
+        this.pressed = false;
+        this.released = false;
     }
 
     mouseHover() {
@@ -34,21 +44,26 @@ class Button {
             mouseY > this.y - this.height / 2 &&
             mouseY < this.y + this.height / 2
         ) {
-            this.clickedState = ButtonStates.HOVER;
+            this.clickState = ButtonStates.HOVER;
         }
         else{
-            this.clickedState = ButtonStates.UP;
+            this.clickState = ButtonStates.UP;
         }
     }
 
     handleClick() {
-
+        this.clickState = ButtonStates.CLICKED;
     }
 
     updateButton() {
         // If hovered, darken the button and change cursor
         this.mouseHover();
-        switch (this.clickedState) {
+        switch (this.clickState) {
+            case ButtonStates.HOVER:
+                this.currentColor = this.backgroundColorHovered;
+                cursor('pointer');
+                break;
+
             case ButtonStates.HOVER:
                 this.currentColor = this.backgroundColorHovered;
                 cursor('pointer');
