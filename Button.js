@@ -5,6 +5,7 @@ const ButtonStates = {
 };
 
 class Button {
+  static anyHovered = false;
   constructor(x, y, width, height, bodyText, size, font, backgroundColor) {
     // Button details
     this.x = x;
@@ -57,6 +58,7 @@ class Button {
 
     // Determine hover and click states
     if (this.isMouseOver()) {
+      Button.anyHovered = true;
       if (mouseIsPressed) {
         this.clickState = ButtonStates.CLICKED;
 
@@ -85,17 +87,16 @@ class Button {
     switch (this.clickState) {
       case ButtonStates.HOVER:
         this.currentColor = this.backgroundColorHovered;
-        cursor('pointer');
         break;
       case ButtonStates.CLICKED:
         this.currentColor = this.backgroundColorClicked;
-        cursor('pointer');
         break;
       default:
         this.currentColor = this.backgroundColor;
-        cursor('default');
         break;
     }
+
+    
   }
 
   // Draw the button
@@ -114,4 +115,10 @@ class Button {
     text(this.bodyText, this.x, this.y);
     pop();
   }
+
+  static updateCursor() {
+    cursor(Button.anyHovered ? 'pointer' : 'default');
+    Button.anyHovered = false; // reset for next frame
+  }
 }
+
