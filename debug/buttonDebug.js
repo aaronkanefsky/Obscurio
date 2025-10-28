@@ -16,6 +16,7 @@ function setup() {
   frameRate(60);
   buttonColor = color(0, 100, 100, 255)
   myButton = new Button(100, 100, 80, 30, buttonText, 14, 'Arial', buttonColor);
+  
 }
 
 function draw() {

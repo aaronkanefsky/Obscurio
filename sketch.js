@@ -90,6 +90,10 @@ var num;
 var titleImg;
 var img0, img1, img2, img3, img4, img5, img6;
 
+// Button Control
+let button1, button2, button3, button4, button5, button6, button7;
+let buttonColor;
+
 function setup() {
     createCanvas(600, 600);
     myGame = new GameObject();
@@ -105,6 +109,12 @@ function setup() {
     img4 = loadImage('assets/images/character4.png');
     img5 = loadImage('assets/images/character5.png');
     img6 = loadImage('assets/images/character6.png');
+
+    // myButton = new Button(100, 100, 80, 30, buttonText, 14, 'Arial', buttonColor);
+    // Buttons for character select
+    buttonColor = color(0, 200, 0)
+    button1 = new Button(300, 100, 400, 40, '2 Players', 25, 'Arial', buttonColor);
+
 }
 
 function draw() {
@@ -114,7 +124,7 @@ function draw() {
     }
     else if (myGame.currScreen == 1) {
         fill(0, 0, 255);
-        rect(100, 80, 400, 40);
+        // rect(100, 80, 400, 40);
         rect(100, 150, 400, 40);
         rect(100, 220, 400, 40);
         rect(100, 290, 400, 40);
@@ -126,13 +136,16 @@ function draw() {
         text('How many players?', 170, 50);
         fill(255);
         textSize(25);
-        text('2 Players', 240, 110);
+        // text('2 Players', 240, 110);
         text('3 Players', 240, 180);
         text('4 Players', 240, 250);
         text('5 Players', 240, 320);
         text('6 Players', 240, 390);
         text('7 Players', 240, 460);
         text('8 Players', 240, 530);
+
+        button1.updateButton();
+        button1.drawButton();
     }
     else if (myGame.currScreen == 2) {
         fill(100, 100, 100, 150);
