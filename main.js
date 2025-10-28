@@ -94,6 +94,9 @@ var img0, img1, img2, img3, img4, img5, img6;
 let button2players, button2, button3, button4, button5, button6, button7;
 let buttonColor;
 
+let cursorDefault, cursorPointer;
+
+
 function setup() {
     createCanvas(600, 600);
     myGame = new GameObject();
@@ -109,6 +112,9 @@ function setup() {
     img4 = loadImage('assets/images/character4.png');
     img5 = loadImage('assets/images/character5.png');
     img6 = loadImage('assets/images/character6.png');
+    cursorDefault = loadImage('assets/images/cursor_default.png');
+    cursorPointer = loadImage('assets/images/cursor_pointer.png');
+    
 
     // myButton = new Button(100, 100, 80, 30, buttonText, 14, 'Arial', buttonColor);
     // Buttons for character select
@@ -152,6 +158,7 @@ function draw() {
         button8players.drawButton();
 
         Button.updateCursor();
+        
     }
     else if (myGame.currScreen == 2) {
         fill(100, 100, 100, 150);
@@ -241,4 +248,9 @@ function draw() {
             myGame.currScreen = 3;
         }
     }
+
+    // Do for every screen
+    noCursor();
+    let cursorImg = Button.anyHovered ? cursorPointer : cursorDefault
+    image(cursorImg, mouseX-14, mouseY-14);
 }
