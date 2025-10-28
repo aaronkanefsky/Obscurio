@@ -6,7 +6,7 @@ const ButtonStates = {
 
 class Button {
   static anyHovered = false;
-  constructor(x, y, width, height, bodyText, size, font, backgroundColor) {
+  constructor(x, y, width, height, bodyText, size, font, backgroundColor, backgroundImage) {
     // Button details
     this.x = x;
     this.y = y;
@@ -15,8 +15,9 @@ class Button {
     this.bodyText = bodyText;
     this.size = size;
     this.font = font;
+    
 
-    // Colors
+    // Colors and background
     this.backgroundColor = backgroundColor;
     this.backgroundColorHovered = color(
       red(this.backgroundColor) * 0.8,
