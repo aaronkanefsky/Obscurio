@@ -16,11 +16,11 @@ function mouseClicked() {
     }
     else if (myGame.currScreen == 1) {
         if (mouseX >= 100 && mouseX <= 500) {
-            if (mouseY >= 80 && mouseY <= 120) {
-                myGame.playerCount = 2;
-                myGame.currScreen = 2;
-            }
-            else if (mouseY >= 150 && mouseY <= 190) {
+            // if (button2players.released) {
+            //     myGame.playerCount = 2;
+            //     myGame.currScreen = 2;
+            // }
+            if (mouseY >= 150 && mouseY <= 190) {
                 myGame.playerCount = 3;
                 myGame.currScreen = 2;
             }
@@ -91,20 +91,14 @@ var titleImg;
 var img0, img1, img2, img3, img4, img5, img6;
 
 // Button Control
-let button2players, button2, button3, button4, button5, button6, button7;
+let button2players, button3players, button4players, button5players, button6players, button7players;
 let buttonColor;
 
 let cursorDefault, cursorPointer;
 
-
-function setup() {
-    createCanvas(600, 600);
-    myGame = new GameObject();
-    num = 0;
-    for (let i = 0; i < 8; i++) {
-        myGame.characters.push(new Character(i));
-    }
-    titleImg = loadImage('assets/images/title_screen.png');
+let menu;
+function preload(){
+  titleImg = loadImage('assets/images/background.png');
     img0 = loadImage('assets/images/character0.png');
     img1 = loadImage('assets/images/character1.png');
     img2 = loadImage('assets/images/character2.png');
@@ -114,7 +108,17 @@ function setup() {
     img6 = loadImage('assets/images/character6.png');
     cursorDefault = loadImage('assets/images/cursor_default.png');
     cursorPointer = loadImage('assets/images/cursor_pointer.png');
+}
+function setup() {
+    createCanvas(600, 600);
+    myGame = new GameObject();
+    menu = new MainMenu(myGame);
+    num = 0;
+    for (let i = 0; i < 8; i++) {
+        myGame.characters.push(new Character(i));
+    }
     
+
 
     // Buttons for character select
     buttonColor = color(0, 50, 200)
@@ -125,13 +129,15 @@ function setup() {
     button6players = new Button(300, 380, 400, 40, '6 Players', 25, 'Arial', buttonColor);
     button7players = new Button(300, 450, 400, 40, '7 Players', 25, 'Arial', buttonColor);
     button8players = new Button(300, 520, 400, 40, '8 Players', 25, 'Arial', buttonColor);
-
+    menu.enter();
 }
 
 function draw() {
     background(220);
     if (myGame.currScreen == 0) {
         image(titleImg, 0, 0, 600, 600);
+        menu.updateMainMenu();
+        menu.drawMainMenu();
     }
     else if (myGame.currScreen == 1) {
         fill(0, 0, 255);
@@ -157,7 +163,12 @@ function draw() {
         button8players.drawButton();
 
         Button.updateCursor();
-        
+
+        if (button2players.released) {
+            myGame.playerCount = 2;
+            myGame.currScreen = 2;
+        }
+
     }
     else if (myGame.currScreen == 2) {
         fill(100, 100, 100, 150);
@@ -251,5 +262,5 @@ function draw() {
     // Do for every screen
     noCursor();
     let cursorImg = Button.anyHovered ? cursorPointer : cursorDefault
-    image(cursorImg, mouseX-14, mouseY-14);
+    image(cursorImg, mouseX - 14, mouseY - 14);
 }

@@ -6,7 +6,7 @@ const ButtonStates = {
 
 class Button {
   static anyHovered = false;
-  constructor(x, y, width, height, bodyText, size, font, backgroundColor, backgroundImage) {
+  constructor(x, y, width, height, bodyText, size, font, backgroundColor) {
     // Button details
     this.x = x;
     this.y = y;
