@@ -11,42 +11,7 @@ class charSelectScreen {
 }
 
 function mouseClicked() {
-    if (myGame.currScreen == 0) {
-        myGame.currScreen = 1;
-    }
-    else if (myGame.currScreen == 1) {
-        if (mouseX >= 100 && mouseX <= 500) {
-            // if (button2players.released) {
-            //     myGame.playerCount = 2;
-            //     myGame.currScreen = 2;
-            // }
-            if (mouseY >= 150 && mouseY <= 190) {
-                myGame.playerCount = 3;
-                myGame.currScreen = 2;
-            }
-            else if (mouseY >= 220 && mouseY <= 260) {
-                myGame.playerCount = 4;
-                myGame.currScreen = 2;
-            }
-            else if (mouseY >= 290 && mouseY <= 330) {
-                myGame.playerCount = 5;
-                myGame.currScreen = 2;
-            }
-            else if (mouseY >= 360 && mouseY <= 400) {
-                myGame.playerCount = 6;
-                myGame.currScreen = 2;
-            }
-            else if (mouseY >= 430 && mouseY <= 470) {
-                myGame.playerCount = 7;
-                myGame.currScreen = 2;
-            }
-            else if (mouseY >= 500 && mouseY <= 540) {
-                myGame.playerCount = 8;
-                myGame.currScreen = 2;
-            }
-        }
-    }
-    else if (myGame.currScreen == 2) {
+    if (myGame.currScreen == 2) {
         if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205 && myGame.characters[0].characterTaken == false) {
             myGame.players.push(new Player(num, 0));
             myGame.characters[0].characterTaken = true;
@@ -96,9 +61,9 @@ let buttonColor;
 
 let cursorDefault, cursorPointer;
 
-let menu;
-function preload(){
-  titleImg = loadImage('assets/images/background.png');
+let menu, options;
+function preload() {
+    titleImg = loadImage('assets/images/background.png');
     img0 = loadImage('assets/images/character0.png');
     img1 = loadImage('assets/images/character1.png');
     img2 = loadImage('assets/images/character2.png');
@@ -113,11 +78,12 @@ function setup() {
     createCanvas(600, 600);
     myGame = new GameObject();
     menu = new MainMenu(myGame);
+    options = new OptionsMenu(myGame);
     num = 0;
     for (let i = 0; i < 8; i++) {
         myGame.characters.push(new Character(i));
     }
-    
+
 
 
     // Buttons for character select
@@ -138,6 +104,16 @@ function draw() {
         image(titleImg, 0, 0, 600, 600);
         menu.updateMainMenu();
         menu.drawMainMenu();
+        if (menu.playButton.released === true) {
+            myGame.currScreen = 1;
+        }
+        if (menu.optionsButton.released === true) {
+            myGame.currScreen = 3;
+            menu.exit();
+            options.enter();
+
+        }
+        
     }
     else if (myGame.currScreen == 1) {
         fill(0, 0, 255);
@@ -165,6 +141,37 @@ function draw() {
         if (button2players.released) {
             myGame.playerCount = 2;
             myGame.currScreen = 2;
+            menu.exit();
+        }
+        if (button3players.released) {
+            myGame.playerCount = 3;
+            myGame.currScreen = 2;
+            menu.exit();
+        }
+        if (button4players.released) {
+            myGame.playerCount = 4;
+            myGame.currScreen = 2;
+            menu.exit();
+        }
+        if (button5players.released) {
+            myGame.playerCount = 5;
+            myGame.currScreen = 2;
+            menu.exit();
+        }
+        if (button6players.released) {
+            myGame.playerCount = 6;
+            myGame.currScreen = 2;
+            menu.exit();
+        }
+        if (button7players.released) {
+            myGame.playerCount = 7;
+            myGame.currScreen = 2;
+            menu.exit();
+        }
+        if (button8players.released) {
+            myGame.playerCount = 8;
+            myGame.currScreen = 2;
+            menu.exit();
         }
 
     }
@@ -182,7 +189,6 @@ function draw() {
         if (myGame.characters[0].characterTaken == true) {
             rect(85, 65, 100, 140);
         }
-
         if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205 && myGame.characters[1].characterTaken == false) {
             image(img1, 240, 50, 120, 170);
         }
@@ -254,6 +260,16 @@ function draw() {
 
         if (num == myGame.playerCount) {
             myGame.currScreen = 3;
+        }
+    }
+    else if(myGame.currScreen === 3){
+        options.updateOptionsMenu();
+        options.drawOptionsMenu();
+        
+        if (options.backButton.released === true) {
+            myGame.currScreen = 0;
+            options.exit();
+            menu.enter();
         }
     }
 

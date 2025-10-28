@@ -5,9 +5,13 @@
  * moving to different states
  */
 class MainMenu{
+    /**
+     * 
+     * @param {Game} game Reference to current game
+     */
     constructor(game){
         this.backgroundImage = loadImage('assets/images/title_screen.png')
-        this.game = game; // Reference to current game
+        this.game = game;
         this.instructionsButton;
         this.optionsButton;
         this.playButton;
