@@ -1,12 +1,13 @@
 /**
- * Obscurio
+ * Obscurio (Milestone 1)
  * 
  * 
  * Created by L'Atelier
- * Game Art made by Xavier Collette
+ * Original Game Art made by Xavier Collette
  * 
  * Recreated in p5js by Emma Wallace and Aaron Kanefsky
  * 
+ * Breakdown of work:
  */
 
 
