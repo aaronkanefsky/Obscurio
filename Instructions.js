@@ -14,6 +14,7 @@ class Instructions{
         this.game = game;
         this.backButton;
         this.menuFont = loadFont('assets/fonts/Firlest-Regular.otf')
+        this.bodyTextFont = loadFont('assets/fonts/MountainKingRegular-woBYn.ttf')
         this.buttonColor = color(143, 86, 59);
     }
 
