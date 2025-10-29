@@ -1,10 +1,10 @@
 /**
- * @class OptionsMenu
+ * @class Instructions
  * 
  * @description Container for Obscurio's main menu, as well as handling
  * moving to different states
  */
-class OptionsMenu{
+class Instructions{
     /**
      * 
      * @param {Game} game Reference to current game
@@ -29,7 +29,7 @@ class OptionsMenu{
     /**
      * @description Behavior while in Main Menu state
      */
-    updateOptionsMenu(){
+    updateInstructions(){
         this.backButton.updateButton();
     }
 
@@ -45,7 +45,7 @@ class OptionsMenu{
     /**
      * @description Draws the main menu to the screen
      */
-    drawOptionsMenu(){
+    drawInstructions(){
         image(this.backgroundImage, 0, 0, 600, 600)
         this.backButton.drawButton();
     }

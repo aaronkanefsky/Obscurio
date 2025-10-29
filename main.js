@@ -1,53 +1,22 @@
-class charSelectScreen {
-    constructor(num_players) {
-        this.playerCount = num_players;
-    }
+/**
+ * Obscurio
+ * 
+ * 
+ * Created by L'Atelier
+ * Game Art made by Xavier Collette
+ * 
+ * Recreated in p5js by Emma Wallace and Aaron Kanefsky
+ * 
+ */
 
-    execute(me) {
-        for (var i = 0; i < this.playerCount; i++) {
 
-        }
-    }
-}
-
-function mouseClicked() {
-    if (myGame.currScreen == 2) {
-        if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205 && myGame.characters[0].characterTaken == false) {
-            myGame.players.push(new Player(num, 0));
-            myGame.characters[0].characterTaken = true;
-            num++;
-        }
-        else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205 && myGame.characters[1].characterTaken == false) {
-            myGame.players.push(new Player(num, 1));
-            myGame.characters[1].characterTaken = true;
-            num++;
-        }
-        else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 65 && mouseY <= 205 && myGame.characters[2].characterTaken == false) {
-            myGame.players.push(new Player(num, 2));
-            myGame.characters[2].characterTaken = true;
-            num++;
-        }
-        else if (mouseX >= 85 && mouseX <= 185 && mouseY >= 230 && mouseY <= 370 && myGame.characters[3].characterTaken == false) {
-            myGame.players.push(new Player(num, 3));
-            myGame.characters[3].characterTaken = true;
-            num++;
-        }
-        else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 230 && mouseY <= 370 && myGame.characters[4].characterTaken == false) {
-            myGame.players.push(new Player(num, 4));
-            myGame.characters[4].characterTaken = true;
-            num++;
-        }
-        else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 230 && mouseY <= 370 && myGame.characters[5].characterTaken == false) {
-            myGame.players.push(new Player(num, 5));
-            myGame.characters[5].characterTaken = true;
-            num++;
-        }
-        else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 395 && mouseY <= 535 && myGame.characters[6].characterTaken == false) {
-            myGame.players.push(new Player(num, 6));
-            myGame.characters[6].characterTaken = true;
-            num++;
-        }
-    }
+const gameStates = {
+    MAIN_MENU: 0,
+    INSTRUCTIONS: 1,
+    OPTIONS_SCREEN: 2,
+    PLAYER_NUM: 3,
+    PLAYER_SELECT: 4,
+    GAME: 5,
 }
 
 var myGame;
@@ -61,7 +30,8 @@ let buttonColor;
 
 let cursorDefault, cursorPointer;
 
-let menu, options;
+let menu, options, instuctions;
+let gameState;
 function preload() {
     titleImg = loadImage('assets/images/background.png');
     img0 = loadImage('assets/images/character0.png');
@@ -79,6 +49,7 @@ function setup() {
     myGame = new GameObject();
     menu = new MainMenu(myGame);
     options = new OptionsMenu(myGame);
+    instructions = new Instructions(myGame);
     num = 0;
     for (let i = 0; i < 8; i++) {
         myGame.characters.push(new Character(i));
@@ -87,6 +58,7 @@ function setup() {
 
 
     // Buttons for character select
+    // TODO: Put this in the character select class
     buttonColor = color(0, 50, 200)
     button2players = new Button(300, 100, 400, 40, '2 Players', 25, 'Arial', buttonColor);
     button3players = new Button(300, 170, 400, 40, '3 Players', 25, 'Arial', buttonColor);
@@ -95,27 +67,33 @@ function setup() {
     button6players = new Button(300, 380, 400, 40, '6 Players', 25, 'Arial', buttonColor);
     button7players = new Button(300, 450, 400, 40, '7 Players', 25, 'Arial', buttonColor);
     button8players = new Button(300, 520, 400, 40, '8 Players', 25, 'Arial', buttonColor);
+
+    gameState = gameStates.MAIN_MENU;
     menu.enter();
 }
 
 function draw() {
     background(220);
-    if (myGame.currScreen == 0) {
+    if (gameState === gameStates.MAIN_MENU) {
         image(titleImg, 0, 0, 600, 600);
         menu.updateMainMenu();
         menu.drawMainMenu();
         if (menu.playButton.released === true) {
-            myGame.currScreen = 1;
+            gameState = gameStates.PLAYER_NUM;
         }
-        if (menu.optionsButton.released === true) {
-            myGame.currScreen = 3;
+        else if (menu.optionsButton.released === true) {
+            gameState = gameStates.OPTIONS_SCREEN;
             menu.exit();
             options.enter();
-
         }
-        
+        else if (menu.instructionsButton.released === true) {
+            gameState = gameStates.INSTRUCTIONS;
+            menu.exit();
+            instructions.enter();
+        }
+
     }
-    else if (myGame.currScreen == 1) {
+    else if (gameState === gameStates.PLAYER_NUM) {
         fill(0, 0, 255);
 
         fill(0);
@@ -140,42 +118,42 @@ function draw() {
 
         if (button2players.released) {
             myGame.playerCount = 2;
-            myGame.currScreen = 2;
+            gameState = gameStates.PLAYER_SELECT;
             menu.exit();
         }
         if (button3players.released) {
             myGame.playerCount = 3;
-            myGame.currScreen = 2;
+            gameState = gameStates.PLAYER_SELECT;
             menu.exit();
         }
         if (button4players.released) {
             myGame.playerCount = 4;
-            myGame.currScreen = 2;
+            gameState = gameStates.PLAYER_SELECT;
             menu.exit();
         }
         if (button5players.released) {
             myGame.playerCount = 5;
-            myGame.currScreen = 2;
+            gameState = gameStates.PLAYER_SELECT;
             menu.exit();
         }
         if (button6players.released) {
             myGame.playerCount = 6;
-            myGame.currScreen = 2;
+            gameState = gameStates.PLAYER_SELECT;
             menu.exit();
         }
         if (button7players.released) {
             myGame.playerCount = 7;
-            myGame.currScreen = 2;
+            gameState = gameStates.PLAYER_SELECT;
             menu.exit();
         }
         if (button8players.released) {
             myGame.playerCount = 8;
-            myGame.currScreen = 2;
+            gameState = gameStates.PLAYER_SELECT;
             menu.exit();
         }
 
     }
-    else if (myGame.currScreen == 2) {
+    else if (gameState === gameStates.PLAYER_SELECT) {
         fill(100, 100, 100, 150);
         noStroke();
 
@@ -259,16 +237,26 @@ function draw() {
         text(`Pick your character player ${num + 1}`, 150, 40);
 
         if (num == myGame.playerCount) {
-            myGame.currScreen = 3;
+            gameState = gameStates.GAME;
         }
     }
-    else if(myGame.currScreen === 3){
+    else if (gameState === gameStates.OPTIONS_SCREEN) {
         options.updateOptionsMenu();
         options.drawOptionsMenu();
-        
+
         if (options.backButton.released === true) {
-            myGame.currScreen = 0;
+            gameState = gameStates.MAIN_MENU;
             options.exit();
+            menu.enter();
+        }
+    }
+    else if (gameState === gameStates.INSTRUCTIONS) {
+        instructions.updateInstructions();
+        instructions.drawInstructions();
+
+        if (instructions.backButton.released === true) {
+            gameState = gameStates.MAIN_MENU;
+            instructions.exit();
             menu.enter();
         }
     }
@@ -276,4 +264,45 @@ function draw() {
     // Do for every screen
     noCursor();
     image(cursorDefault, mouseX - 14, mouseY - 14);
+}
+
+
+function mouseClicked() {
+    if (gameState === gameStates.PLAYER_SELECT) {
+        if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205 && myGame.characters[0].characterTaken == false) {
+            myGame.players.push(new Player(num, 0));
+            myGame.characters[0].characterTaken = true;
+            num++;
+        }
+        else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205 && myGame.characters[1].characterTaken == false) {
+            myGame.players.push(new Player(num, 1));
+            myGame.characters[1].characterTaken = true;
+            num++;
+        }
+        else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 65 && mouseY <= 205 && myGame.characters[2].characterTaken == false) {
+            myGame.players.push(new Player(num, 2));
+            myGame.characters[2].characterTaken = true;
+            num++;
+        }
+        else if (mouseX >= 85 && mouseX <= 185 && mouseY >= 230 && mouseY <= 370 && myGame.characters[3].characterTaken == false) {
+            myGame.players.push(new Player(num, 3));
+            myGame.characters[3].characterTaken = true;
+            num++;
+        }
+        else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 230 && mouseY <= 370 && myGame.characters[4].characterTaken == false) {
+            myGame.players.push(new Player(num, 4));
+            myGame.characters[4].characterTaken = true;
+            num++;
+        }
+        else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 230 && mouseY <= 370 && myGame.characters[5].characterTaken == false) {
+            myGame.players.push(new Player(num, 5));
+            myGame.characters[5].characterTaken = true;
+            num++;
+        }
+        else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 395 && mouseY <= 535 && myGame.characters[6].characterTaken == false) {
+            myGame.players.push(new Player(num, 6));
+            myGame.characters[6].characterTaken = true;
+            num++;
+        }
+    }
 }
