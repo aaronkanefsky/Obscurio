@@ -1,12 +1,13 @@
 /**
- * Obscurio
+ * Obscurio (Milestone 1)
  * 
  * 
  * Created by L'Atelier
- * Game Art made by Xavier Collette
+ * Original Game Art made by Xavier Collette
  * 
  * Recreated in p5js by Emma Wallace and Aaron Kanefsky
  * 
+ * Breakdown of work:
  */
 
 
@@ -30,7 +31,7 @@ let buttonColor;
 
 let cursorDefault, cursorPointer;
 
-let menu, options, instuctions;
+let menu, options, instuctions, playerNum, playerSel;
 let gameState;
 function preload() {
     titleImg = loadImage('assets/images/background.png');
@@ -50,6 +51,7 @@ function setup() {
     menu = new MainMenu(myGame);
     options = new OptionsMenu(myGame);
     instructions = new Instructions(myGame);
+    playerNum = new PlayerNumberScreen(myGame);
     num = 0;
     for (let i = 0; i < 8; i++) {
         myGame.characters.push(new Character(i));
@@ -60,13 +62,7 @@ function setup() {
     // Buttons for character select
     // TODO: Put this in the character select class
     buttonColor = color(0, 50, 200)
-    button2players = new Button(300, 100, 400, 40, '2 Players', 25, 'Arial', buttonColor);
-    button3players = new Button(300, 170, 400, 40, '3 Players', 25, 'Arial', buttonColor);
-    button4players = new Button(300, 240, 400, 40, '4 Players', 25, 'Arial', buttonColor);
-    button5players = new Button(300, 310, 400, 40, '5 Players', 25, 'Arial', buttonColor);
-    button6players = new Button(300, 380, 400, 40, '6 Players', 25, 'Arial', buttonColor);
-    button7players = new Button(300, 450, 400, 40, '7 Players', 25, 'Arial', buttonColor);
-    button8players = new Button(300, 520, 400, 40, '8 Players', 25, 'Arial', buttonColor);
+
 
     gameState = gameStates.MAIN_MENU;
     menu.enter();
@@ -75,83 +71,10 @@ function setup() {
 function draw() {
     background(220);
     if (gameState === gameStates.MAIN_MENU) {
-        image(titleImg, 0, 0, 600, 600);
-        menu.updateMainMenu();
-        menu.drawMainMenu();
-        if (menu.playButton.released === true) {
-            gameState = gameStates.PLAYER_NUM;
-        }
-        else if (menu.optionsButton.released === true) {
-            gameState = gameStates.OPTIONS_SCREEN;
-            menu.exit();
-            options.enter();
-        }
-        else if (menu.instructionsButton.released === true) {
-            gameState = gameStates.INSTRUCTIONS;
-            menu.exit();
-            instructions.enter();
-        }
-
+        handleMainMenu();
     }
     else if (gameState === gameStates.PLAYER_NUM) {
-        fill(0, 0, 255);
-
-        fill(0);
-        textSize(30);
-        text('How many players?', 170, 50);
-
-        button2players.updateButton();
-        button3players.updateButton();
-        button4players.updateButton();
-        button5players.updateButton();
-        button6players.updateButton();
-        button7players.updateButton();
-        button8players.updateButton();
-
-        button2players.drawButton();
-        button3players.drawButton();
-        button4players.drawButton();
-        button5players.drawButton();
-        button6players.drawButton();
-        button7players.drawButton();
-        button8players.drawButton();
-
-        if (button2players.released) {
-            myGame.playerCount = 2;
-            gameState = gameStates.PLAYER_SELECT;
-            menu.exit();
-        }
-        if (button3players.released) {
-            myGame.playerCount = 3;
-            gameState = gameStates.PLAYER_SELECT;
-            menu.exit();
-        }
-        if (button4players.released) {
-            myGame.playerCount = 4;
-            gameState = gameStates.PLAYER_SELECT;
-            menu.exit();
-        }
-        if (button5players.released) {
-            myGame.playerCount = 5;
-            gameState = gameStates.PLAYER_SELECT;
-            menu.exit();
-        }
-        if (button6players.released) {
-            myGame.playerCount = 6;
-            gameState = gameStates.PLAYER_SELECT;
-            menu.exit();
-        }
-        if (button7players.released) {
-            myGame.playerCount = 7;
-            gameState = gameStates.PLAYER_SELECT;
-            menu.exit();
-        }
-        if (button8players.released) {
-            myGame.playerCount = 8;
-            gameState = gameStates.PLAYER_SELECT;
-            menu.exit();
-        }
-
+        handlePlayerNumScreen();
     }
     else if (gameState === gameStates.PLAYER_SELECT) {
         fill(100, 100, 100, 150);
@@ -304,5 +227,42 @@ function mouseClicked() {
             myGame.characters[6].characterTaken = true;
             num++;
         }
+    }
+}
+
+function handleMainMenu() {
+    image(titleImg, 0, 0, 600, 600);
+    menu.updateMainMenu();
+    menu.drawMainMenu();
+    if (menu.playButton.released === true) {
+        gameState = gameStates.PLAYER_NUM;
+        menu.exit();
+        playerNum.enter();
+    }
+    else if (menu.optionsButton.released === true) {
+        gameState = gameStates.OPTIONS_SCREEN;
+        menu.exit();
+        options.enter();
+    }
+    else if (menu.instructionsButton.released === true) {
+        gameState = gameStates.INSTRUCTIONS;
+        menu.exit();
+        instructions.enter();
+    }
+}
+
+function handlePlayerNumScreen() {
+    playerNum.updatePlayerNumberScreen();
+    playerNum.drawPlayerNumberScreen();
+    if (playerNum.playerNumSelection > 0) {
+        myGame.playerCount = playerNum.playerNumSelection;
+        gameState = gameStates.PLAYER_SELECT;
+        playerNum.exit();
+        playerSel.enter();
+    }
+    else if (playerNum.backButton.released === true) {
+        gameState = gameStates.MAIN_MENU;
+        playerNum.exit();
+        menu.enter();
     }
 }
