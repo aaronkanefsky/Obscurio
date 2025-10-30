@@ -33,13 +33,13 @@ class PlayerNumberScreen {
 
         // Init all buttons
         this.backButton = new Button(170, 570, 100, 40, 'Back', 20, this.menuFont, this.buttonColor);
-        this.button2players = new Button(300, 100, 400, 40, '2 Players', 25, this.menuFont, buttonColor);
-        this.button3players = new Button(300, 170, 400, 40, '3 Players', 25, this.menuFont, buttonColor);
-        this.button4players = new Button(300, 240, 400, 40, '4 Players', 25, this.menuFont, buttonColor);
-        this.button5players = new Button(300, 310, 400, 40, '5 Players', 25, this.menuFont, buttonColor);
-        this.button6players = new Button(300, 380, 400, 40, '6 Players', 25, this.menuFont, buttonColor);
-        this.button7players = new Button(300, 450, 400, 40, '7 Players', 25, this.menuFont, buttonColor);
-        this.button8players = new Button(300, 520, 400, 40, '8 Players', 25, this.menuFont, buttonColor);
+        this.button2players = new Button(300, 100, 400, 40, '2 Players', 25, this.menuFont, this.buttonColor);
+        this.button3players = new Button(300, 170, 400, 40, '3 Players', 25, this.menuFont, this.buttonColor);
+        this.button4players = new Button(300, 240, 400, 40, '4 Players', 25, this.menuFont, this.buttonColor);
+        this.button5players = new Button(300, 310, 400, 40, '5 Players', 25, this.menuFont, this.buttonColor);
+        this.button6players = new Button(300, 380, 400, 40, '6 Players', 25, this.menuFont, this.buttonColor);
+        this.button7players = new Button(300, 450, 400, 40, '7 Players', 25, this.menuFont, this.buttonColor);
+        this.button8players = new Button(300, 520, 400, 40, '8 Players', 25, this.menuFont, this.buttonColor);
         this.playerNumSelection = 0;
     }
 
