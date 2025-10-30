@@ -40,6 +40,7 @@ class PlayerNumberScreen {
         this.button6players = new Button(300, 380, 400, 40, '6 Players', 25, this.menuFont, buttonColor);
         this.button7players = new Button(300, 450, 400, 40, '7 Players', 25, this.menuFont, buttonColor);
         this.button8players = new Button(300, 520, 400, 40, '8 Players', 25, this.menuFont, buttonColor);
+        this.playerNumSelection = 0;
     }
 
     /**
@@ -55,7 +56,7 @@ class PlayerNumberScreen {
         this.button7players.updateButton();
         this.button8players.updateButton();
 
-        // this.playerNumSelection = _checkNumberReleased();
+        this.playerNumSelection = this._checkNumberReleased();
     }
 
     _checkNumberReleased(){
