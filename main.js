@@ -22,10 +22,7 @@ const gameStates = {
 
 var myGame;
 
-// Button Control
-let button2players, button3players, button4players, button5players, button6players, button7players;
-let buttonColor;
-
+// Cursor images
 let cursorDefault, cursorPointer;
 
 let menu, options, instuctions, playerNum, playerSel;
@@ -45,13 +42,6 @@ function setup() {
     for (let i = 0; i < 8; i++) {
         myGame.characters.push(new Character(i));
     }
-
-
-
-    // Buttons for character select
-    // TODO: Put this in the character select class
-    // buttonColor = color(0, 50, 200)
-
 
     gameState = gameStates.MAIN_MENU;
     menu.enter();
