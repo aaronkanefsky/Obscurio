@@ -12,6 +12,7 @@ class PlayerSelScreen {
         this.backgroundImage = loadImage('assets/images/backgroundBlurred.png')
         this.game = game;
         this.backButton;
+        this.nextButton;
         this.menuFont = loadFont('assets/fonts/Firlest-Regular.otf')
         this.buttonColor = color(143, 86, 59);
         this.num;
@@ -27,6 +28,7 @@ class PlayerSelScreen {
 
         // Init all buttons
         this.backButton = new Button(170, 570, 100, 40, 'Back', 20, this.menuFont, this.buttonColor);
+        this.nextButton = new Button(230, 570, 100, 40, 'Next', 20, this.menuFont, this.buttonColor);
 
         // Images for the player to select from
         this.playerChoices[0] = loadImage('assets/images/character0.png');
@@ -48,42 +50,94 @@ class PlayerSelScreen {
      */
     updatePlayerSelScreen() {
         this.backButton.updateButton();
+        if(this.game.players.length === num) {
+            this.nextButton.updateButton();
+        }
         if (mouseIsPressed) {
             if (gameState === gameStates.PLAYER_SELECT) {
-                if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205 && this.game.characters[0].characterTaken == false) {
-                    this.game.players.push(new Player(this.num, 0));
-                    this.game.characters[0].characterTaken = true;
-                    this.num++;
+                if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205) {
+                    if(this.game.characters[0].characterTaken === false) {
+                        this.game.players.push(new Player(this.num, 0));
+                        this.game.characters[0].characterTaken = true;
+                    }
+                    else {
+                        if(this.game.players.length === num) {
+                            this.game.players.splice(num);
+                            this.game.characters[0].characterTaken = false;
+                        }
+                    }
                 }
-                else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205 && this.game.characters[1].characterTaken == false) {
-                    this.game.players.push(new Player(this.num, 1));
-                    this.game.characters[1].characterTaken = true;
-                    this.num++;
+                else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205) {
+                    if(this.game.characters[1].characterTaken === false) {
+                        this.game.players.push(new Player(this.num, 1));
+                        this.game.characters[1].characterTaken = true;
+                    }
+                    else {
+                        if(this.game.players.length === num) {
+                            this.game.players.splice(num);
+                            this.game.characters[1].characterTaken = false;
+                        }
+                    }
                 }
-                else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 65 && mouseY <= 205 && this.game.characters[2].characterTaken == false) {
-                    this.game.players.push(new Player(this.num, 2));
-                    this.game.characters[2].characterTaken = true;
-                    this.num++;
+                else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 65 && mouseY <= 205) {
+                    if(this.game.characters[2].characterTaken === false) {
+                        this.game.players.push(new Player(this.num, 2));
+                        this.game.characters[2].characterTaken = true;
+                    }
+                    else {
+                        if(this.game.players.length === num) {
+                            this.game.players.splice(num);
+                            this.game.characters[2].characterTaken = false;
+                        }
+                    }
                 }
-                else if (mouseX >= 85 && mouseX <= 185 && mouseY >= 230 && mouseY <= 370 && this.game.characters[3].characterTaken == false) {
-                    this.game.players.push(new Player(this.num, 3));
-                    this.game.characters[3].characterTaken = true;
-                    this.num++;
+                else if (mouseX >= 85 && mouseX <= 185 && mouseY >= 230 && mouseY <= 370) {
+                    if(this.game.characters[3].characterTaken === false) {
+                        this.game.players.push(new Player(this.num, 3));
+                        this.game.characters[3].characterTaken = true;
+                    }
+                    else {
+                        if(this.game.players.length === num) {
+                            this.game.players.splice(num);
+                            this.game.characters[0].characterTaken = false;
+                        }
+                    }
                 }
-                else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 230 && mouseY <= 370 && this.game.characters[4].characterTaken == false) {
-                    this.game.players.push(new Player(this.num, 4));
-                    this.game.characters[4].characterTaken = true;
-                    this.num++;
+                else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 230 && mouseY <= 370) {
+                    if(this.game.characters[4].characterTaken === false) {
+                        this.game.players.push(new Player(this.num, 4));
+                        this.game.characters[4].characterTaken = true;
+                    }
+                    else {
+                        if(this.game.players.length === num) {
+                            this.game.players.splice(num);
+                            this.game.characters[4].characterTaken = false;
+                        }
+                    }
                 }
-                else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 230 && mouseY <= 370 && this.game.characters[5].characterTaken == false) {
-                    this.game.players.push(new Player(this.num, 5));
-                    this.game.characters[5].characterTaken = true;
-                    this.num++;
+                else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 230 && mouseY <= 370) {
+                    if(this.game.characters[5].characterTaken === false) {
+                        this.game.players.push(new Player(this.num, 5));
+                        this.game.characters[5].characterTaken = true;
+                    }
+                    else {
+                        if(this.game.players.length === num) {
+                            this.game.players.splice(num);
+                            this.game.characters[5].characterTaken = false;
+                        }
+                    }
                 }
-                else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 395 && mouseY <= 535 && this.game.characters[6].characterTaken == false) {
-                    this.game.players.push(new Player(this.num, 6));
-                    this.game.characters[6].characterTaken = true;
-                    this.num++;
+                else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 395 && mouseY <= 535) {
+                    if(this.game.characters[6].characterTaken === false) {
+                        this.game.players.push(new Player(this.num, 6));
+                        this.game.characters[6].characterTaken = true;
+                    }
+                    else {
+                        if(this.game.players.length === num) {
+                            this.game.players.splice(num);
+                            this.game.characters[6].characterTaken = false;
+                        }
+                    }
                 }
             }
         }
@@ -97,6 +151,7 @@ class PlayerSelScreen {
     exit() {
         // Turn all buttons to null to remove them from memory
         this.backButton = null;
+        this.nextButton = null;
         this.playerChoices = [];
 
         // Reset all player choices
@@ -111,6 +166,7 @@ class PlayerSelScreen {
     drawPlayerSelScreen() {
         image(this.backgroundImage, 0, 0, 600, 600)
         this.backButton.drawButton();
+        this.nextButton.drawButton();
         push();
         fill(100, 100, 100, 150);
         noStroke();
@@ -124,6 +180,7 @@ class PlayerSelScreen {
         if (this.game.characters[0].characterTaken == true) {
             rect(85, 65, 100, 140, 15);
         }
+        
         if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205 && this.game.characters[1].characterTaken == false) {
             image(this.playerChoices[1], 240, 50, 120, 170);
         }
