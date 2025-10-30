@@ -121,9 +121,12 @@ function handlePlayerSelScreen() {
     playerSel.drawPlayerSelScreen();
 
     // Change to the game
-    if (playerSel.num == myGame.playerCount) {
+    if (playerSel.num === myGame.playerCount && playerSel.nextButton.released === true) {
         gameState = gameStates.GAME;
         playerSel.exit();
+    }
+    else if(playerSel.players.length === playerSel.num && playerSel.nextButton.released === true {
+        playerSel.num++;
     }
     else if (playerSel.backButton.released === true) {
         gameState = gameStates.PLAYER_NUM;
