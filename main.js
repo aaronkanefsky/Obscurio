@@ -8,6 +8,16 @@
  * Recreated in p5js by Emma Wallace and Aaron Kanefsky
  * 
  * Breakdown of work:
+ * Emma Wallace:
+ * - Main behavior of game
+ * - Sourcing artwork from the game
+ * - Generate and create player animations
+ * 
+ * Aaron Kanefsky:
+ * - Refactoring of code to be an FSM
+ * - Design of button objects
+ * - Design of state architecture
+ * - Blurred background image
  */
 
 
@@ -69,9 +79,6 @@ function draw() {
     noCursor();
     image(cursorDefault, mouseX - 14, mouseY - 14);
 }
-
-
-
 
 function handleMainMenu() {
     menu.updateMainMenu();
@@ -146,4 +153,20 @@ function handleInstructionsScreen() {
         instructions.exit();
         menu.enter();
     }
+}
+
+
+
+// Mouse wheel events:
+function mouseWheel(event) {
+  // if mouse over box, let it handle the wheel and return false
+  if (
+    mouseX >= instructions.textbox.x &&
+    mouseX <= instructions.textbox.x + instructions.textbox.w &&
+    mouseY >= instructions.textbox.y &&
+    mouseY <= instructions.textbox.y + instructions.textbox.h
+  ) {
+    instructions.textbox.handleScroll(event);
+    return false; // prevents page from scrolling in some browsers
+  }
 }
