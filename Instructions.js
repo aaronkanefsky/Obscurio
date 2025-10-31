@@ -4,12 +4,12 @@
  * @description Container for Obscurio's main menu, as well as handling
  * moving to different states
  */
-class Instructions{
+class Instructions {
     /**
      * 
      * @param {Game} game Reference to current game
      */
-    constructor(game){
+    constructor(game) {
         this.backgroundImage = loadImage('assets/images/backgroundBlurred.png')
         this.game = game;
         this.backButton;
@@ -23,19 +23,24 @@ class Instructions{
     /**
      * @description Behavior on state entry
      */
-    enter(){
-        let bigText = "Long text here...".repeat(1000);
+    enter() {
+
         // Init all buttons
         this.backButton = new Button(170, 570, 100, 40, 'Back', 20, this.menuFont, this.buttonColor);
-    
+
+        // Join preloaded text lines and make textbox
+        const fullText = instructionText.join('\n');
+
         // Init the textbox
-        this.textbox = new ScrollableTextBox(30, 30, 540, 500, bigText, 16, this.textBackgroundColor, 10)
+        this.textbox = new ScrollableTextBox(
+            30, 30, 540, 500, fullText, 16, this.textBackgroundColor, 10
+        );
     }
 
     /**
      * @description Behavior while in Main Menu state
      */
-    updateInstructions(){
+    updateInstructions() {
         this.backButton.updateButton();
         this.textbox.doDrag();
     }
@@ -43,22 +48,19 @@ class Instructions{
     /**
      * @description Behavior on state exit
      */
-    exit(){
+    exit() {
         // Turn all buttons to null to remove them from memory
         this.backButton = null;
         this.textbox = null;
-
     }
 
     /**
      * @description Draws the main menu to the screen
      */
-    drawInstructions(){
+    drawInstructions() {
         image(this.backgroundImage, 0, 0, 600, 600)
         this.backButton.drawButton();
         this.textbox.draw();
     }
 }
-
-// Instruction text:
 

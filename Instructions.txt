@@ -1,8 +1,120 @@
-Game Overview
-Obscurio is a cooperative, asymmetric game, where each player has a secret role. Players try to interpret pictures to escape the Library. Depending on their role, they will each play differently.
+OBSCURIO — GAME RULES
 
-The Grimoire is the only role that is public at the start of the game. They play the game differently, as they know the way out. The Grimoire also knows who the Traitor is. Their role  is to guide their team. However, the Grimoire cannot speak (it’s a book, after all) and must only communicate with pictures and visual clues.
+GAME OVERVIEW
 
-Victory: The Grimoire wins with the Wizards if the loyal Wizards manage to escape the Library. They know who the Traitor is but must not give any information about it! The loyal Wizards keep their role hidden for most of the game. They try to decipher the clues given by the Grimoire to choose the doors that will allow them to exit the Library.
+Obscurio is a cooperative, asymmetric game of visual clues and deception. Players are trapped in a magical library and must work together to escape, except one player is secretly a Traitor.
 
-Victory: The loyal Wizards win if they manage to escape the Library. The Traitor is hidden among the Wizards at the beginning of the game. They must try to mislead the other Wizards as long as possible, without being exposed. The Traitor plays against the Grimoire and the Wizards, and wins if they lose.
+The Grimoire (the magical book) guides the Wizards using image clues. The Wizards try to interpret those clues and find the correct exit door. The Traitor secretly tries to mislead the Wizards.
+
+Victory Conditions:
+
+- Wizards and the Grimoire win if they escape the library.
+
+- The Traitor wins if the Wizards lose all their Cohesion tokens.
+
+COMPONENTS
+
+1. Library board with progress track
+
+2. Grimoire desk and card holder
+
+3. Hourglass timer
+
+4. Trap token bag
+
+5. Illusion cards (door cards)
+
+6. Transparent clue overlays
+
+7. Loyalty cards (Wizard / Traitor)
+
+8. Wizard tokens or markers
+
+9. Cohesion tokens (group life)
+
+10. Butterfly markers (used by Grimoire)
+
+ROLES
+
+GRIMOIRE:
+The Grimoire gives clues using images but cannot speak.
+It points to symbols or details with butterfly markers.
+
+WIZARDS:
+The loyal players. They must interpret the Grimoire’s clues and choose
+which door card is the correct exit.
+
+TRAITOR:
+Hidden among the Wizards. Their goal is to mislead others into choosing
+wrong doors or wasting time. The Grimoire knows who the Traitor is but
+cannot reveal it.
+
+SETUP
+
+1. Place the Library board in the center and put the Progress marker on the first room.
+
+2. Choose a player to be the Grimoire and give them the desk, markers, and hourglass.
+
+3. Shuffle the Illusion cards and draw eight into the Grimoire’s hand.
+
+4. Deal loyalty cards so that one player may be the Traitor.
+
+5. Place trap tokens in the bag and set the number of Cohesion tokens according to player count and difficulty.
+
+GAME FLOW
+
+Each round represents a room in the Library.
+
+Step 1: Turn Setup
+
+- Draw a trap token from the bag and apply its effect for this round.
+
+Step 2: Prepare the Riddle
+
+- The Grimoire secretly selects the Exit card (the correct door).
+
+- They draw two random cards and use butterfly markers to point at visual hints related to the Exit card.
+
+Step 3: Traitor’s Interference
+
+- All Wizards close their eyes.
+
+- The Traitor opens their eyes and chooses up to two cards to add confusion among the door options.
+
+Step 4: Choosing the Door
+
+- The Grimoire shuffles the Exit card, Traitor’s cards, and several random ones to create the final display of doors (usually six).
+
+- Wizards discuss and place their tokens in front of the door they believe is correct before the time runs out.
+
+Step 5: Resolution
+
+- If at least one Wizard chose the correct door, advance the Progress marker one room.
+
+- For each Wizard who chose incorrectly, remove one Cohesion token.
+
+- If all Wizards fail, remove additional Cohesion tokens.
+
+- Discard used cards and reset the setup for the next round.
+
+SPECIAL RULES AND VARIANTS
+
+- In two or three player games, there is no Traitor.
+
+- Difficulty can be adjusted by changing the number of Cohesion tokens and trap token frequency.
+
+END OF THE GAME
+
+The game ends immediately when one of the following occurs:
+
+1. Wizards win if the Progress marker reaches the final room and at least one Cohesion token remains.
+
+2. The Traitor wins if all Cohesion tokens are lost before the group escapes.
+
+SUMMARY OF VICTORY CONDITIONS
+
+Wizards + Grimoire Victory:
+Escape the Library with at least one Cohesion token left.
+
+Traitor Victory:
+Cause the group to lose all Cohesion tokens before escaping.
