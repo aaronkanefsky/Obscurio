@@ -46,25 +46,25 @@ class PlayerSelScreen {
       push();
       translate(x,y);
       
-      if(this.playerChoices[charID].isFlipping) {
-        if(!this.playerChoices[charID].flipped) {
-          this.playerChoices[charID].flipProgress += 0.05;
+      if(this.game.characters[charID].isFlipping) {
+        if(!this.game.characters[charID].flipped) {
+          this.game.characters[charID].flipProgress += 0.05;
         }
         else {
-          this.playerChoices[charID].flipProgress -= 0.05;
+          this.game.characters[charID].flipProgress -= 0.05;
         }
         
         
         
-        let scaleX = cos(this.playerChoices[charID].flipProgress * PI);
+        let scaleX = cos(this.game.characters[charID].flipProgress * PI);
         
         
-        if(this.playerChoices[charID].flipProgress < 0.5) {
+        if(this.game.characters[charID].flipProgress < 0.5) {
           scale(scaleX,1);
           imageMode(CENTER);
           image(this.playerChoices[charID],0,0);
         }
-        else if(this.playerChoices[charID].flipProgress >= 0.5) {
+        else if(this.game.characters[charID].flipProgress >= 0.5) {
           scale(scaleX,1);
           rect(-w/2, -h/2, w, h);
           imageMode(CENTER);
@@ -72,16 +72,16 @@ class PlayerSelScreen {
         }
         
         
-        if((this.playerChoices[charID].flipProgress >= 1 && !this.playerChoices[charID].flipped) || (this.playerChoices[charID].flipProgress <= 0 && this.playerChoices[charID].flipped)) {
-          this.playerChoices[charID].isFlipping = false;
-          this.playerChoices[charID].flipped = !this.playerChoices[charID].flipped;
+        if((this.game.characters[charID].flipProgress >= 1 && !this.game.characters[charID].flipped) || (this.game.characters[charID].flipProgress <= 0 && this.game.characters[charID].flipped)) {
+          this.game.characters[charID].isFlipping = false;
+          this.game.characters[charID].flipped = !this.game.characters[charID].flipped;
         }
       }
       else {
         imageMode(CENTER);
-        if(this.playerChoices[charID].flipped) {
+        if(this.game.characters[charID].flipped) {
           rect(-w/2, -h/2, w, h);
-          this.playerChoices[charID].spell();
+          this.game.characters[charID].spell();
         }
         else {
           image(this.playerChoices[charID],0,0);
@@ -100,30 +100,30 @@ class PlayerSelScreen {
             this.nextButton.updateButton();
         }
         if (mouseIsPressed) {
-            for(var i = 0; i < this.playerChoices.length; i++) {
-                if(this.playerChoices[i].isFlipping === false) {
-                    this.playerChoices[i].isFlipping = true;
+            for(var i = 0; i < this.game.characters.length; i++) {
+                if(this.game.characters[i].isFlipping === false) {
+                    this.game.characters[i].isFlipping = true;
                 }
             }
             if (gameState === gameStates.PLAYER_SELECT) {
                 if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205) {
                     
-                    if(this.playerChoices[0].characterTaken === false) {
+                    if(this.game.characters[0].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 0));
-                        this.playerChoices[0].characterTaken = true;
+                        this.game.characters[0].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.playerChoices[0].characterTaken = false;
+                            this.game.characters[0].characterTaken = false;
                         }
                     }
                 }
                 else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205) {
                     
-                    if(this.playerChoices[1].characterTaken === false) {
+                    if(this.game.characters[1].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 1));
-                        this.playerChoices[1].characterTaken = true;
+                        this.game.characters[1].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
@@ -134,66 +134,66 @@ class PlayerSelScreen {
                 }
                 else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 65 && mouseY <= 205) {
                     
-                    if(this.playerChoices[2].characterTaken === false) {
+                    if(this.game.characters[2].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 2));
-                        this.playerChoices[2].characterTaken = true;
+                        this.game.characters[2].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.playerChoices[2].characterTaken = false;
+                            this.game.characters[2].characterTaken = false;
                         }
                     }
                 }
                 else if (mouseX >= 85 && mouseX <= 185 && mouseY >= 230 && mouseY <= 370) {
                     
-                    if(this.playerChoices[3].characterTaken === false) {
+                    if(this.game.characters[3].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 3));
-                        this.playerChoices[3].characterTaken = true;
+                        this.game.characters[3].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.playerChoices[0].characterTaken = false;
+                            this.game.characters[0].characterTaken = false;
                         }
                     }
                 }
                 else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 230 && mouseY <= 370) {
                     
-                    if(this.playerChoices[4].characterTaken === false) {
+                    if(this.game.characters[4].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 4));
-                        this.playerChoices[4].characterTaken = true;
+                        this.game.characters[4].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.playerChoices[4].characterTaken = false;
+                            this.game.characters[4].characterTaken = false;
                         }
                     }
                 }
                 else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 230 && mouseY <= 370) {
                     
-                    if(this.playerChoices[5].characterTaken === false) {
+                    if(this.game.characters[5].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 5));
-                        this.playerChoices[5].characterTaken = true;
+                        this.game.characters[5].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.playerChoices[5].characterTaken = false;
+                            this.game.characters[5].characterTaken = false;
                         }
                     }
                 }
                 else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 395 && mouseY <= 535) {
                     
-                    if(this.playerChoices[6].characterTaken === false) {
+                    if(this.game.characters[6].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 6));
-                        this.playerChoices[6].characterTaken = true;
+                        this.game.characters[6].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.playerChoices[6].characterTaken = false;
+                            this.game.characters[6].characterTaken = false;
                         }
                     }
                 }
