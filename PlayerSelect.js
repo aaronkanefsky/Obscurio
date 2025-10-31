@@ -34,7 +34,7 @@ class PlayerSelScreen {
 
         // Images for the player to select from
         for(var i = 0; i < 7; i++) {
-            this.playerChoices.push(loadImage("assets/images/character" + i + ".png");
+            this.playerChoices.push(loadImage("assets/images/character" + i + ".png"));
         }
 
         this.num = 0;
