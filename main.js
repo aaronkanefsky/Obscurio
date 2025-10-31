@@ -55,7 +55,7 @@ function setup() {
     playerNum = new PlayerNumberScreen(myGame);
     playerSel = new PlayerSelScreen(myGame);
     for (let i = 0; i < 8; i++) {
-        myGame.characters.push(new Character(i));
+        myGame.characters.push(new Character(i, 100, 100));
     }
 
     gameState = gameStates.MAIN_MENU;
@@ -130,7 +130,7 @@ function handlePlayerSelScreen() {
         gameState = gameStates.GAME;
         playerSel.exit();
     }
-    else if(playerSel.players.length === playerSel.num && playerSel.nextButton.released === true {
+    else if(playerSel.playerChoices.length === playerSel.num && playerSel.nextButton.released === true) {
         playerSel.num++;
     }
     else if (playerSel.backButton.released === true) {
