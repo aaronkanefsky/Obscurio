@@ -105,9 +105,17 @@ class PlayerNumberScreen {
     drawPlayerNumberScreen() {
         push();
         image(this.backgroundImage, 0, 0, 600, 600)
+        push();
+        strokeWeight(3)
+        fill(this.buttonColor);
+        rectMode(CENTER);
+        rect(300, 40, 300, 40, 8)
+        pop();
         fill(0);
         textSize(30);
-        text('How many players?', 170, 50);
+        textAlign(CENTER);
+        textFont(this.menuFont)
+        text('How many players?', 300, 50);
         this.backButton.drawButton();
         this.button2players.drawButton();
         this.button3players.drawButton();
