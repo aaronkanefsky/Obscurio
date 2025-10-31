@@ -27,7 +27,7 @@ class ScrollableTextBox {
         this.padding = padding;
 
         this.scrollOffset = 0;
-        this.scrollSpeed = 24;    // pixels per wheel "notch"
+        this.scrollSpeed = 50;    // pixels per wheel "notch"
         this.isDragging = false;
         this.dragStartY = 0;
         this.startOffset = 0;
