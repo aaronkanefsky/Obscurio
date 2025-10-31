@@ -1,0 +1,8 @@
+Game Overview
+Obscurio is a cooperative, asymmetric game, where each player has a secret role. Players try to interpret pictures to escape the Library. Depending on their role, they will each play differently.
+
+The Grimoire is the only role that is public at the start of the game. They play the game differently, as they know the way out. The Grimoire also knows who the Traitor is. Their role  is to guide their team. However, the Grimoire cannot speak (it’s a book, after all) and must only communicate with pictures and visual clues.
+
+Victory: The Grimoire wins with the Wizards if the loyal Wizards manage to escape the Library. They know who the Traitor is but must not give any information about it! The loyal Wizards keep their role hidden for most of the game. They try to decipher the clues given by the Grimoire to choose the doors that will allow them to exit the Library.
+
+Victory: The loyal Wizards win if they manage to escape the Library. The Traitor is hidden among the Wizards at the beginning of the game. They must try to mislead the other Wizards as long as possible, without being exposed. The Traitor plays against the Grimoire and the Wizards, and wins if they lose.
