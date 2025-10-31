@@ -16,6 +16,7 @@ class PlayerSelScreen {
         this.menuFont = loadFont('assets/fonts/Firlest-Regular.otf')
         this.buttonColor = color(143, 86, 59);
         this.num;
+        this.selectedCard = null;
 
         // Images for the player to select from
         this.playerChoices = [];
@@ -44,61 +45,98 @@ class PlayerSelScreen {
         this.num = 0;
     }
 
+    /**
+     * Handles the flipping of the card
+     * 
+     * @param {Number} charID ID for the card to be called from
+     * @param {Number} x The x coordinate of the animation
+     * @param {Number} y The y coordinate of the animation
+     * @param {Number} w The width of the card animation
+     * @param {Number} h The height of the card animation
+     */
     flipAnimation(charID, x, y, w, h) {
         push();
         let char = this.game.characters[charID];
         let progress = char.flipProgress;
 
-        if (char.isFlipping) {
-            // Move progress forward or backward
+        // Start flipping
+        if (char.isFlipping){
+            // Flip direction check
             progress += char.flipped ? -0.05 : 0.05;
             char.flipProgress = constrain(progress, 0, 1);
 
-            // Stop flipping when complete and toggle state
+            // When fully flipped open
             if (progress >= 1 && !char.flipped) {
                 char.flipped = true;
                 char.isFlipping = false;
-            } else if (progress <= 0 && char.flipped) {
+
+                // Flip back any previously selected card
+                if (this.selectedCard !== null && this.selectedCard !== charID) {
+                    let prevChar = this.game.characters[this.selectedCard];
+                    prevChar.isFlipping = true;
+                    prevChar.flipped = true; // start flipping
+                }
+                this.selectedCard = charID;
+            }
+
+            // When fully flipped back
+            if (progress <= 0 && char.flipped) {
                 char.flipped = false;
                 char.isFlipping = false;
+                if (this.selectedCard === charID) this.selectedCard = null;
             }
         }
 
-        // Compute visual rotation
+        // rotation calc
         let angle = progress * PI;
-
-        // Center transform for realistic flipping
         translate(x + w / 2, y + h / 2);
-        let scaleX = cos(angle);
-        scale(scaleX, 1);
-
+        scale(cos(angle), 1);
         imageMode(CENTER);
+
+
         if (progress < 0.5) {
+            // Frontside
             image(this.playerChoices[charID], 0, 0, w, h);
         } else {
-            // Back side
-            fill(50);
+            // Backside
+            fill(30);
             rectMode(CENTER);
             rect(0, 0, w, h);
-            if (this.charSpell && this.charSpell[charID])
-                image(this.charSpell[charID].get(64, 64, 64, 64), 0, 0, w, h);
         }
-
         pop();
+
+        if (char.flipped && !char.isFlipping){
+            push();
+            translate(x - w * 0.8, y - h * 0.5); // center above card
+            char.walk(); // character draws itself relative to this position
+            pop();
+        }
     }
+
 
     /**
      * @description Behavior while in Main Menu state
      */
     updatePlayerSelScreen() {
         this.backButton.updateButton();
-        if (this.game.players.length === this.num) {
-            this.nextButton.updateButton();
-            this.num++;
+        this.nextButton.updateButton();
+        if (this.nextButton.released && this.selectedCard !== null) {
+            // Only advance if a card is flipped (character selected)
+            let selectedChar = this.game.characters[this.selectedCard];
+
+            selectedChar.characterTaken = true;
+            this.game.players[this.num] = new Player(this.num, this.selectedCard);
+            selectedChar.isFlipping = true;
+            selectedChar.flipped = true; 
+
+
+            this.num++; // Next
+
+            this.selectedCard = null;
         }
         if (mouseIsPressed) {
             if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205) {
-                if (!this.game.characters[0].isFlipping) {
+                if (!this.game.characters[0].isFlipping && !this.game.characters[0].characterTaken) {
                     this.game.characters[0].isFlipping = true;
                 }
                 if (this.game.characters[0].characterTaken === false) {
@@ -113,7 +151,7 @@ class PlayerSelScreen {
                 }
             }
             else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205) {
-                if (!this.game.characters[1].isFlipping) {
+                if (!this.game.characters[1].isFlipping && !this.game.characters[1].characterTaken) {
                     this.game.characters[1].isFlipping = true;
                 }
                 if (this.game.characters[1].characterTaken === false) {
@@ -128,7 +166,7 @@ class PlayerSelScreen {
                 }
             }
             else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 65 && mouseY <= 205) {
-                if (!this.game.characters[2].isFlipping) {
+                if (!this.game.characters[2].isFlipping && !this.game.characters[2].characterTaken) {
                     this.game.characters[2].isFlipping = true;
                 }
                 if (this.game.characters[2].characterTaken === false) {
@@ -143,7 +181,7 @@ class PlayerSelScreen {
                 }
             }
             else if (mouseX >= 85 && mouseX <= 185 && mouseY >= 230 && mouseY <= 370) {
-                if (!this.game.characters[3].isFlipping) {
+                if (!this.game.characters[3].isFlipping && !this.game.characters[3].characterTaken) {
                     this.game.characters[3].isFlipping = true;
                 }
                 if (this.game.characters[3].characterTaken === false) {
@@ -158,7 +196,7 @@ class PlayerSelScreen {
                 }
             }
             else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 230 && mouseY <= 370) {
-                if (!this.game.characters[4].isFlipping) {
+                if (!this.game.characters[4].isFlipping && !this.game.characters[4].characterTaken) {
                     this.game.characters[4].isFlipping = true;
                 }
                 if (this.game.characters[4].characterTaken === false) {
@@ -173,7 +211,7 @@ class PlayerSelScreen {
                 }
             }
             else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 230 && mouseY <= 370) {
-                if (!this.game.characters[5].isFlipping) {
+                if (!this.game.characters[5].isFlipping && !this.game.characters[5].characterTaken) {
                     this.game.characters[5].isFlipping = true;
                 }
                 if (this.game.characters[5].characterTaken === false) {
@@ -188,7 +226,7 @@ class PlayerSelScreen {
                 }
             }
             else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 395 && mouseY <= 535) {
-                if (!this.game.characters[6].isFlipping) {
+                if (!this.game.characters[6].isFlipping && !this.game.characters[6].characterTaken) {
                     this.game.characters[6].isFlipping = true;
                 }
                 if (this.game.characters[6].characterTaken === false) {
@@ -230,7 +268,7 @@ class PlayerSelScreen {
         image(this.backgroundImage, 0, 0, 600, 600)
         this.backButton.drawButton();
         this.nextButton.drawButton();
-        // /*
+
         this.flipAnimation(0, 85, 65, 100, 140);
         this.flipAnimation(1, 250, 65, 100, 140);
         this.flipAnimation(2, 415, 65, 100, 140);
@@ -238,91 +276,7 @@ class PlayerSelScreen {
         this.flipAnimation(4, 250, 230, 100, 140);
         this.flipAnimation(5, 415, 230, 100, 140);
         this.flipAnimation(6, 250, 395, 100, 140);
-        // */
 
-
-        /*
-        push();
-        fill(100, 100, 100, 150);
-        noStroke();
-        if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205 && this.game.characters[0].characterTaken == false) {
-            image(this.playerChoices[0], 75, 50, 120, 170);
-        }
-        else {
-            image(this.playerChoices[0], 85, 65, 100, 140);
-        }
-
-        if (this.game.characters[0].characterTaken == true) {
-            rect(85, 65, 100, 140, 15);
-        }
-
-        if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205 && this.game.characters[1].characterTaken == false) {
-            image(this.playerChoices[1], 240, 50, 120, 170);
-        }
-        else {
-            image(this.playerChoices[1], 250, 65, 100, 140);
-        }
-
-        if (this.game.characters[1].characterTaken == true) {
-            rect(250, 65, 100, 140, 15);
-        }
-
-        if (mouseX >= 415 && mouseX <= 515 && mouseY >= 65 && mouseY <= 205 && this.game.characters[2].characterTaken == false) {
-            image(this.playerChoices[2], 405, 50, 120, 170);
-        }
-        else {
-            image(this.playerChoices[2], 415, 65, 100, 140);
-        }
-
-        if (this.game.characters[2].characterTaken == true) {
-            rect(415, 65, 100, 140, 15);
-        }
-
-        if (mouseX >= 85 && mouseX <= 185 && mouseY >= 230 && mouseY <= 375 && this.game.characters[3].characterTaken == false) {
-            image(this.playerChoices[3], 75, 215, 120, 170);
-        }
-        else {
-            image(this.playerChoices[3], 85, 230, 100, 140);
-        }
-
-        if (this.game.characters[3].characterTaken == true) {
-            rect(85, 230, 100, 140, 15);
-        }
-
-        if (mouseX >= 250 && mouseX <= 350 && mouseY >= 230 && mouseY <= 375 && this.game.characters[4].characterTaken == false) {
-            image(this.playerChoices[4], 240, 215, 120, 170);
-        }
-        else {
-            image(this.playerChoices[4], 250, 230, 100, 140);
-        }
-
-        if (this.game.characters[4].characterTaken == true) {
-            rect(250, 230, 100, 140, 15);
-        }
-
-        if (mouseX >= 415 && mouseX <= 515 && mouseY >= 230 && mouseY <= 375 && this.game.characters[5].characterTaken == false) {
-            image(this.playerChoices[5], 405, 215, 120, 170);
-        }
-        else {
-            image(this.playerChoices[5], 415, 230, 100, 140);
-        }
-
-        if (this.game.characters[5].characterTaken == true) {
-            rect(415, 230, 100, 140, 15);
-        }
-
-        if (mouseX >= 250 && mouseX <= 350 && mouseY >= 395 && mouseY <= 535 && this.game.characters[6].characterTaken == false) {
-            image(this.playerChoices[6], 240, 380, 120, 170);
-        }
-        else {
-            image(this.playerChoices[6], 250, 395, 100, 140);
-        }
-
-        if (this.game.characters[6].characterTaken == true) {
-            rect(250, 395, 100, 140, 15);
-        }
-        pop();
-        */
         fill(0);
         textSize(25);
         text(`Pick your character player ${this.num + 1}`, 150, 40);

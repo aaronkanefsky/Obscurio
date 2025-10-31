@@ -134,9 +134,7 @@ function handlePlayerSelScreen() {
         gameState = gameStates.GAME;
         playerSel.exit();
     }
-    else if(myGame.players.length === playerSel.num && playerSel.nextButton.released === true) {
-        playerSel.num++;
-    }
+    
     else if (playerSel.backButton.released === true) {
         gameState = gameStates.PLAYER_NUM;
         playerSel.exit();
