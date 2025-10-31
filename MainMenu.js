@@ -60,5 +60,23 @@ class MainMenu{
         this.instructionsButton.drawButton();
         this.optionsButton.drawButton();
         this.playButton.drawButton();
+
+        
+        // Credits
+        push();
+        rectMode(CENTER);
+        strokeWeight(3);
+        fill(this.buttonColor);
+        rect(510, 440, 120, 150, 15)
+        pop();
+
+        push();
+        textAlign(CENTER);
+        textFont(this.menuFont);
+        stroke(0);
+        textSize(20);
+        strokeWeight(1)
+        text('Created By: Emma Wallace & Aaron Kanefsky', 460, 400, 100, 200)
+        pop();
     }
 }
