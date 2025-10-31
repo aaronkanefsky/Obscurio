@@ -32,6 +32,8 @@ const gameStates = {
 
 var myGame;
 
+let instructionText;
+
 // Cursor images
 let cursorDefault, cursorPointer;
 var charWalk = [];
@@ -45,6 +47,8 @@ function preload() {
         charWalk.push(loadImage("assets/images/char" + i + "walk.png"));
         charSpell.push(loadImage("assets/images/char" + i + "spellcast.png"));
     }
+
+    instructionText = loadStrings('Instructions.txt');
 }
 function setup() {
     createCanvas(600, 600);

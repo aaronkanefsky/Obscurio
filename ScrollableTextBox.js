@@ -23,7 +23,7 @@ class ScrollableTextBox {
         this.textContent = textContent;
         this.fontSize = fontSize;
         this.bgColor = bgColor;
-        this.textColor = color(0,0,0);
+        this.textColor = color(0, 0, 0);
         this.padding = padding;
 
         this.scrollOffset = 0;
@@ -44,26 +44,40 @@ class ScrollableTextBox {
         this.textLines = [];
 
         const maxW = this.w - 2 * this.padding;
-        let words = this.textContent.split(/\s+/);
-        let line = '';
 
-        for (let i = 0; i < words.length; i++) {
-            const word = words[i];
-            const test = line.length ? (line + ' ' + word) : word;
-            if (textWidth(test) > maxW) {
-                if (line.length) {
-                    this.textLines.push(line);
-                    line = word;
+        // Split text into paragraphs based on line breaks
+        const paragraphs = this.textContent.split(/\n+/);
+
+        for (let p = 0; p < paragraphs.length; p++) {
+            const words = paragraphs[p].trim().split(/\s+/);
+            let line = '';
+
+            for (let i = 0; i < words.length; i++) {
+                const word = words[i];
+                const test = line.length ? (line + ' ' + word) : word;
+
+                if (textWidth(test) > maxW) {
+                    // line too long — push and start new
+                    if (line.length) {
+                        this.textLines.push(line);
+                        line = word;
+                    } else {
+                        // extremely long word (rare)
+                        this.textLines.push(word);
+                        line = '';
+                    }
                 } else {
-                    // single long word longer than width — force split (rare)
-                    this.textLines.push(word);
-                    line = '';
+                    line = test;
                 }
-            } else {
-                line = test;
+            }
+
+            if (line.length) this.textLines.push(line);
+
+            // add an empty line between paragraphs
+            if (p < paragraphs.length - 1) {
+                this.textLines.push('');
             }
         }
-        if (line.length) this.textLines.push(line);
 
         // compute max scroll (so bottom of text aligns with bottom of box)
         const contentH = this.textLines.length * this.lineHeight;
@@ -71,6 +85,7 @@ class ScrollableTextBox {
         this.scrollOffset = constrain(this.scrollOffset, 0, this.maxScroll);
         pop();
     }
+
 
     // call from sketch mouseWheel
     handleScroll(event) {
@@ -116,8 +131,6 @@ class ScrollableTextBox {
         fill(this.bgColor);
         rect(this.x, this.y, this.w, this.h, 8);
 
-        // Save context and create clipping region using canvas API
-        // We'll translate so that text is drawn at (this.x + padding, this.y + padding)
         drawingContext.save();                    // save canvas state
         drawingContext.beginPath();
         drawingContext.rect(this.x + this.padding, this.y + this.padding, this.w - 2 * this.padding, this.h - 2 * this.padding);
@@ -132,7 +145,6 @@ class ScrollableTextBox {
 
         let y = startY;
         for (let i = 0; i < this.textLines.length; i++) {
-            // optional: quick culling to avoid drawing off-screen lines
             if (y + this.lineHeight >= this.y + this.padding && y <= this.y + this.h - this.padding) {
                 text(this.textLines[i], startX, y);
             }
