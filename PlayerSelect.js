@@ -19,6 +19,8 @@ class PlayerSelScreen {
 
         // Images for the player to select from
         this.playerChoices = [];
+        this.charWalk = [];
+        this.charSpell = [];
     }
 
     /**
@@ -31,18 +33,62 @@ class PlayerSelScreen {
         this.nextButton = new Button(230, 570, 100, 40, 'Next', 20, this.menuFont, this.buttonColor);
 
         // Images for the player to select from
-        this.playerChoices[0] = loadImage('assets/images/character0.png');
-        this.playerChoices[1] = loadImage('assets/images/character1.png');
-        this.playerChoices[2] = loadImage('assets/images/character2.png');
-        this.playerChoices[3] = loadImage('assets/images/character3.png');
-        this.playerChoices[4] = loadImage('assets/images/character4.png');
-        this.playerChoices[5] = loadImage('assets/images/character5.png');
-        this.playerChoices[6] = loadImage('assets/images/character6.png');
+        for(var i = 0; i < 6; i++) {
+            this.playerChoices.push(loadImage("assets/images/character" + i + ".png");
+            this.charWalk.push(loadImage("assets/images/char" + i + "walk.png"));
+            this.charSpell.push(loadImage("assets/images/char" + i + "spellcast.png"));
+        }
 
         this.num = 0;
     }
 
-
+    flipAnimation(charID,x,y,w,h) {
+      push();
+      translate(x,y);
+      
+      if(this.playerChoices[charID].isFlipping) {
+        if(!this.playerChoices[charID].flipped) {
+          this.playerChoices[charID].flipProgress += 0.05;
+        }
+        else {
+          this.playerChoices[charID].flipProgress -= 0.05;
+        }
+        
+        
+        
+        let scaleX = cos(this.playerChoices[charID].flipProgress * PI);
+        
+        
+        if(this.playerChoices[charID].flipProgress < 0.5) {
+          scale(scaleX,1);
+          imageMode(CENTER);
+          image(this.playerChoices[charID],0,0);
+        }
+        else if(this.playerChoices[charID].flipProgress >= 0.5) {
+          scale(scaleX,1);
+          rect(-w/2, -h/2, w, h);
+          imageMode(CENTER);
+          image(charSpell[charID].get(64,64,64,64),0, 0);
+        }
+        
+        
+        if((this.playerChoices[charID].flipProgress >= 1 && !this.playerChoices[charID].flipped) || (this.playerChoices[charID].flipProgress <= 0 && this.playerChoices[charID].flipped)) {
+          this.playerChoices[charID].isFlipping = false;
+          this.playerChoices[charID].flipped = !this.playerChoices[charID].flipped;
+        }
+      }
+      else {
+        imageMode(CENTER);
+        if(this.playerChoices[charID].flipped) {
+          rect(-w/2, -h/2, w, h);
+          this.playerChoices[charID].spell();
+        }
+        else {
+          image(this.playerChoices[charID],0,0);
+        }
+      }
+      pop();
+    }
 
 
     /**
@@ -54,23 +100,30 @@ class PlayerSelScreen {
             this.nextButton.updateButton();
         }
         if (mouseIsPressed) {
+            for(var i = 0; i < this.playerChoices.length; i++) {
+                if(this.playerChoices[i].isFlipping === false) {
+                    this.playerChoices[i].isFlipping = true;
+                }
+            }
             if (gameState === gameStates.PLAYER_SELECT) {
                 if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205) {
-                    if(this.game.characters[0].characterTaken === false) {
+                    
+                    if(this.playerChoices[0].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 0));
-                        this.game.characters[0].characterTaken = true;
+                        this.playerChoices[0].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.game.characters[0].characterTaken = false;
+                            this.playerChoices[0].characterTaken = false;
                         }
                     }
                 }
                 else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205) {
-                    if(this.game.characters[1].characterTaken === false) {
+                    
+                    if(this.playerChoices[1].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 1));
-                        this.game.characters[1].characterTaken = true;
+                        this.playerChoices[1].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
@@ -80,62 +133,67 @@ class PlayerSelScreen {
                     }
                 }
                 else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 65 && mouseY <= 205) {
-                    if(this.game.characters[2].characterTaken === false) {
+                    
+                    if(this.playerChoices[2].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 2));
-                        this.game.characters[2].characterTaken = true;
+                        this.playerChoices[2].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.game.characters[2].characterTaken = false;
+                            this.playerChoices[2].characterTaken = false;
                         }
                     }
                 }
                 else if (mouseX >= 85 && mouseX <= 185 && mouseY >= 230 && mouseY <= 370) {
-                    if(this.game.characters[3].characterTaken === false) {
+                    
+                    if(this.playerChoices[3].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 3));
-                        this.game.characters[3].characterTaken = true;
+                        this.playerChoices[3].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.game.characters[0].characterTaken = false;
+                            this.playerChoices[0].characterTaken = false;
                         }
                     }
                 }
                 else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 230 && mouseY <= 370) {
-                    if(this.game.characters[4].characterTaken === false) {
+                    
+                    if(this.playerChoices[4].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 4));
-                        this.game.characters[4].characterTaken = true;
+                        this.playerChoices[4].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.game.characters[4].characterTaken = false;
+                            this.playerChoices[4].characterTaken = false;
                         }
                     }
                 }
                 else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 230 && mouseY <= 370) {
-                    if(this.game.characters[5].characterTaken === false) {
+                    
+                    if(this.playerChoices[5].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 5));
-                        this.game.characters[5].characterTaken = true;
+                        this.playerChoices[5].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.game.characters[5].characterTaken = false;
+                            this.playerChoices[5].characterTaken = false;
                         }
                     }
                 }
                 else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 395 && mouseY <= 535) {
-                    if(this.game.characters[6].characterTaken === false) {
+                    
+                    if(this.playerChoices[6].characterTaken === false) {
                         this.game.players.push(new Player(this.num, 6));
-                        this.game.characters[6].characterTaken = true;
+                        this.playerChoices[6].characterTaken = true;
                     }
                     else {
                         if(this.game.players.length === num) {
                             this.game.players.splice(num);
-                            this.game.characters[6].characterTaken = false;
+                            this.playerChoices[6].characterTaken = false;
                         }
                     }
                 }
@@ -167,7 +225,14 @@ class PlayerSelScreen {
         image(this.backgroundImage, 0, 0, 600, 600)
         this.backButton.drawButton();
         this.nextButton.drawButton();
-        push();
+        flipAnimation(0,85,65,100,140);
+        flipAnimation(1,250,65,100,140);
+        flipAnimation(2,415,65,100,140);
+        flipAnimation(3,85,230,100,140);
+        flipAnimation(4,250,230,100,140);
+        flipAnimation(5,415,230,100,140);
+        flipAnimation(6,250,395,100,140);
+        /*push();
         fill(100, 100, 100, 150);
         noStroke();
         if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205 && this.game.characters[0].characterTaken == false) {
@@ -246,7 +311,7 @@ class PlayerSelScreen {
         if (this.game.characters[6].characterTaken == true) {
             rect(250, 395, 100, 140, 15);
         }
-        pop();
+        pop();*/
         fill(0);
         textSize(25);
         text(`Pick your character player ${this.num + 1}`, 150, 40);
