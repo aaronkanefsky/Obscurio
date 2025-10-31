@@ -33,10 +33,8 @@ class PlayerSelScreen {
         this.nextButton = new Button(230, 570, 100, 40, 'Next', 20, this.menuFont, this.buttonColor);
 
         // Images for the player to select from
-        for(var i = 0; i < 6; i++) {
+        for(var i = 0; i < 7; i++) {
             this.playerChoices.push(loadImage("assets/images/character" + i + ".png");
-            this.charWalk.push(loadImage("assets/images/char" + i + "walk.png"));
-            this.charSpell.push(loadImage("assets/images/char" + i + "spellcast.png"));
         }
 
         this.num = 0;
