@@ -44,52 +44,92 @@ class PlayerSelScreen {
         this.num = 0;
     }
 
+    // flipAnimation(charID, x, y, w, h) {
+    //     push();
+    //     // translate(x, y);
+
+    //     if (this.game.characters[charID].isFlipping) {
+    //         if (!this.game.characters[charID].flipped) {
+    //             this.game.characters[charID].flipProgress += 0.05;
+    //         }
+    //         else {
+    //             this.game.characters[charID].flipProgress -= 0.05;
+    //         }
+
+
+
+    //         let scaleX = cos(this.game.characters[charID].flipProgress * PI) - x / 20;
+
+
+    //         if (this.game.characters[charID].flipProgress < 0.5) {
+    //             scale(scaleX, 1);
+    //             imageMode(CORNER);
+    //             image(this.playerChoices[charID], x, y, w, h);
+    //         }
+    //         else if (this.game.characters[charID].flipProgress >= 0.5) {
+    //             scale(scaleX, 1);
+    //             rect(x, y, w, h);
+    //             imageMode(CORNER);
+    //             image(charSpell[charID].get(64, 64, 64, 64), x, y, w, h);
+    //         }
+
+
+    //         if ((this.game.characters[charID].flipProgress >= 1 && !this.game.characters[charID].flipped) || (this.game.characters[charID].flipProgress <= 0 && this.game.characters[charID].flipped)) {
+    //             this.game.characters[charID].isFlipping = false;
+    //             this.game.characters[charID].flipped = !this.game.characters[charID].flipped;
+    //         }
+    //     }
+    //     else {
+
+    //         imageMode(CORNER);
+    //         if (this.game.characters[charID].flipped) {
+    //             rect(x, y, w, h);
+    //             this.game.characters[charID].spell();
+    //         }
+    //         else {
+    //             image(this.playerChoices[charID], x, y, w, h);
+    //         }
+    //     }
+    //     pop();
+    // }
     flipAnimation(charID, x, y, w, h) {
         push();
-        // translate(x, y);
+        let char = this.game.characters[charID];
+        let progress = char.flipProgress;
 
-        if (this.game.characters[charID].isFlipping) {
-            if (!this.game.characters[charID].flipped) {
-                this.game.characters[charID].flipProgress += 0.05;
-            }
-            else {
-                this.game.characters[charID].flipProgress -= 0.05;
-            }
+        // Update flip progress
+        if (char.isFlipping) {
+            progress += char.flipped ? -0.05 : 0.05;
+            char.flipProgress = constrain(progress, 0, 1);
 
-
-
-            let scaleX = cos(this.game.characters[charID].flipProgress * PI) - x / 20;
-
-
-            if (this.game.characters[charID].flipProgress < 0.5) {
-                scale(scaleX, 1);
-                imageMode(CORNER);
-                image(this.playerChoices[charID], x, y, w, h);
-            }
-            else if (this.game.characters[charID].flipProgress >= 0.5) {
-                scale(scaleX, 1);
-                rect(x, y, w, h);
-                imageMode(CORNER);
-                image(charSpell[charID].get(64, 64, 64, 64), x, y, w, h);
-            }
-
-
-            if ((this.game.characters[charID].flipProgress >= 1 && !this.game.characters[charID].flipped) || (this.game.characters[charID].flipProgress <= 0 && this.game.characters[charID].flipped)) {
-                this.game.characters[charID].isFlipping = false;
-                this.game.characters[charID].flipped = !this.game.characters[charID].flipped;
+            if (progress === 1 && !char.flipped) {
+                char.flipped = true;
+                char.isFlipping = false;
+            } else if (progress === 0 && char.flipped) {
+                char.flipped = false;
+                char.isFlipping = false;
             }
         }
-        else {
-            
-            imageMode(CORNER);
-            if (this.game.characters[charID].flipped) {
-                rect(x, y, w, h);
-                this.game.characters[charID].spell();
-            }
-            else {
-                image(this.playerChoices[charID], x, y, w, h);
-            }
+        let angle = progress * PI;
+
+        // Center the transform on the card
+        translate(x + w / 2, y + h / 2);
+        let scaleX = cos(angle);
+        scale(scaleX, 1);
+
+        // Decide which side to draw
+        imageMode(CENTER);
+        if (progress < 0.5) {
+            image(this.playerChoices[charID], 0, 0, w, h);
+        } else {
+            // Draw flipped side
+            fill(50);
+            rectMode(CENTER);
+            rect(0, 0, w, h);
+            if (this.charSpell && this.charSpell[charID])
+                image(this.charSpell[charID].get(64, 64, 64, 64), 0, 0, w, h);
         }
+
         pop();
     }
 
@@ -103,14 +143,16 @@ class PlayerSelScreen {
             this.nextButton.updateButton();
         }
         if (mouseIsPressed) {
-            for (var i = 0; i < this.game.characters.length; i++) {
-                if (this.game.characters[i].isFlipping === false) {
-                    this.game.characters[i].isFlipping = true;
-                }
-            }
+            // for (var i = 0; i < this.game.characters.length; i++) {
+            //     if (this.game.characters[i].isFlipping === false) {
+            //         this.game.characters[i].isFlipping = true;
+            //     }
+            // }
 
             if (mouseX >= 85 && mouseX <= 185 && mouseY >= 65 && mouseY <= 205) {
-
+                if (!this.game.characters[0].isFlipping) {
+                    this.game.characters[0].isFlipping = true;
+                }
                 if (this.game.characters[0].characterTaken === false) {
                     this.game.players.push(new Player(this.num, 0));
                     this.game.characters[0].characterTaken = true;
