@@ -130,7 +130,7 @@ function handlePlayerSelScreen() {
         gameState = gameStates.GAME;
         playerSel.exit();
     }
-    else if(playerSel.playerChoices.length === playerSel.num && playerSel.nextButton.released === true) {
+    else if(myGame.players.length === playerSel.num && playerSel.nextButton.released === true) {
         playerSel.num++;
     }
     else if (playerSel.backButton.released === true) {
