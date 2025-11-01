@@ -281,5 +281,21 @@ class PlayerSelScreen {
         fill(0);
         textSize(25);
         text(`Pick your character player ${this.num + 1}`, 150, 40);
+
+        push();
+        rectMode(CENTER);
+        strokeWeight(3);
+        fill(this.buttonColor);
+        rect(300, 50, 300, 50);
+        pop();
+
+        push();
+        textAlign(CENTER);
+        textFont(this.menuFont);
+        stroke(0);
+        textSize(20);
+        strokeWeight(1);
+        text(`Pick your character player ${this.num + 1}`, 300, 50)
+        pop();
     }
 }
