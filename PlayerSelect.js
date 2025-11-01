@@ -101,7 +101,7 @@ class PlayerSelScreen {
             // Backside
             fill(30);
             rectMode(CENTER);
-            rect(0, 0, w, h);
+            rect(0, 0, w, h, 15);
         }
         pop();
 
