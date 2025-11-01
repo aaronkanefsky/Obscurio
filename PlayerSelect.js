@@ -120,7 +120,7 @@ class PlayerSelScreen {
     updatePlayerSelScreen() {
         this.backButton.updateButton();
         this.nextButton.updateButton();
-        if (this.nextButton.released && this.selectedCard !== null) {
+        if (this.nextButton.released && this.selectedCard !== null && this.players.length === this.num + 1) {
             // Only advance if a card is flipped (character selected)
             let selectedChar = this.game.characters[this.selectedCard];
 
