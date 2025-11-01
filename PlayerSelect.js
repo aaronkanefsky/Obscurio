@@ -278,24 +278,17 @@ class PlayerSelScreen {
         this.flipAnimation(5, 415, 230, 100, 140);
         this.flipAnimation(6, 250, 395, 100, 140);
 
-        fill(0);
-        textSize(25);
-        text(`Pick your character player ${this.num + 1}`, 150, 40);
-
         push();
         rectMode(CENTER);
         strokeWeight(3);
         fill(this.buttonColor);
-        rect(300, 50, 300, 50);
-        pop();
-
-        push();
+        rect(300, 40, 300, 40);
         textAlign(CENTER);
         textFont(this.menuFont);
-        stroke(0);
+        fill(0);
+        noStroke();
         textSize(20);
-        strokeWeight(1);
-        text(`Pick your character player ${this.num + 1}`, 300, 50)
+        text(`Pick your character player ${this.num + 1}`, 300, 40)
         pop();
     }
 }
