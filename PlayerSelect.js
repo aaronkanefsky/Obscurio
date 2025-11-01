@@ -144,8 +144,8 @@ class PlayerSelScreen {
                     this.game.characters[0].characterTaken = true;
                 }
                 else {
-                    if (this.game.players.length === this.num) {
-                        this.game.players.splice(this.num);
+                    if (this.game.players.length === this.num + 1) {
+                        this.game.players.pop();
                         this.game.characters[0].characterTaken = false;
                     }
                 }
@@ -159,8 +159,8 @@ class PlayerSelScreen {
                     this.game.characters[1].characterTaken = true;
                 }
                 else {
-                    if (this.game.players.length === this.num) {
-                        this.game.players.splice(this.num);
+                    if (this.game.players.length === this.num + 1) {
+                        this.game.players.pop();
                         this.game.characters[1].characterTaken = false;
                     }
                 }
@@ -174,8 +174,8 @@ class PlayerSelScreen {
                     this.game.characters[2].characterTaken = true;
                 }
                 else {
-                    if (this.game.players.length === this.num) {
-                        this.game.players.splice(this.num);
+                    if (this.game.players.length === this.num + 1) {
+                        this.game.players.pop();
                         this.game.characters[2].characterTaken = false;
                     }
                 }
@@ -189,8 +189,8 @@ class PlayerSelScreen {
                     this.game.characters[3].characterTaken = true;
                 }
                 else {
-                    if (this.game.players.length === this.num) {
-                        this.game.players.splice(this.num);
+                    if (this.game.players.length === this.num + 1) {
+                        this.game.players.pop();
                         this.game.characters[0].characterTaken = false;
                     }
                 }
@@ -204,8 +204,8 @@ class PlayerSelScreen {
                     this.game.characters[4].characterTaken = true;
                 }
                 else {
-                    if (this.game.players.length === this.num) {
-                        this.game.players.splice(this.num);
+                    if (this.game.players.length === this.num + 1) {
+                        this.game.players.pop();
                         this.game.characters[4].characterTaken = false;
                     }
                 }
@@ -219,8 +219,8 @@ class PlayerSelScreen {
                     this.game.characters[5].characterTaken = true;
                 }
                 else {
-                    if (this.game.players.length === this.num) {
-                        this.game.players.splice(this.num);
+                    if (this.game.players.length === this.num + 1) {
+                        this.game.players.pop();
                         this.game.characters[5].characterTaken = false;
                     }
                 }
@@ -234,8 +234,8 @@ class PlayerSelScreen {
                     this.game.characters[6].characterTaken = true;
                 }
                 else {
-                    if (this.game.players.length === this.num) {
-                        this.game.players.splice(this.num);
+                    if (this.game.players.length === this.num + 1) {
+                        this.game.players.pop();
                         this.game.characters[6].characterTaken = false;
                     }
                 }
