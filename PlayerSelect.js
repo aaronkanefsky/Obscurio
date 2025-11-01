@@ -282,7 +282,7 @@ class PlayerSelScreen {
         rectMode(CENTER);
         strokeWeight(3);
         fill(this.buttonColor);
-        rect(300, 40, 300, 40);
+        rect(300, 30, 300, 40);
         textAlign(CENTER);
         textFont(this.menuFont);
         fill(0);
