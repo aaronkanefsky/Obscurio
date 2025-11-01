@@ -100,6 +100,7 @@ class PlayerSelScreen {
         } else {
             // Backside
             fill(30);
+            noStroke();
             rectMode(CENTER);
             rect(0, 0, w, h, 15);
         }
@@ -108,7 +109,7 @@ class PlayerSelScreen {
         if (char.flipped && !char.isFlipping){
             push();
             translate(x - w * 0.8, y - h * 0.5); // center above card
-            char.walk(); // character draws itself relative to this position
+            char.spell(); // character draws itself relative to this position
             pop();
         }
     }
@@ -130,7 +131,6 @@ class PlayerSelScreen {
             selectedChar.isFlipping = true;
             selectedChar.flipped = true; 
 
-
             this.num++; // Next
 
             this.selectedCard = null;
@@ -140,106 +140,36 @@ class PlayerSelScreen {
                 if (!this.game.characters[0].isFlipping && !this.game.characters[0].characterTaken) {
                     this.game.characters[0].isFlipping = true;
                 }
-                /*if (this.game.characters[0].characterTaken === false) {
-                    this.game.players.push(new Player(this.num, 0));
-                    this.game.characters[0].characterTaken = true;
-                }
-                else {
-                    if (this.game.players.length === this.num + 1) {
-                        this.game.players.pop();
-                        this.game.characters[0].characterTaken = false;
-                    }
-                }*/
             }
             else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 65 && mouseY <= 205) {
                 if (!this.game.characters[1].isFlipping && !this.game.characters[1].characterTaken) {
                     this.game.characters[1].isFlipping = true;
                 }
-                /*if (this.game.characters[1].characterTaken === false) {
-                    this.game.players.push(new Player(this.num, 1));
-                    this.game.characters[1].characterTaken = true;
-                }
-                else {
-                    if (this.game.players.length === this.num + 1) {
-                        this.game.players.pop();
-                        this.game.characters[1].characterTaken = false;
-                    }
-                }*/
             }
             else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 65 && mouseY <= 205) {
                 if (!this.game.characters[2].isFlipping && !this.game.characters[2].characterTaken) {
                     this.game.characters[2].isFlipping = true;
                 }
-                /*if (this.game.characters[2].characterTaken === false) {
-                    this.game.players.push(new Player(this.num, 2));
-                    this.game.characters[2].characterTaken = true;
-                }
-                else {
-                    if (this.game.players.length === this.num + 1) {
-                        this.game.players.pop();
-                        this.game.characters[2].characterTaken = false;
-                    }
-                }*/
             }
             else if (mouseX >= 85 && mouseX <= 185 && mouseY >= 230 && mouseY <= 370) {
                 if (!this.game.characters[3].isFlipping && !this.game.characters[3].characterTaken) {
                     this.game.characters[3].isFlipping = true;
                 }
-                /*if (this.game.characters[3].characterTaken === false) {
-                    this.game.players.push(new Player(this.num, 3));
-                    this.game.characters[3].characterTaken = true;
-                }
-                else {
-                    if (this.game.players.length === this.num + 1) {
-                        this.game.players.pop();
-                        this.game.characters[0].characterTaken = false;
-                    }
-                }*/
             }
             else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 230 && mouseY <= 370) {
                 if (!this.game.characters[4].isFlipping && !this.game.characters[4].characterTaken) {
                     this.game.characters[4].isFlipping = true;
                 }
-                /*if (this.game.characters[4].characterTaken === false) {
-                    this.game.players.push(new Player(this.num, 4));
-                    this.game.characters[4].characterTaken = true;
-                }
-                else {
-                    if (this.game.players.length === this.num + 1) {
-                        this.game.players.pop();
-                        this.game.characters[4].characterTaken = false;
-                    }
-                }*/
             }
             else if (mouseX >= 415 && mouseX <= 515 && mouseY >= 230 && mouseY <= 370) {
                 if (!this.game.characters[5].isFlipping && !this.game.characters[5].characterTaken) {
                     this.game.characters[5].isFlipping = true;
                 }
-                /*if (this.game.characters[5].characterTaken === false) {
-                    this.game.players.push(new Player(this.num, 5));
-                    this.game.characters[5].characterTaken = true;
-                }
-                else {
-                    if (this.game.players.length === this.num + 1) {
-                        this.game.players.pop();
-                        this.game.characters[5].characterTaken = false;
-                    }
-                }*/
             }
             else if (mouseX >= 250 && mouseX <= 350 && mouseY >= 395 && mouseY <= 535) {
                 if (!this.game.characters[6].isFlipping && !this.game.characters[6].characterTaken) {
                     this.game.characters[6].isFlipping = true;
                 }
-                /*if (this.game.characters[6].characterTaken === false) {
-                    this.game.players.push(new Player(this.num, 6));
-                    this.game.characters[6].characterTaken = true;
-                }
-                else {
-                    if (this.game.players.length === this.num + 1) {
-                        this.game.players.pop();
-                        this.game.characters[6].characterTaken = false;
-                    }
-                }*/
             }
 
         }
@@ -282,7 +212,7 @@ class PlayerSelScreen {
         rectMode(CENTER);
         strokeWeight(3);
         fill(this.buttonColor);
-        rect(300, 30, 300, 40);
+        rect(300, 35, 300, 40);
         textAlign(CENTER);
         textFont(this.menuFont);
         fill(0);
