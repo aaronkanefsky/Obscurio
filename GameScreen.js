@@ -15,10 +15,10 @@ class GameScreen {
 
   draw() {
     background(220);
-    if(this.gameLoopState === this.loopStates.GRIMOIRE_CLUES_SCREEN) {
+    if(this.gameLoopState === this.grimoireCluesScreen) {
       handleGrimoireCluesScreen();
     }
-    else if(this.gameLoopState === this.loopStates.TRAITOR_PICK_SCREEN) {
+    else if(this.gameLoopState === this.traitorPickScreen) {
       handleTraitorPickScreen();
     }
     else {
@@ -31,7 +31,7 @@ class GameScreen {
     this.grimoireCluesScreen.draw();
 
     if(this.grimoireCluesScreen.nextButton.released === true) {
-      this.gameLoopState = this.loopStates.TRAITOR_PICK_SCREEN;
+      this.gameLoopState.changeState(this.traitorPickScreen);
       this.grimoireCluesScreen.exit();
       this.traitorPickScreen.enter();
     }
@@ -42,7 +42,7 @@ class GameScreen {
     this.traitorPickScreen.draw();
 
     if(this.traitorPickScreen.nextButton.released === true) {
-      this.gameLoopState = this.loopStates.EXIT_SELECT_SCREEN;
+      this.gameLoopState.changeState(this.exitSelectScreen);
       this.traitorPickScreen.exit();
       this.exitSelectScreen.enter();
     }
@@ -53,7 +53,7 @@ class GameScreen {
     this.exitSelectScreen.draw();
 
     if(this.exitSelectScreen.nextButton.released === true) {
-      this.gameLoopState = this.loopStates.GRIMOIRE_CLUES_SCREEN;
+      this.gameLoopState.changeState(this.grimoireCluesScreen);
       this.exitSelectScreen.exit();
       if(this.level > 6) {
         this.game.gameState = this.game.gameStates.WIN_SCREEN;
