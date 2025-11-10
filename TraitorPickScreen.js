@@ -8,15 +8,15 @@ class TraitorPickScreen {
    * 
    * @param {Game} game Reference to current game
    */
-  constructor(game) {
-    this.game = game;
+  constructor(gameLoop) {
+    this.gameLoop = gameLoop;
     this.folioDoors = [];
     for(let i = 0; i < 8; i++) {
       if(i < 4) {
-        this.folioDoors.push(new folioObj((i*50),200,this.game.gameDoors.pop()));
+        this.folioDoors.push(new folioObj((i*50),200,this.gameLoop.gameDoors.pop()));
       }
       else {
-        this.folioDoors.push(new folioObj((i*50),400,this.game.gameDoors.pop()));
+        this.folioDoors.push(new folioObj((i*50),400,this.gameLoop.gameDoors.pop()));
       }
     }
     this.doorPicks = 0;
@@ -27,7 +27,7 @@ class TraitorPickScreen {
    * @description Behavior on state entry
    */
   enter() {
-    this.nextButton = new Button(430, 570, 100, 40, 'Next', 20, this.game.menuFont, this.game.buttonColor);
+    this.nextButton = new Button(430, 570, 100, 40, 'Next', 20, this.gameLoop.game.menuFont, this.gameLoop.game.buttonColor);
   }
 
   /**
@@ -57,8 +57,8 @@ class TraitorPickScreen {
     // find the selected doors and add them to level doors, then replace them in te folio with new doors for next level's traitor pick
     for(let i = 0; i < this.folioDoors.length; i++) {
       if(this.folioDoors[i].selected === true) {
-        this.game.levelDoors.push(new doorObj(false,this.folioDoors[i].door));
-        this.folioDoors.splice(i,1,this.game.gameDoors.pop());
+        this.gameLoop.levelDoors.push(new doorObj(false,this.folioDoors[i].door));
+        this.folioDoors.splice(i,1,this.gameLoop.gameDoors.pop());
       }
     }
     
