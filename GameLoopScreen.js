@@ -1,4 +1,4 @@
-class GameScreen {
+class GameLoopScreen {
   constructor(game) {
     this.game = game;
     this.gameDoors = shuffle(this.doors);
@@ -24,6 +24,17 @@ class GameScreen {
     else {
       handleExitSelectScreen();
     }
+  }
+
+  exit() {
+    this.game = null;
+    this.gameDoors = [];
+    this.exit = null;
+    this.level = 1;
+    this.grimoireCluesScreen.gameLoop = null;
+    this.traitorPickScreen.folioDoors = [];
+    this.traitorPickScreen.gameLoop = null;
+    this.exitSelectScreen.gameLoop = null;
   }
 
   handleGrimoireCluesScreen() {
@@ -57,10 +68,12 @@ class GameScreen {
       this.exitSelectScreen.exit();
       if(this.level > 6) {
         this.game.gameState = this.game.gameStates.WIN_SCREEN;
+        this.exit();
         this.game.winScreen.enter();
       }
       else if(this.cohesionTokens <= 0) {
         this.game.gameState = this.game.gameStates.LOSE_SCREEN;
+        this.exit();
         this.game.loseScreen.enter();
       }
       else {
