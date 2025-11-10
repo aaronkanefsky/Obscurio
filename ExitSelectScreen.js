@@ -8,7 +8,7 @@ class ExitSelectScreen {
   enter() {
     let randDoors = 5 - this.gameLoop.levelDoors;
     for(let i = 0; i < randDoors; i++) {
-      this.gameLoop.levelDoors.push(new doorObj(i,0,false,this.gameLoop.gameDoors.pop()));
+      this.gameLoop.levelDoors.push(new doorObj(i,false,this.gameLoop.gameDoors.pop()));
     }
   }
 
