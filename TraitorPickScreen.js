@@ -1,9 +1,9 @@
 /**
- * @class TraitorPickGameScreen
+ * @class TraitorPickScreen
  * 
  * @description Game screen with a single next button and the blurred image as the background, draws 8 doors stored in folio of doors for traitor to pick from, highlights doors picked, up to 2 doors may be selected.
  */
-class TraitorPickGameScreen {
+class TraitorPickScreen {
   /**
    * 
    * @param {Game} game Reference to current game
