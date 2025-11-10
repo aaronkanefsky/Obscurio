@@ -1,22 +1,46 @@
 class GrimoireCluesScreen {
-  constructor() {
-    
+  constructor(gameLoop) {
+    this.gameLoop = gameLoop;
+    this.clueDoor1;
+    this.clueDoor2;
+    this.grimoire = loadImage('assets/grimoire.png');
+    this.butterflyMarker1 = new p5.Vector(220, 160);
+    this.butterflyMarker2 = new p5.Vector(380, 160);
   }
 
   enter() {
-    
+    this.clueDoor1 = this.gameLoop.gameDoors.pop();
+    this.clueDoor2 = this.gameLoop.gameDoors.pop();
   }
 
   update() {
-
+    // Drag the butterfly markers using the cursor
+    if(mouseIsPressed) {
+      if(dist(this.butterflyMarker1.x, this.butterflyMarker1.y, mouseX, mouseY) < 10) {
+        this.butterflyMarker1.x = mouseX;
+        this.butterflyMarker1.y = mouseY;
+      }
+      else if(dist(this.butterflyMarker2.x, this.butterflyMarker2.y, mouseX, mouseY) < 10) {
+        this.butterflyMarker2.x = mouseX;
+        this.butterflyMarker2.y = mouseY;
+      }
+    }
   }
 
   exit() {
-
+    this.clueDoor1 = null;
+    this.clueDoor2 = null;
+    // Take screenshot of grimoire clues setup to display in following screens
+    this.gameLoop.grimoireClues = get(200, 50, 200, 100));
+    this.grimoire = null;
+    this.butterflyMarker1 = null;
+    this.butterflyMarker2 = null;
   }
 
   draw() {
-    
+    image(this.grimoire, 200, 50, 200, 100);
+    image(this.clueDoor1, 225, 50, 50, 50);
+    image(this.clueDoor2, 325, 50, 50, 50);
     textSize(30);
     textMode(CENTER);
     text("In the next screen the traitor will have the chance to pick up to 2 doors to include in this level.", 300, 350);
