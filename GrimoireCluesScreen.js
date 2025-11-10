@@ -1,3 +1,8 @@
+/**
+ * @class GrimoireCluesScreen
+ * 
+ * @description Game loop screen class to contain screen where Grimoire sets up clues
+ */
 class GrimoireCluesScreen {
   constructor(gameLoop) {
     this.gameLoop = gameLoop;
@@ -11,8 +16,8 @@ class GrimoireCluesScreen {
   enter() {
     this.clueDoor1 = this.gameLoop.gameDoors.pop();
     this.clueDoor2 = this.gameLoop.gameDoors.pop();
-    this.butterflyMarker1 = new bMarkObj(220, 160, PI/4, false);
-    this.butterflyMarker2 = new bMarkObj(380, 160, -PI/4, false);
+    this.butterflyMarker1 = new bMarkObj(220, 160, PI/4);
+    this.butterflyMarker2 = new bMarkObj(380, 160, -PI/4);
   }
 
   update() {
