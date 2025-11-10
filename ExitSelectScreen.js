@@ -1,15 +1,18 @@
 class ExitSelectScreen {
   constructor(gameLoop) {
     this.gameLoop = gameLoop;
-    this.doorCount = [];
     this.currLevelDoors = [];
+    this.playerInd = 1;
+    this.board = loadImage('assets/gameboard.png');
   }
 
   enter() {
     let randDoors = 5 - this.gameLoop.levelDoors;
     for(let i = 0; i < randDoors; i++) {
-      this.gameLoop.levelDoors.push(new doorObj(i,false,this.gameLoop.gameDoors.pop()));
+      this.gameLoop.levelDoors.push(new doorObj(false,this.gameLoop.gameDoors.pop()));
     }
+    this.currLevelDoors = shuffle(this.gameLoop.levelDoors);
+    this.gameLoop.levelDoors = [];
   }
 
   update() {
@@ -18,21 +21,24 @@ class ExitSelectScreen {
 
   exit() {
     for(let i = 0; i < this.gameLoop.levelDoors.length; i++) {
-      if(this.gameLoop.levelDoors[i].exitCard === false && this.gameLoop.levelDoors[i].count > 0) {
-        this.gameLoop.game.cohesionTokens -= this.gameLoop.levelDoors[i].count;
+      if(this.currLevelDoors[i].exitCard === false && this.currLevelDoors[i].count > 0) {
+        this.gameLoop.game.cohesionTokens -= this.currLevelDoors[i].count;
       }
-      else if(this.gameLoop.levelDoors[i].exitCard === true && this.gameLoop.levelDoors[i].count > 0) {
+      else if(this.currLevelDoors[i].exitCard === true && this.currLevelDoors[i].count > 0) {
         this.gameLoop.level++;
       }
     }
     // Remove doors used in this level from memory
-    this.gameLoop.levelDoors = [];
+    this.currLevelDoors = [];
+
+    // Reset player index
+    this.playerInd = 1;
   }
 
   draw() {
-    
+    image(this.board,150,217,300,300);
     textSize(30);
     textMode(CENTER);
-    text(`Player ${this.ind} pick a door!`, 100, 300);
+    text(`Player ${this.playerInd} pick a door!`, 100, 300);
   }
 }
