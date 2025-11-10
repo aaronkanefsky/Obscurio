@@ -11,8 +11,8 @@ class GrimoireCluesScreen {
   enter() {
     this.clueDoor1 = this.gameLoop.gameDoors.pop();
     this.clueDoor2 = this.gameLoop.gameDoors.pop();
-    this.butterflyMarker1 = new bMarkObj(220, 160, PI/4);
-    this.butterflyMarker2 = new bMarkObj(380, 160, -PI/4);
+    this.butterflyMarker1 = new bMarkObj(220, 160, PI/4, false);
+    this.butterflyMarker2 = new bMarkObj(380, 160, -PI/4, false);
   }
 
   update() {
@@ -21,10 +21,14 @@ class GrimoireCluesScreen {
       if(dist(this.butterflyMarker1.x, this.butterflyMarker1.y, mouseX, mouseY) < 10) {
         this.butterflyMarker1.x = mouseX;
         this.butterflyMarker1.y = mouseY;
+        this.butterflyMarker2.selected = false;
+        this.butterflyMarker1.selected = true;
       }
       else if(dist(this.butterflyMarker2.x, this.butterflyMarker2.y, mouseX, mouseY) < 10) {
         this.butterflyMarker2.x = mouseX;
         this.butterflyMarker2.y = mouseY;
+        this.butterflyMarker1.selected = false;
+        this.butterflyMarker2.selected = true;
       }
     }
   }
