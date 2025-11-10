@@ -8,6 +8,7 @@ class bMarkObj {
     this.x = x;
     this.y = y;
     this.angle = angle;
+    this.selected = false;
     this.marker = loadImage('assets/butterflymarker.png');
   }
 
@@ -20,10 +21,10 @@ class bMarkObj {
   }
 
   update() {
-    if(keyIsDown(LEFT_ARROW)) {
+    if(this.selected === true && keyIsDown(LEFT_ARROW)) {
       this.angle -= radians(1);
     }
-    else if(keyIsDown(RIGHT_ARROW)) {
+    else if(this.selected === true && keyIsDown(RIGHT_ARROW)) {
       this.angle += radians(1);
     }
   }
