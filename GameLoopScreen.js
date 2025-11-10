@@ -7,6 +7,10 @@ class GameLoopScreen {
     this.loopStates = [this.grimoireCluesScreen = new GrimoireCluesScreen(game), this.traitorPickScreen = new TraitorPickScreen(game), this.exitSelectScreen = new ExitSelectScreen(game)];
     this.gameLoopState = this.grimoireCluesScreen;
   }
+
+  changeState(x) {
+    this.gameLoopState = x;
+  }
   
   enter() {
     this.exit = this.gameDoors.pop();
