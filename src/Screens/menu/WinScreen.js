@@ -25,7 +25,7 @@ class WinScreen {
   /**
    * @description Behavior while in Win Screen state
    */
-  update() {
+  updateWinScreen() {
     if(frameCount - this.animationStart >= 500) {
       this.restartButton.updateButton();
     }
@@ -34,7 +34,7 @@ class WinScreen {
   /**
     * @description Draws the win screen to the screen
     */
-  draw() {
+  drawWinScreen() {
     // Add animation of players leaving the library, then transition to static end screen
     // Current time given for transition between animation and static screen is an estimate
     if(frameCount - this.animationStart < 500) {
