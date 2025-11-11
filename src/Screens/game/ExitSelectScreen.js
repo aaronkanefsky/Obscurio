@@ -30,32 +30,32 @@ class ExitSelectScreen {
       // Check to see if door has been clicked and which one
       // Set the character's path to the door and increment the door's count to indicate how many times it got picked
       // Check door 6
-      if(mouseX > 230 && mouseX < 270 && mouseY > 90 && mouseY < 165) {
+      if(dist(mouseX, mouseY, 518, 83) < 80) {
         this.currLevelDoors[5].count++;
         this.target = door6;
       }
       // Check door 5
-      else if(mouseX > 30 && mouseX < 70 && mouseY > 90 && mouseY < 165) {
+      else if(dist(mouseX, mouseY, 82, 83) < 80) {
         this.currLevelDoors[4].count++;
         this.target = door5;
       }
       // Check door 4
-      else if(mouseX > 230 && mouseX < 270 && mouseY > 270 && mouseY < 360) {
+      else if(dist(mouseX, mouseY, 518, 298) < 80) {
         this.currLevelDoors[3].count++;
         this.target = door4;
       }
       // Check door 3
-      else if(mouseX > 30 && mouseX < 70 && mouseY > 270 && mouseY < 360) {
+      else if(dist(mouseX, mouseY, 82, 298) < 80) {
         this.currLevelDoors[2].count++;
         this.target = door3;
       }
       // Check door 2
-      else if(mouseX > 230 && mouseX < 270 && mouseY > 480 && mouseY < 555) {
+      else if(dist(mouseX, mouseY, 518, 519) < 80) {
         this.currLevelDoors[1].count++;
         this.target = door2;
       }
       // Check door 1
-      else if(mouseX > 30 && mouseX < 70 && mouseY > 480 && mouseY < 555) {
+      else if(dist(mouseX, mouseY, 82, 519) < 80) {
         this.currLevelDoors[0].count++;
         this.target = door1;
       }
@@ -87,9 +87,18 @@ class ExitSelectScreen {
   }
 
   draw() {
-    image(this.gameLoop.game.backgroundImage, 0, 0, 600, 600);  
-    image(this.gameLoop.clues, 200, 150, 200, 100);    // draw Grimoire clues for players to see
+    //image(this.gameLoop.game.backgroundImage, 0, 0, 600, 600);  
+    //image(this.gameLoop.clues, 200, 150, 200, 100);    // draw Grimoire clues for players to see
     image(this.board, 200, 300, 100, 200);             // draw cropped game board
+
+    // draw doors of current level
+    image(this.currLevelDoors[5],438,3,160,160);
+    image(this.currLevelDoors[4],2,3,160,160);
+    image(this.currLevelDoors[3],438,218,160,160);
+    image(this.currLevelDoors[2],2,218,160,160);
+    image(this.currLevelDoors[1],438,439,160,160);
+    image(this.currLevelDoors[0],2,439,160,160);
+    
     push();
     rectMode(CENTER);
     strokeWeight(3);
