@@ -1,12 +1,14 @@
 class GameLoopScreen {
   constructor(game) {
     this.game = game;
-    this.gameDoors = shuffle(this.doors);
+    this.gameDoors = [];
+    // this.gameDoors = [shuffle(this.doors)];
     this.exit = null;
     this.level = 1;
     this.cohesionTokens = 0;
-    this.loopStates = [this.grimoireCluesScreen = new GrimoireCluesScreen(game), this.traitorPickScreen = new TraitorPickScreen(game), this.exitSelectScreen = new ExitSelectScreen(game)];
+    this.loopStates = [this.grimoireCluesScreen = new GrimoireCluesScreen(this), this.traitorPickScreen = new TraitorPickScreen(this), this.exitSelectScreen = new ExitSelectScreen(this)];
     this.gameLoopState = this.grimoireCluesScreen;
+    this.levelDoors = [];
   }
 
   changeState(x) {

@@ -69,29 +69,36 @@ function setup() {
         globalGameConfig.characters.push(new Character(i, 100, 100));
     }
 
+    
     gameState = gameStates.MAIN_MENU;
     menu.enter();
 }
 
 function draw() {
     background(220);
-    if (gameState === gameStates.MAIN_MENU) {
-        handleMainMenu();
-    }
-    else if (gameState === gameStates.PLAYER_NUM) {
-        handlePlayerNumScreen();
-    }
-    else if (gameState === gameStates.PLAYER_SELECT) {
-        handlePlayerSelScreen();
-    }
-    else if (gameState === gameStates.OPTIONS_SCREEN) {
-        handleOptionsScreen();
-    }
-    else if (gameState === gameStates.INSTRUCTIONS) {
-        handleInstructionsScreen();
-    }
-    else if (gameState === gameStates.GAME){
-        handleGame();
+
+    switch (gameState) {
+        case gameStates.MAIN_MENU:
+            handleMainMenu();
+            break;
+        case gameStates.OPTIONS_SCREEN:
+            handleOptionsScreen();
+            break;
+        case gameStates.INSTRUCTIONS:
+            handleInstructionsScreen();
+            break;
+        case gameStates.PLAYER_NUM:
+            handlePlayerNumScreen();
+            break;
+        case gameStates.PLAYER_SELECT:
+            handlePlayerSelScreen();
+            break;
+        case gameStates.GAME:
+            handleGame();
+            break;
+        
+        default:
+            break;
     }
 
     // Do for every screen
@@ -143,6 +150,7 @@ function handlePlayerSelScreen() {
     if (playerSel.num === globalGameConfig.playerCount && playerSel.nextButton.released === true) {
         gameState = gameStates.GAME;
         playerSel.exit();
+        game.enter();
     }
 
     else if (playerSel.backButton.released === true) {
@@ -176,7 +184,7 @@ function handleInstructionsScreen() {
 }
 
 function handleGame(){
-
+    
 }
 
 
