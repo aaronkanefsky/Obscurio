@@ -34,6 +34,7 @@ class TraitorPickScreen {
    * @description Behavior while in traitor pick game state
    */
   update() {
+    this.nextButton.updateButton();
     if(mouseIsPressed) {
       for(let k = 0; k < this.folioDoors.length; k++) {
         if(dist(mouseX,mouseY,this.folioDoors[k].x + 25,this.folioDoors[k].y + 25) < 25 && this.folioDoors[k].selected === false && this.doorPicks < 2) {
@@ -69,8 +70,20 @@ class TraitorPickScreen {
    * @description Draws the traitor pick to the screen
    */
   draw() {
+    image(this.gameLoop.game.backgroundImage, 0, 0, 600, 600);
+    this.nextButton.drawButton();
+    
+    push();
+    rectMode(CENTER);
+    strokeWeight(3);
+    fill(this.gameLoop.game.buttonColor);
+    rect(300, 50, 200, 100, 15);
+    
     textSize(40);
-    textMode(CENTER);
+    textAlign(CENTER,CENTER);
+    textFont(this.gameLoop.game.menuFont);
+    strokeWeight(1);
+    fill(0);
     text(`Traitor you can select up to ${2 - this.doorsPicked} more doors!`, 300, 50);
     for(let d of this.folioDoors) {
       if(d.selected === true) {
@@ -79,5 +92,6 @@ class TraitorPickScreen {
       }
       image(d.door, d.x, d.y, 50, 50);
     }
+    pop();
   }
 }
