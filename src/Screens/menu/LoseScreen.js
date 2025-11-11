@@ -25,7 +25,7 @@ class LoseScreen {
   /**
    * @description Behavior while in Lose Screen state
    */
-  update() {
+  updateLoseScreen() {
     if(frameCount - this.animationStart >= 500) {
       this.restartButton.updateButton();
     }
@@ -34,7 +34,7 @@ class LoseScreen {
   /**
     * @description Draws the win screen to the screen
     */
-  draw() {
+  drawLoseScreen() {
     // Add animation of players leaving the library, then transition to static end screen
     // Current time given for transition between animation and static screen is an estimate
     if(frameCount - this.animationStart < 500) {
