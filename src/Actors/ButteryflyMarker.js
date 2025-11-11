@@ -1,9 +1,9 @@
 /**
- * @class bMarkObj
+ * @class ButteryflyMarker
  * 
  * @description Object class to contain butterfly markers and allow the player to change the angle and location of the butterfly markers
  */
-class bMarkObj {
+class ButteryflyMarker {
   constructor(x, y, angle) {
     this.x = x;
     this.y = y;

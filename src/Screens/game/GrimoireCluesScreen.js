@@ -8,7 +8,7 @@ class GrimoireCluesScreen {
     this.gameLoop = gameLoop;
     this.clueDoor1;
     this.clueDoor2;
-    this.grimoire = loadImage(ASSET_PATH + 'grimoire.png');
+    this.grimoire = loadImage(ASSET_PATH + 'images/grimoire.png');
     this.butterflyMarker1;
     this.butterflyMarker2;
   }
@@ -16,8 +16,8 @@ class GrimoireCluesScreen {
   enter() {
     this.clueDoor1 = this.gameLoop.gameDoors.pop();
     this.clueDoor2 = this.gameLoop.gameDoors.pop();
-    this.butterflyMarker1 = new bMarkObj(220, 160, PI/4);
-    this.butterflyMarker2 = new bMarkObj(380, 160, -PI/4);
+    this.butterflyMarker1 = new ButteryflyMarker(220, 160, PI/4);
+    this.butterflyMarker2 = new ButteryflyMarker(380, 160, -PI/4);
   }
 
   update() {

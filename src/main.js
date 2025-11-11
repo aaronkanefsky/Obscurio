@@ -30,7 +30,7 @@ const gameStates = {
     GAME: 5,
 }
 
-var myGame;
+var globalGameConfig;
 
 let instructionText;
 
@@ -38,28 +38,35 @@ let instructionText;
 let cursorDefault, cursorPointer;
 var charWalk = [];
 var charSpell = [];
-let menu, options, instuctions, playerNum, playerSel;
+let menu, options, instuctions, playerNum, playerSel, game;
 let gameState;
+
 function preload() {
     cursorDefault = loadImage(ASSET_PATH + 'images/cursor_default.png');
     cursorPointer = loadImage(ASSET_PATH + 'images/cursor_pointer.png');
-    for(var i = 0; i < 7; i++) {
+    for (var i = 0; i < 7; i++) {
         charWalk.push(loadImage(ASSET_PATH + "images/char" + i + "walk.png"));
         charSpell.push(loadImage(ASSET_PATH + "images/char" + i + "spellcast.png"));
     }
 
     instructionText = loadStrings(ASSET_PATH + 'instructions/Instructions.txt');
 }
+
 function setup() {
     createCanvas(600, 600);
-    myGame = new GameObject();
-    menu = new MainMenu(myGame);
-    options = new OptionsMenu(myGame);
-    instructions = new Instructions(myGame);
-    playerNum = new PlayerNumberScreen(myGame);
-    playerSel = new PlayerSelScreen(myGame);
+
+    // Game screens and objects
+    globalGameConfig = new GameObject();
+    menu = new MainMenu(globalGameConfig);
+    options = new OptionsMenu(globalGameConfig);
+    instructions = new Instructions(globalGameConfig);
+    playerNum = new PlayerNumberScreen(globalGameConfig);
+    playerSel = new PlayerSelScreen(globalGameConfig);
+    game = new GameLoopScreen(globalGameConfig);
+
+
     for (let i = 0; i < 8; i++) {
-        myGame.characters.push(new Character(i, 100, 100));
+        globalGameConfig.characters.push(new Character(i, 100, 100));
     }
 
     gameState = gameStates.MAIN_MENU;
@@ -82,6 +89,9 @@ function draw() {
     }
     else if (gameState === gameStates.INSTRUCTIONS) {
         handleInstructionsScreen();
+    }
+    else if (gameState === gameStates.GAME){
+        handleGame();
     }
 
     // Do for every screen
@@ -113,7 +123,7 @@ function handlePlayerNumScreen() {
     playerNum.updatePlayerNumberScreen();
     playerNum.drawPlayerNumberScreen();
     if (playerNum.playerNumSelection > 0) {
-        myGame.playerCount = playerNum.playerNumSelection;
+        globalGameConfig.playerCount = playerNum.playerNumSelection;
         gameState = gameStates.PLAYER_SELECT;
         playerNum.exit();
         playerSel.enter();
@@ -130,11 +140,11 @@ function handlePlayerSelScreen() {
     playerSel.drawPlayerSelScreen();
 
     // Change to the game
-    if (playerSel.num === myGame.playerCount && playerSel.nextButton.released === true) {
+    if (playerSel.num === globalGameConfig.playerCount && playerSel.nextButton.released === true) {
         gameState = gameStates.GAME;
         playerSel.exit();
     }
-    
+
     else if (playerSel.backButton.released === true) {
         gameState = gameStates.PLAYER_NUM;
         playerSel.exit();
@@ -165,18 +175,22 @@ function handleInstructionsScreen() {
     }
 }
 
+function handleGame(){
+
+}
 
 
 // Mouse wheel events:
 function mouseWheel(event) {
-  // if mouse over box, let it handle the wheel and return false
-  if (
-    mouseX >= instructions.textbox.x &&
-    mouseX <= instructions.textbox.x + instructions.textbox.w &&
-    mouseY >= instructions.textbox.y &&
-    mouseY <= instructions.textbox.y + instructions.textbox.h
-  ) {
-    instructions.textbox.handleScroll(event);
-    return false; // prevents page from scrolling in some browsers
-  }
+    // if mouse over box, let it handle the wheel and return false
+    if (
+        gameState === gameStates.INSTRUCTIONS &&
+        (mouseX >= instructions.textbox.x &&
+            mouseX <= instructions.textbox.x + instructions.textbox.w &&
+            mouseY >= instructions.textbox.y &&
+            mouseY <= instructions.textbox.y + instructions.textbox.h)
+    ) {
+        instructions.textbox.handleScroll(event);
+        return false; // prevents page from scrolling in some browsers
+    }
 }
