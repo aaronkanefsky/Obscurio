@@ -3,7 +3,7 @@ class ExitSelectScreen {
     this.gameLoop = gameLoop;
     this.currLevelDoors = [];
     this.playerInd = 1;
-    this.board = loadImage('assets/gameboard.png');
+    this.board = loadImage(ASSET_PATH + 'gameboard.png');
   }
 
   enter() {

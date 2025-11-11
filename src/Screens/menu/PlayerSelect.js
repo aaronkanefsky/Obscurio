@@ -9,11 +9,11 @@ class PlayerSelScreen {
      * @param {Game} game Reference to current game
      */
     constructor(game) {
-        this.backgroundImage = loadImage('assets/images/backgroundBlurred.png')
+        this.backgroundImage = loadImage(ASSET_PATH + 'images/backgroundBlurred.png')
         this.game = game;
         this.backButton;
         this.nextButton;
-        this.menuFont = loadFont('assets/fonts/Firlest-Regular.otf')
+        this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
         this.buttonColor = color(143, 86, 59);
         this.num;
         this.selectedCard = null;
@@ -34,13 +34,13 @@ class PlayerSelScreen {
         this.nextButton = new Button(430, 570, 100, 40, 'Next', 20, this.menuFont, this.buttonColor);
 
         // Images for the player to select from
-        this.playerChoices[0] = loadImage('assets/images/character0.png');
-        this.playerChoices[1] = loadImage('assets/images/character1.png');
-        this.playerChoices[2] = loadImage('assets/images/character2.png');
-        this.playerChoices[3] = loadImage('assets/images/character3.png');
-        this.playerChoices[4] = loadImage('assets/images/character4.png');
-        this.playerChoices[5] = loadImage('assets/images/character5.png');
-        this.playerChoices[6] = loadImage('assets/images/character6.png');
+        this.playerChoices[0] = loadImage(ASSET_PATH + 'images/character0.png');
+        this.playerChoices[1] = loadImage(ASSET_PATH + 'images/character1.png');
+        this.playerChoices[2] = loadImage(ASSET_PATH + 'images/character2.png');
+        this.playerChoices[3] = loadImage(ASSET_PATH + 'images/character3.png');
+        this.playerChoices[4] = loadImage(ASSET_PATH + 'images/character4.png');
+        this.playerChoices[5] = loadImage(ASSET_PATH + 'images/character5.png');
+        this.playerChoices[6] = loadImage(ASSET_PATH + 'images/character6.png');
 
         this.num = 0;
     }

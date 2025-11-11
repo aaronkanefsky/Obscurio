@@ -41,14 +41,14 @@ var charSpell = [];
 let menu, options, instuctions, playerNum, playerSel;
 let gameState;
 function preload() {
-    cursorDefault = loadImage('assets/images/cursor_default.png');
-    cursorPointer = loadImage('assets/images/cursor_pointer.png');
+    cursorDefault = loadImage(ASSET_PATH + 'images/cursor_default.png');
+    cursorPointer = loadImage(ASSET_PATH + 'images/cursor_pointer.png');
     for(var i = 0; i < 7; i++) {
-        charWalk.push(loadImage("assets/images/char" + i + "walk.png"));
-        charSpell.push(loadImage("assets/images/char" + i + "spellcast.png"));
+        charWalk.push(loadImage(ASSET_PATH + "images/char" + i + "walk.png"));
+        charSpell.push(loadImage(ASSET_PATH + "images/char" + i + "spellcast.png"));
     }
 
-    instructionText = loadStrings('Instructions.txt');
+    instructionText = loadStrings(ASSET_PATH + 'instructions/Instructions.txt');
 }
 function setup() {
     createCanvas(600, 600);

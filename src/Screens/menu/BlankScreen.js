@@ -9,10 +9,10 @@ class BlankScreen{
      * @param {Game} game Reference to current game
      */
     constructor(game){
-        this.backgroundImage = loadImage('assets/images/backgroundBlurred.png')
+        this.backgroundImage = loadImage(ASSET_PATH + 'images/backgroundBlurred.png')
         this.game = game;
         this.backButton;
-        this.menuFont = loadFont('assets/fonts/Firlest-Regular.otf')
+        this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
         this.buttonColor = color(143, 86, 59);
     }
 

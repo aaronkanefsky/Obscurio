@@ -8,7 +8,7 @@ class GrimoireCluesScreen {
     this.gameLoop = gameLoop;
     this.clueDoor1;
     this.clueDoor2;
-    this.grimoire = loadImage('assets/grimoire.png');
+    this.grimoire = loadImage(ASSET_PATH + 'grimoire.png');
     this.butterflyMarker1;
     this.butterflyMarker2;
   }
@@ -42,7 +42,7 @@ class GrimoireCluesScreen {
     this.clueDoor1 = null;
     this.clueDoor2 = null;
     // Take screenshot of grimoire clues setup to display in following screens
-    this.gameLoop.grimoireClues = get(200, 50, 200, 100));
+    this.gameLoop.grimoireClues = get(200, 50, 200, 100);
     this.grimoire = null;
     this.butterflyMarker1 = null;
     this.butterflyMarker2 = null;

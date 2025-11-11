@@ -9,7 +9,7 @@ class bMarkObj {
     this.y = y;
     this.angle = angle;
     this.selected = false;
-    this.marker = loadImage('assets/butterflymarker.png');
+    this.marker = loadImage(ASSET_PATH + 'butterflymarker.png');
   }
 
   draw() {

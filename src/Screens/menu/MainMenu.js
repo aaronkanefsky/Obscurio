@@ -10,12 +10,12 @@ class MainMenu{
      * @param {Game} game Reference to current game
      */
     constructor(game){
-        this.backgroundImage = loadImage('assets/images/title_screen.png')
+        this.backgroundImage = loadImage(ASSET_PATH + 'images/title_screen.png')
         this.game = game;
         this.instructionsButton;
         this.optionsButton;
         this.playButton;
-        this.menuFont = loadFont('assets/fonts/Firlest-Regular.otf')
+        this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
         this.buttonColor = color(143, 86, 59);
     }
 

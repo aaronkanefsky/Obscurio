@@ -10,23 +10,39 @@
   <body>
     <main>
     </main>
+    <!-- Config file for pathing -->
+    <script src="src/config.js"></script>
+    
     <!-- UI Elements and behavior -->
-    <script src="Button.js"></script>
-    <script src="ScrollableTextBox.js"></script>
+    <script src="src/CustomObjects/Button.js"></script>
+    <script src="src/CustomObjects/ScrollableTextBox.js"></script>
 
     <!-- Game Object and Support -->
-    <script src="Player.js"></script>
-    <script src="Character.js"></script>
-    <script src="GameObject.js"></script>
+    <script src="src/Actors/Player.js"></script>
+    <script src="src/Actors/Character.js"></script>
+    <script src="src/Actors/GameObject.js"></script>
+    <script src="src/Actors/bMarkObj.js"></script>
+    <script src="src/Actors/doorObj.js"></script>
+    <script src="src/Actors/folioObj.js"></script>
+    <script src="src/Actors/Torch.js"></script>
+    
+
+    <!-- Main Menu Screens -->
+    <script src="src/Screens/menu/BlankScreen.js"></script>
+    <script src="src/Screens/menu/OptionsMenu.js"></script>
+    <script src="src/Screens/menu/Instructions.js"></script>
+    <script src="src/Screens/menu/PlayerNumber.js"></script>
+    <script src="src/Screens/menu/PlayerSelect.js"></script>
+    <script src="src/Screens/menu/MainMenu.js"></script>
 
     <!-- Game States -->
-    <script src="MainMenu.js"></script>
-    <script src="OptionsMenu.js"></script>
-    <script src="Instructions.js"></script>
-    <script src="PlayerNumber.js"></script>
-    <script src="PlayerSelect.js"></script>
+    <script src="src/Screens/game/ExitSelectScreen.js"></script>
+    <script src="src/Screens/game/GameLoopScreen.js"></script>
+    <script src="src/Screens/game/GrimoireCluesScreen.js"></script>
+    <script src="src/Screens/game/TraitorPickScreen.js"></script>
+    
 
     <!-- Main game loop -->
-    <script src="main.js"></script>
+    <script src="src/main.js"></script>
   </body>
 </html>
