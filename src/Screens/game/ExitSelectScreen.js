@@ -4,10 +4,11 @@ class ExitSelectScreen {
     this.currLevelDoors = [];
     this.playerInd = 1;
     this.board = loadImage(ASSET_PATH + 'game_board_cropped.png');
-    this.target = new p5.Vector(0,0);
+    this.target;
   }
 
   enter() {
+    this.target = new p5.Vector(285,570);
     let randDoors = 5 - this.gameLoop.levelDoors;
     for(let i = 0; i < randDoors; i++) {
       this.gameLoop.levelDoors.push(new doorObj(false,this.gameLoop.gameDoors.pop()));
@@ -68,6 +69,7 @@ class ExitSelectScreen {
     // Once character reaches the door, increment the player index so the next player can go
     if(this.gameLoop.game.players[this.playerInd - 1].x === this.target.x && this.gameLoop.game.players[this.playerInd - 1].y === this.target.y) {
       this.playerInd++;
+      this.target.set(285,570);  // player starting position
     }
   }
 
@@ -85,6 +87,9 @@ class ExitSelectScreen {
 
     // Reset player index
     this.playerInd = 1;
+
+    // Reset target
+    this.target = null;
   }
 
   draw() {
