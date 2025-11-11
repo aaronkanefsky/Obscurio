@@ -4,6 +4,7 @@ class ExitSelectScreen {
     this.currLevelDoors = [];
     this.playerInd = 1;
     this.board = loadImage(ASSET_PATH + 'game_board_cropped.png');
+    this.target = new p5.Vector(0,0);
   }
 
   enter() {
@@ -16,10 +17,57 @@ class ExitSelectScreen {
   }
 
   update() {
+    // Middle of door square check
+    let door6 = p5.Vector(250,125);
+    let door5 = p5.Vector(50,125);
+    let door4 = p5.Vector(250,315);
+    let door3 = p5.Vector(50,315);
+    let door2 = p5.Vector(250,517.5);
+    let door1 = p5.Vector(50,517.5);
+    
     if(mouseIsPressed) {
       // Check to see if door has been clicked and which one
       // Set the character's path to the door and increment the door's count to indicate how many times it got picked
-      // Once character reaches the door, increment the player index so the next player can go
+      // Check door 6
+      if(mouseX > 230 && mouseX < 270 && mouseY > 90 && mouseY < 160) {
+        this.currLevelDoors[5].count++;
+        this.target = door6;
+        //this.players[playerInd - 1].updatePath(5);
+      }
+      // Check door 5
+      else if(mouseX > 30 && mouseX < 70 && mouseY > 90 && mouseY < 160) {
+        this.currLevelDoors[4].count++;
+        this.target = door5;
+        //this.players[playerInd - 1].updatePath(4);
+      }
+      // Check door 4
+      else if(mouseX > 230 && mouseX < 270 && mouseY > 270 && mouseY < 360) {
+        this.currLevelDoors[3].count++;
+        this.target = door4;
+        //this.players[playerInd - 1].updatePath(3);
+      }
+      // Check door 3
+      else if(mouseX > 30 && mouseX < 70 && mouseY > 270 && mouseY < 360) {
+        this.currLevelDoors[2].count++;
+        this.target = door3;
+        //this.players[playerInd - 1].updatePath(2);
+      }
+      // Check door 2
+      else if(mouseX > 230 && mouseX < 270 && mouseY > 480 && mouseY < 555) {
+        this.currLevelDoors[1].count++;
+        this.target = door2;
+        //this.players[playerInd - 1].updatePath(1);
+      }
+      // Check door 1
+      else if(mouseX > 30 && mouseX < 70 && mouseY > 480 && mouseY < 555) {
+        this.currLevelDoors[0].count++;
+        this.target = door1;
+        //this.players[playerInd - 1].updatePath(0);
+      }
+    }
+    // Once character reaches the door, increment the player index so the next player can go
+    if(this.gameLoop.game.players[this.playerInd - 1].x === this.target.x && this.gameLoop.game.players[this.playerInd - 1].y === this.target.y) {
+      this.playerInd++;
     }
   }
 
