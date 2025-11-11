@@ -28,6 +28,8 @@ const gameStates = {
     PLAYER_NUM: 3,
     PLAYER_SELECT: 4,
     GAME: 5,
+    WIN_SCREEN: 6,
+    LOSE_SCREEN: 7
 }
 
 var globalGameConfig;
@@ -38,7 +40,7 @@ let instructionText;
 let cursorDefault, cursorPointer;
 var charWalk = [];
 var charSpell = [];
-let menu, options, instuctions, playerNum, playerSel, game;
+let menu, options, instuctions, playerNum, playerSel, game, win, lose;
 let gameState;
 
 function preload() {
@@ -63,6 +65,8 @@ function setup() {
     playerNum = new PlayerNumberScreen(globalGameConfig);
     playerSel = new PlayerSelScreen(globalGameConfig);
     game = new GameLoopScreen(globalGameConfig);
+    win = new WinScreen(globalGameConfig);
+    lose = new LoseScreen(globalGameConfig);
 
 
     for (let i = 0; i < 8; i++) {
@@ -92,6 +96,12 @@ function draw() {
     }
     else if (gameState === gameStates.GAME){
         handleGame();
+    }
+    else if(gameState === gameStates.WIN_SCREEN) {
+        handleWin();
+    }
+    else if(gameState === gameStates.LOSE_SCREEN) {
+        handleLose();
     }
 
     // Do for every screen
@@ -177,6 +187,28 @@ function handleInstructionsScreen() {
 
 function handleGame(){
 
+}
+
+function handleWin() {
+    win.updateWinScreen();
+    win.drawWinScreen();
+    
+    if (win.restartButton.released === true) {
+        gameState = gameStates.MAIN_MENU;
+        win.exit();
+        menu.enter();
+    }
+}
+
+function handleLose() {
+    lose.updateLoseScreen();
+    lose.drawLoseScreen();
+    
+    if (lose.restartButton.released === true) {
+        gameState = gameStates.MAIN_MENU;
+        lose.exit();
+        menu.enter();
+    }
 }
 
 
