@@ -49,9 +49,10 @@ class GrimoireCluesScreen {
   }
 
   draw() {
-    image(this.grimoire, 200, 50, 200, 100);
-    image(this.clueDoor1, 225, 50, 50, 50);
-    image(this.clueDoor2, 325, 50, 50, 50);
+    background(255, 0,0)
+    // image(this.grimoire, 200, 50, 200, 100);
+    // image(this.clueDoor1, 225, 50, 50, 50);
+    // image(this.clueDoor2, 325, 50, 50, 50);
     textSize(30);
     textMode(CENTER);
     text("In the next screen the traitor will have the chance to pick up to 2 doors to include in this level.", 300, 350);

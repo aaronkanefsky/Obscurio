@@ -51,11 +51,11 @@ class GameLoopScreen {
     this.grimoireCluesScreen.update();
     this.grimoireCluesScreen.draw();
 
-    if(this.grimoireCluesScreen.nextButton.released === true) {
-      this.gameLoopState.changeState(this.traitorPickScreen);
-      this.grimoireCluesScreen.exit();
-      this.traitorPickScreen.enter();
-    }
+    // if(this.grimoireCluesScreen.nextButton.released === true) {
+    //   this.gameLoopState.changeState(this.traitorPickScreen);
+    //   this.grimoireCluesScreen.exit();
+    //   this.traitorPickScreen.enter();
+    // }
   }
 
   handleTraitorPickScreen() {

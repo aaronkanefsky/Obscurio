@@ -70,8 +70,8 @@ function setup() {
     }
 
     
-    gameState = gameStates.MAIN_MENU;
-    menu.enter();
+    gameState = gameStates.GAME;
+    game.enter();
 }
 
 function draw() {
