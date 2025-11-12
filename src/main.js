@@ -54,7 +54,7 @@ function preload() {
 
 function setup() {
     createCanvas(600, 600);
-    frameRate(60);
+    frameRate(40);
     // Game screens and objects
     globalGameConfig = new GameObject();
     menu = new MainMenu(globalGameConfig);
@@ -194,10 +194,6 @@ function handleGame(){
 
 
 function showMouse(){
-    // if(gameState === gameStates.GAME && game.gameLoopState.state === GrimoireState.PLACE_MARKERS){
-        
-    //     image(cursorButterfly, mouseX - 3, mouseY - 3);
-    // }
     if(showCursor === true &&
         game.gameLoopState.state !== GrimoireState.PLACE_MARKERS ||
         (game.gameLoopState.state === GrimoireState.PLACE_MARKERS && 

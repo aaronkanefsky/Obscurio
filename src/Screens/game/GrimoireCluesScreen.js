@@ -9,6 +9,7 @@ const GrimoireState = {
   SHOW_CLUES: 1,
   HIDE_CLUES: 2,
   PLACE_MARKERS: 3,
+  READY: 4
 
 }
 
@@ -27,11 +28,12 @@ class GrimoireCluesScreen {
     this.grimoireBackground;
     this.butterflyMarker1;
     this.butterflyMarker2;
+    this.randomDoorList = [5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 
 
     this.continueButton;  // Continue Button for instructions
-    this.nextButton;      // Next button to go to the next step
+    this.nextButton = null;      // Next button to go to the next step
     this.backButton;      // Back button to go to the previous step
     this.buttonColor = color(97, 64, 38);
     this.buttonFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
@@ -48,11 +50,12 @@ class GrimoireCluesScreen {
     // this.clueDoor2 = this.gameLoop.gameDoors.pop();
 
     // Doors
-    this.clueDoor1 = new DoorObj(-203, -45, 5, 3, 57, 108, 9, null, 0);
-    this.clueDoor2 = new DoorObj(652, -30, 5, 2, 327, 106, 7, null, 0);
-    this.goalDoor = new DoorObj(200, 500, 2, 5, 200, 360, 8, null, 1);
+    this.clueDoor1 = new DoorObj(-203, -45, 5, 3, 57, 108, random(this.randomDoorList), null, 0);
+    this.clueDoor2 = new DoorObj(652, -30, 5, 2, 327, 106, random(this.randomDoorList), null, 0);
+    this.goalDoor = new DoorObj(200, 500, 2, 5, 200, 360, random(this.randomDoorList), null, 1);
     this.goalCover = new DoorObj(200, 500, 2, 5, 200, 360, 14, null, 2);
 
+    // Butterfly markers
     this.butterflyMarker1 = new ButteryflyMarker(mouseX, mouseY, PI / 4);
     this.butterflyMarker2 = new ButteryflyMarker(mouseX, mouseY, PI / 4);
 
@@ -61,6 +64,8 @@ class GrimoireCluesScreen {
 
     // Buttons
     this.continueButton = new Button(300, 300, 200, 50, "Continue", 25, this.buttonFont, this.buttonColor)
+    this.nextButton = new Button(530, 560, 100, 50, "Next", 25, this.buttonFont, this.buttonColor)
+    this.backButton = new Button(70, 560, 100, 50, "Back", 25, this.buttonFont, this.buttonColor)
   }
 
   exit() {
@@ -86,6 +91,8 @@ class GrimoireCluesScreen {
       this.handleMarkers();
     else if (this.state === GrimoireState.HIDE_CLUES)
       this.coverWinningDoor();
+    else if (this.state === GrimoireState.READY)
+      this.handleReady();
   }
 
 
@@ -124,6 +131,7 @@ class GrimoireCluesScreen {
 
 
     this.continueButton.drawButton();
+
     push();
     stroke(97, 64, 38);
     fill(255, 250, 214);
@@ -174,7 +182,8 @@ class GrimoireCluesScreen {
   }
 
   handleMarkers() {
-
+    this.nextButton.updateButton();
+    this.backButton.updateButton();
     if (this.butterflyMarker1.placed === false)
       // No markers placed
       this.butterflyMarker1.update();
@@ -183,13 +192,17 @@ class GrimoireCluesScreen {
       this.butterflyMarker2.update();
     else if (this.butterflyMarker1.placed === true && this.butterflyMarker2.placed === true) {
       // Both are placed
-      this.state = GrimoireState.HIDE_CLUES;
+      if(this.nextButton.released)
+        this.state = GrimoireState.HIDE_CLUES;
 
     }
   }
 
   drawMarkers() {
     this.drawClues();
+    this.nextButton.drawButton();
+    this.backButton.drawButton();
+
     // Draw the markers:
     this.butterflyMarker1.draw();
     if (this.butterflyMarker1.placed === true)
@@ -221,6 +234,18 @@ class GrimoireCluesScreen {
 
       this.done = true;
     }
+  }
+
+  handleReady(){
+    // Check if the continue button is hit
+
+
+    // If the back button is hit, go back to placing the markers
+
+  }
+
+  drawReady(){
+    // Draw the buttons
   }
 
 }
