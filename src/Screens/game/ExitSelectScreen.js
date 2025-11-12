@@ -3,7 +3,7 @@ class ExitSelectScreen {
     this.gameLoop = gameLoop;
     this.currLevelDoors = [];
     this.playerInd = 1;
-    this.board = loadImage(ASSET_PATH + 'game_board_cropped.png');
+    this.board = loadImage(ASSET_PATH + 'images/game_board_cropped.png');
     this.target;
     this.targetSet = false;
     this.tilemap = ["wwwwwwwwww",
