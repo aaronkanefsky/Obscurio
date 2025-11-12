@@ -9,7 +9,7 @@ class ButteryflyMarker {
     this.y = y;
     this.angle = angle;
     this.selected = false;
-    this.marker = loadImage(ASSET_PATH + 'butterflymarker.png');
+    this.marker = loadImage(ASSET_PATH + 'images/ButterflyMarker.png');
   }
 
   draw() {

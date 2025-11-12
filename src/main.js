@@ -184,7 +184,7 @@ function handleInstructionsScreen() {
 }
 
 function handleGame(){
-    
+    game.draw();
 }
 
 

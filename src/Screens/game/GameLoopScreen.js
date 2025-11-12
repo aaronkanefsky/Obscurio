@@ -21,12 +21,16 @@ class GameLoopScreen {
     if(this.game.playerCount === 3) this.cohesionTokens -= 1;                           // Adjustment for 3 players
     this.exit = this.gameDoors.pop();
     this.levelDoors.push(new doorObj(true,this.exit));
+
+
+    // TODO: Remove this. Debug only
+    this.grimoireCluesScreen.enter();
   }
 
   draw() {
     background(220);
     if(this.gameLoopState === this.grimoireCluesScreen) {
-      handleGrimoireCluesScreen();
+      this.handleGrimoireCluesScreen();
     }
     else if(this.gameLoopState === this.traitorPickScreen) {
       handleTraitorPickScreen();

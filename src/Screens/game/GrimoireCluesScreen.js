@@ -3,14 +3,34 @@
  * 
  * @description Game loop screen class to contain screen where Grimoire sets up clues
  */
+
+const GrimoireState = {
+  INSTRUCTIONS: 0,
+  SHOW_CLUES: 1,
+  SHOW_WIN: 2,
+  PLACE_MARKERS: 3,
+
+}
+
 class GrimoireCluesScreen {
   constructor(gameLoop) {
     this.gameLoop = gameLoop;
+
+    // Images
     this.clueDoor1;
     this.clueDoor2;
     this.grimoire = loadImage(ASSET_PATH + 'images/grimoire.png');
+    this.grimoireBackground;
     this.butterflyMarker1;
     this.butterflyMarker2;
+
+    // Continue Button for instructions
+    this.continueButton;
+    this.continueButtonColor = color(97, 64, 38);
+    this.continueFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
+
+    // State control
+    this.state = GrimoireState.INSTRUCTIONS;
   }
 
   enter() {
@@ -18,47 +38,102 @@ class GrimoireCluesScreen {
     this.clueDoor2 = this.gameLoop.gameDoors.pop();
     this.butterflyMarker1 = new ButteryflyMarker(220, 160, PI/4);
     this.butterflyMarker2 = new ButteryflyMarker(380, 160, -PI/4);
+    this.grimoireBackground = loadImage(ASSET_PATH + 'images/GrimoireScreenBackground.png'); // Sourced from: https://www.etsy.com/listing/1496891045/vintage-grimoire-paper-blank-spell-pages
+    this.continueButton = new Button(300, 300, 200, 50, "Continue", 25, this.continueFont, this.continueButtonColor)
   }
 
   update() {
     // Drag the butterfly markers using the cursor
-    if(mouseIsPressed) {
-      if(dist(this.butterflyMarker1.x, this.butterflyMarker1.y, mouseX, mouseY) < 10) {
-        this.butterflyMarker1.x = mouseX;
-        this.butterflyMarker1.y = mouseY;
-        this.butterflyMarker2.selected = false;
-        this.butterflyMarker1.selected = true;
-      }
-      else if(dist(this.butterflyMarker2.x, this.butterflyMarker2.y, mouseX, mouseY) < 10) {
-        this.butterflyMarker2.x = mouseX;
-        this.butterflyMarker2.y = mouseY;
-        this.butterflyMarker1.selected = false;
-        this.butterflyMarker2.selected = true;
-      }
-    }
+    // if(mouseIsPressed) {
+    //   if(dist(this.butterflyMarker1.x, this.butterflyMarker1.y, mouseX, mouseY) < 10) {
+    //     this.butterflyMarker1.x = mouseX;
+    //     this.butterflyMarker1.y = mouseY;
+    //     this.butterflyMarker2.selected = false;
+    //     this.butterflyMarker1.selected = true;
+    //   }
+    //   else if(dist(this.butterflyMarker2.x, this.butterflyMarker2.y, mouseX, mouseY) < 10) {
+    //     this.butterflyMarker2.x = mouseX;
+    //     this.butterflyMarker2.y = mouseY;
+    //     this.butterflyMarker1.selected = false;
+    //     this.butterflyMarker2.selected = true;
+    //   }
+    // }
+
+    if(this.state === GrimoireState.INSTRUCTIONS)
+      this.handleInstructions();
+    else if(this.state === GrimoireState.SHOW_CLUES)
+      this.handleClues();
+    
+    
   }
 
   exit() {
     this.clueDoor1 = null;
     this.clueDoor2 = null;
+
     // Take screenshot of grimoire clues setup to display in following screens
     this.gameLoop.grimoireClues = get(200, 50, 200, 100);
     this.grimoire = null;
     this.butterflyMarker1 = null;
     this.butterflyMarker2 = null;
+    this.continueButton = null;
+    this.grimoireBackground = null;
   }
 
   draw() {
-    background(255, 0,0)
-    // image(this.grimoire, 200, 50, 200, 100);
-    // image(this.clueDoor1, 225, 50, 50, 50);
-    // image(this.clueDoor2, 325, 50, 50, 50);
-    textSize(30);
-    textMode(CENTER);
-    text("In the next screen the traitor will have the chance to pick up to 2 doors to include in this level.", 300, 350);
-    text("Step (1) All players except the Grimoire should now close their eyes.", 300, 400);
-    text("Step (2) Grimoire count down from 3 and ask the traitor to open their eyes.", 300, 450);
-    text("Step (3) On the next screen the traitor will indicate the number of the card with their fingers and the Grimoire will select the door they choose with the mouse.", 300, 500);
-    text("Step (4) When the traitor is finished selecting doors, they should close their eyes and the Grimoire should select next on the screen.", 300, 550);
+
+    image(this.grimoireBackground, 0, 0, 600, 600);
+    image(this.grimoire, 0, 0, 600, 391);
+
+    if(this.state === GrimoireState.INSTRUCTIONS)
+      this.drawInstructions();
+    else if(this.state === GrimoireState.SHOW_CLUES)
+      this.drawClues();
+    
+    
+    // push();
+    // drawingContext.shadowBlur = 30;
+    // drawingContext.shadowColor = color(0, 197, 232);
+    // circle(300, 300, 100)
+    // pop();
   }
+
+  handleInstructions(){
+    this.continueButton.updateButton();
+    if(this.continueButton.released === true){
+      this.state = GrimoireState.SHOW_CLUES;
+    }
+  }
+
+  drawInstructions(){
+
+    
+    this.continueButton.drawButton();
+    push();
+    stroke(97, 64, 38);
+    fill(255, 250, 214);
+    strokeWeight(3)
+    rect(5, 375, 590, 220)
+    textSize(19);
+    textAlign(LEFT);
+    stroke(41, 25, 13);
+    text("In the next screen, the traitor will have the chance to pick up to 2 doors to include in this level. Step (1) All players except the Grimoire should now close their eyes. Step (2) Grimoire count down from 3 and ask the traitor to open their eyes. Step (3) On the next screen the traitor will indicate the number of the card with their fingers and the Grimoire will select the door they choose with the mouse. Step (4) When the traitor is finished selecting doors, they should close their eyes and the Grimoire should select next on the screen.",
+       20, 380, 580);
+
+    pop();
+  }
+
+  handleClues(){
+
+  }
+
+  drawClues(){
+    push();
+    fill(255);
+    stroke(0);
+    circle(0, 203, 250)
+
+    pop();
+  }
+  
 }
