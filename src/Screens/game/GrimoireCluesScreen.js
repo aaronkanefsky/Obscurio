@@ -51,7 +51,7 @@ class GrimoireCluesScreen {
     this.clueDoor1 = new DoorObj(-203, -45, 5, 3, 57, 108, 9, null, 0);
     this.clueDoor2 = new DoorObj(652, -30, 5, 2, 327, 106, 7, null, 0);
     this.goalDoor = new DoorObj(200, 500, 2, 5, 200, 360, 8, null, 1);
-    this.goalCover = new DoorObj(200, 500, 2, 5, 200, 360, 6, null, 2);
+    this.goalCover = new DoorObj(200, 500, 2, 5, 200, 360, 14, null, 2);
 
     this.butterflyMarker1 = new ButteryflyMarker(mouseX, mouseY, PI / 4);
     this.butterflyMarker2 = new ButteryflyMarker(mouseX, mouseY, PI / 4);
