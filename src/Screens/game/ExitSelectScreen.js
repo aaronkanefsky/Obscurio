@@ -66,7 +66,7 @@ class ExitSelectScreen {
 
     // Initialize player location at starting position
     for(let i = 0; i < this.gameLoop.game.players.length; i ++) {
-      this.gameLoop.game.players.position.set(300,585);
+      this.gameLoop.game.players.position = new p5.Vector(300,585);
     }
   }
 
@@ -78,7 +78,33 @@ class ExitSelectScreen {
       this.closeCluesButton.updateButton();
     }
 
-    // Middle of door square check
+    // Hover glow on doors:
+    // Check door 6
+    /*if(dist(mouseX, mouseY, 518, 83) < 80) {
+      
+    }
+      // Check door 5
+    else if(dist(mouseX, mouseY, 82, 83) < 80 && this.targetSet == false) {
+      
+    }
+    // Check door 4
+    else if(dist(mouseX, mouseY, 518, 298) < 80 && this.targetSet == false) {
+
+    }
+    // Check door 3
+    else if(dist(mouseX, mouseY, 82, 298) < 80 && this.targetSet == false) {
+
+    }
+    // Check door 2
+    else if(dist(mouseX, mouseY, 518, 519) < 80 && this.targetSet == false) {
+
+    }
+    // Check door 1
+    else if(dist(mouseX, mouseY, 82, 519) < 80 && this.targetSet == false) {
+
+    }*/
+
+    // Door targets
     let door6 = p5.Vector(250, 127.5);
     let door5 = p5.Vector(50, 127.5);
     let door4 = p5.Vector(250, 315);
@@ -89,6 +115,7 @@ class ExitSelectScreen {
     if(mouseIsPressed) {
       // Check to see if door has been clicked and which one
       // Set the character's path to the door and increment the door's count to indicate how many times it got picked
+      // Set the door as the target
       // Check door 6
       if(dist(mouseX, mouseY, 518, 83) < 80 && this.targetSet == false) {
         this.currLevelDoors[5].count++;
@@ -150,6 +177,11 @@ class ExitSelectScreen {
     // Remove doors used in this level from memory
     this.currLevelDoors = [];
 
+    // Reset player positions
+    for(let i = 0; i < this.gameLoop.game.players.length; i ++) {
+      this.gameLoop.game.players.position = null;
+    }
+
     // Reset player index
     this.playerInd = 1;
 
@@ -166,8 +198,10 @@ class ExitSelectScreen {
   }
 
   draw() {
+    push();
+    noStroke();
     imageMode(CENTER);
-    image(this.board, 300, 300, 100, 200);             // draw cropped game board
+    image(this.board, 300, 300, 300, 600);             // draw cropped game board
 
     // draw doors of current level
     image(this.currLevelDoors[5].door, 518, 83, 160, 160);
@@ -176,8 +210,6 @@ class ExitSelectScreen {
     image(this.currLevelDoors[2].door, 82, 298, 160, 160);
     image(this.currLevelDoors[1].door, 518, 519, 160, 160);
     image(this.currLevelDoors[0].door, 82, 519, 160, 160);
-    
-    this.gameLoop.game.players[playerInd - 1].drawPlayer();
 
     if(this.cluesShowing == true) {
       rectMode(CENTER);
@@ -185,6 +217,12 @@ class ExitSelectScreen {
       fill(this.gameLoop.game.buttonColor);
       rect(300,300,500,400);
       this.closeCluesButton.drawButton();
+      noStroke();
+      textAlign(CENTER, CENTER);
+      fill(0);
+      textSize(20);
+      textFont(this.gameLoop.game.menuFont);
+      text('Grimoire Clues', 300, 125);
       imageMode(CENTER);
       image(this.gameLoop.clues, 300, 300, 500, 300);
     }
@@ -192,19 +230,20 @@ class ExitSelectScreen {
       this.cluesButton.drawButton();
     }
 
-    push();
     rectMode(CENTER);
     strokeWeight(3);
     fill(this.gameLoop.game.buttonColor);
-    rect(300, 50, 200, 100, 15);
+    rect(300, 30, 200, 50, 15);
     
     textSize(40);
     textAlign(CENTER,CENTER);
     textFont(this.gameLoop.game.menuFont);
-    strokeWeight(1);
+    noStroke();
     fill(0);
-    textSize(30);
-    textMode(CENTER);
-    text(`Player ${this.playerInd} pick a door!`, 300, 50);
+    textSize(20);
+    text(`Player ${this.playerInd} pick a door!`, 300, 30);
+    pop();
+
+    this.gameLoop.game.players[playerInd - 1].drawPlayer();
   }
 }
