@@ -42,7 +42,7 @@ let menu, options, instuctions, playerNum, playerSel, game;
 let gameState;
 
 function preload() {
-    cursorDefault = loadImage(ASSET_PATH + 'images/cursor_default.png');
+    cursorDefault = loadImage(ASSET_PATH + 'images/ButterflyMarker.png');
     cursorPointer = loadImage(ASSET_PATH + 'images/cursor_pointer.png');
     for (var i = 0; i < 7; i++) {
         charWalk.push(loadImage(ASSET_PATH + "images/char" + i + "walk.png"));

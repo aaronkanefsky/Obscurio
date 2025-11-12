@@ -20,7 +20,7 @@ class GameLoopScreen {
     if(this.game.playerCount === 2) this.cohesionTokens += 6;                           // Adjustment for 2 players
     if(this.game.playerCount === 3) this.cohesionTokens -= 1;                           // Adjustment for 3 players
     this.exit = this.gameDoors.pop();
-    this.levelDoors.push(new doorObj(true,this.exit));
+    // this.levelDoors.push(new DoorObj(true,this.exit));
 
 
     // TODO: Remove this. Debug only

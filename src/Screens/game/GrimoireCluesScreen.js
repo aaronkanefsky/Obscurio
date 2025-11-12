@@ -19,6 +19,7 @@ class GrimoireCluesScreen {
     // Images
     this.clueDoor1;
     this.clueDoor2;
+    this.goalDoor;
     this.grimoire = loadImage(ASSET_PATH + 'images/grimoire.png');
     this.grimoireBackground;
     this.butterflyMarker1;
@@ -34,8 +35,12 @@ class GrimoireCluesScreen {
   }
 
   enter() {
-    this.clueDoor1 = this.gameLoop.gameDoors.pop();
-    this.clueDoor2 = this.gameLoop.gameDoors.pop();
+    // this.clueDoor1 = this.gameLoop.gameDoors.pop();
+    // this.clueDoor2 = this.gameLoop.gameDoors.pop();
+    this.clueDoor1 = new DoorObj(-203, -45, 5, 3, 57, 108, 9, null, 0);
+    this.clueDoor2 = new DoorObj(0, -110, 3, 2, 327, 106, 7, null, 0);
+    this.goalDoor = new DoorObj(200, 0, 2, 5, 200, 360, 8, null, 1);
+
     this.butterflyMarker1 = new ButteryflyMarker(220, 160, PI/4);
     this.butterflyMarker2 = new ButteryflyMarker(380, 160, -PI/4);
     this.grimoireBackground = loadImage(ASSET_PATH + 'images/GrimoireScreenBackground.png'); // Sourced from: https://www.etsy.com/listing/1496891045/vintage-grimoire-paper-blank-spell-pages
@@ -89,13 +94,6 @@ class GrimoireCluesScreen {
       this.drawInstructions();
     else if(this.state === GrimoireState.SHOW_CLUES)
       this.drawClues();
-    
-    
-    // push();
-    // drawingContext.shadowBlur = 30;
-    // drawingContext.shadowColor = color(0, 197, 232);
-    // circle(300, 300, 100)
-    // pop();
   }
 
   handleInstructions(){
@@ -124,14 +122,24 @@ class GrimoireCluesScreen {
   }
 
   handleClues(){
-
+    this.clueDoor1.update();
+    this.clueDoor2.update();
+    this.goalDoor.update();
   }
 
   drawClues(){
     push();
     fill(255);
     stroke(0);
-    circle(0, 203, 250)
+
+    // Hint cards
+    this.clueDoor1.draw();
+    this.clueDoor2.draw();
+
+
+    // Goal Card
+    this.goalDoor.draw();
+
 
     pop();
   }
