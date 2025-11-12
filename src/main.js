@@ -35,7 +35,7 @@ var globalGameConfig;
 let instructionText;
 
 // Cursor images
-let cursorDefault, cursorPointer;
+let cursorDefault, cursorPointer, showCursor;
 var charWalk = [];
 var charSpell = [];
 let menu, options, instuctions, playerNum, playerSel, game;
@@ -54,7 +54,7 @@ function preload() {
 
 function setup() {
     createCanvas(600, 600);
-
+    frameRate(60);
     // Game screens and objects
     globalGameConfig = new GameObject();
     menu = new MainMenu(globalGameConfig);
@@ -64,6 +64,7 @@ function setup() {
     playerSel = new PlayerSelScreen(globalGameConfig);
     game = new GameLoopScreen(globalGameConfig);
 
+    showCursor = true;
 
     for (let i = 0; i < 8; i++) {
         globalGameConfig.characters.push(new Character(i, 100, 100));
@@ -197,7 +198,8 @@ function showMouse(){
         
     //     image(cursorButterfly, mouseX - 3, mouseY - 3);
     // }
-    if(game.gameLoopState.state !== GrimoireState.PLACE_MARKERS ||
+    if(showCursor === true &&
+        game.gameLoopState.state !== GrimoireState.PLACE_MARKERS ||
         (game.gameLoopState.state === GrimoireState.PLACE_MARKERS && 
          game.gameLoopState.butterflyMarker1.placed === true && 
          game.gameLoopState.butterflyMarker2.placed === true)

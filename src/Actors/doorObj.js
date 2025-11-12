@@ -40,7 +40,7 @@ class DoorObj {
 
     push();
     translate(this.x, this.y)
-    if(this.x === this.tx && this.y === this.ty) {
+    if(this.x === this.tx && this.y === this.ty && this.door !== 2) {
       drawingContext.shadowBlur = 80;
       if(this.door === 0)
         drawingContext.shadowColor = color(59, 214, 235)

@@ -7,10 +7,12 @@
 const GrimoireState = {
   INSTRUCTIONS: 0,
   SHOW_CLUES: 1,
-  SHOW_WIN: 2,
+  HIDE_CLUES: 2,
   PLACE_MARKERS: 3,
 
 }
+
+let cluePicture;
 
 class GrimoireCluesScreen {
   constructor(gameLoop) {
@@ -25,9 +27,9 @@ class GrimoireCluesScreen {
     this.grimoireBackground;
     this.butterflyMarker1;
     this.butterflyMarker2;
-    
 
-    
+
+
     this.continueButton;  // Continue Button for instructions
     this.nextButton;      // Next button to go to the next step
     this.backButton;      // Back button to go to the previous step
@@ -38,34 +40,31 @@ class GrimoireCluesScreen {
 
     // State control
     this.state = GrimoireState.INSTRUCTIONS;
+    this.done = false; // Set to true when the clue has been determined and covered. Helps move to the next phase
   }
 
   enter() {
     // this.clueDoor1 = this.gameLoop.gameDoors.pop();
     // this.clueDoor2 = this.gameLoop.gameDoors.pop();
+
+    // Doors
     this.clueDoor1 = new DoorObj(-203, -45, 5, 3, 57, 108, 9, null, 0);
     this.clueDoor2 = new DoorObj(652, -30, 5, 2, 327, 106, 7, null, 0);
     this.goalDoor = new DoorObj(200, 500, 2, 5, 200, 360, 8, null, 1);
-    this.goalCover = new DoorObj(200, 0, 2, 5, 200, 360, 6, null, 1);
-    
-    this.butterflyMarker1 = new ButteryflyMarker(mouseX, mouseY, PI/4);
-    this.butterflyMarker2 = new ButteryflyMarker(mouseX, mouseY, PI/4);
+    this.goalCover = new DoorObj(200, 500, 2, 5, 200, 360, 6, null, 2);
+
+    this.butterflyMarker1 = new ButteryflyMarker(mouseX, mouseY, PI / 4);
+    this.butterflyMarker2 = new ButteryflyMarker(mouseX, mouseY, PI / 4);
+
+    // Screen Background
     this.grimoireBackground = loadImage(ASSET_PATH + 'images/GrimoireScreenBackground.png'); // Sourced from: https://www.etsy.com/listing/1496891045/vintage-grimoire-paper-blank-spell-pages
+
+    // Buttons
     this.continueButton = new Button(300, 300, 200, 50, "Continue", 25, this.buttonFont, this.buttonColor)
   }
 
-  update() {
-    if(this.state === GrimoireState.INSTRUCTIONS)
-      this.handleInstructions();
-    else if(this.state === GrimoireState.SHOW_CLUES)
-      this.handleClues();
-    else if(this.state === GrimoireState.PLACE_MARKERS)
-      this.handleMarkers();
-    
-    
-  }
-
   exit() {
+
     this.clueDoor1 = null;
     this.clueDoor2 = null;
 
@@ -78,30 +77,52 @@ class GrimoireCluesScreen {
     this.grimoireBackground = null;
   }
 
+  update() {
+    if (this.state === GrimoireState.INSTRUCTIONS)
+      this.handleInstructions();
+    else if (this.state === GrimoireState.SHOW_CLUES)
+      this.handleClues();
+    else if (this.state === GrimoireState.PLACE_MARKERS)
+      this.handleMarkers();
+    else if (this.state === GrimoireState.HIDE_CLUES)
+      this.coverWinningDoor();
+  }
+
+
+
   draw() {
 
     image(this.grimoireBackground, 0, 0, 600, 600);
     image(this.grimoire, 0, 0, 600, 391);
 
-    if(this.state === GrimoireState.INSTRUCTIONS)
+    if (this.state === GrimoireState.INSTRUCTIONS)
       this.drawInstructions();
-    else if(this.state === GrimoireState.SHOW_CLUES)
+    else if (this.state === GrimoireState.SHOW_CLUES)
       this.drawClues();
-    else if(this.state === GrimoireState.PLACE_MARKERS)
+    else if (this.state === GrimoireState.PLACE_MARKERS)
       this.drawMarkers();
-    
+    else if (this.state === GrimoireState.HIDE_CLUES) {
+      this.drawMarkers();
+      this.goalCover.draw();
+    }
+    else {
+      // image(cluePicture, 0, 0);
+
+    }
+
+
   }
 
-  handleInstructions(){
+  handleInstructions() {
     this.continueButton.updateButton();
-    if(this.continueButton.released === true){
+    if (this.continueButton.released === true) {
       this.state = GrimoireState.SHOW_CLUES;
     }
   }
 
-  drawInstructions(){
+  drawInstructions() {
 
-    
+
     this.continueButton.drawButton();
     push();
     stroke(97, 64, 38);
@@ -112,28 +133,28 @@ class GrimoireCluesScreen {
     textAlign(LEFT);
     stroke(41, 25, 13);
     text("In the next screen, the traitor will have the chance to pick up to 2 doors to include in this level. Step (1) All players except the Grimoire should now close their eyes. Step (2) Grimoire count down from 3 and ask the traitor to open their eyes. Step (3) On the next screen the traitor will indicate the number of the card with their fingers and the Grimoire will select the door they choose with the mouse. Step (4) When the traitor is finished selecting doors, they should close their eyes and the Grimoire should select next on the screen.",
-       20, 380, 580);
+      20, 380, 580);
 
     pop();
   }
 
-  handleClues(){
+  handleClues() {
     this.clueDoor1.update();
     this.clueDoor2.update();
     this.goalDoor.update();
 
-    if(
+    if (
       this.clueDoor1.x === this.clueDoor1.tx &&
       this.clueDoor1.y === this.clueDoor1.ty &&
       this.clueDoor2.x === this.clueDoor2.tx &&
       this.clueDoor2.y === this.clueDoor2.ty &&
       this.goalDoor.x === this.goalDoor.tx &&
-      this.goalDoor.y === this.goalDoor.ty      
+      this.goalDoor.y === this.goalDoor.ty
     )
       this.state = GrimoireState.PLACE_MARKERS;
   }
 
-  drawClues(){
+  drawClues() {
     push();
     fill(255);
     stroke(0);
@@ -149,21 +170,57 @@ class GrimoireCluesScreen {
 
     pop();
 
-    
-  }
-  
-  handleMarkers(){
-    if(this.butterflyMarker1.placed === false)
-      this.butterflyMarker1.update();
-    else if(this.butterflyMarker2.placed === false)
-      this.butterflyMarker2.update();
+
   }
 
-  drawMarkers(){
+  handleMarkers() {
+
+    if (this.butterflyMarker1.placed === false)
+      // No markers placed
+      this.butterflyMarker1.update();
+    else if (this.butterflyMarker2.placed === false)
+      // Only one marker is placed
+      this.butterflyMarker2.update();
+    else if (this.butterflyMarker1.placed === true && this.butterflyMarker2.placed === true) {
+      // Both are placed
+      this.state = GrimoireState.HIDE_CLUES;
+
+    }
+  }
+
+  drawMarkers() {
     this.drawClues();
     // Draw the markers:
     this.butterflyMarker1.draw();
-    if(this.butterflyMarker1.placed === true)
+    if (this.butterflyMarker1.placed === true)
       this.butterflyMarker2.draw();
   }
+
+  coverWinningDoor() {
+    this.goalCover.update();
+
+    if (
+      this.goalCover.x === this.goalCover.tx &&
+      this.goalCover.y === this.goalCover.ty
+    ) {
+      if (this.done === false) {
+        // Temporarily hide cursor before capture
+        setTimeout(() => {
+          showCursor = false;
+          // Redraw one clean frame without cursor
+          this.draw();
+
+          // Capture the screenshot
+          cluePicture = get(0, 0, 600, 600);
+          cluePicture.save('clue', 'png');
+
+          // Bring cursor back
+          showCursor = true;
+        }, 100); // small delay to ensure frame is fully drawn
+      }
+
+      this.done = true;
+    }
+  }
+
 }
