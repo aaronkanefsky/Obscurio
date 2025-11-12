@@ -7,7 +7,9 @@ class DoorObj {
     this.dy = dy; // Speed of y
     this.x = x;  
     this.y = y;
-    
+    this.xDir = x > tx ? 1 : 0;
+    this.yDir = y > ty ? 1 : 0;
+
     this.image = loadImage(ASSET_PATH + 'images/door' + this.index + '.png');
     
     // Do we need these?
@@ -18,12 +20,18 @@ class DoorObj {
 
 
   update(){
-    if(this.x < this.tx){
+    if(this.xDir === 0 && this.x < this.tx){
       this.x += this.dx;
     }
+    else if (this.x > this.tx){
+      this.x -= this.dx;
+    }
 
-    if(this.y < this.ty){
+    if(this.yDir === 0 && this.y < this.ty){
       this.y += this.dy;
+    }
+    else if (this.y > this.ty){
+      this.y -= this.dy;
     }
 
   }

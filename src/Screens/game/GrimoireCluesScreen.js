@@ -20,15 +20,21 @@ class GrimoireCluesScreen {
     this.clueDoor1;
     this.clueDoor2;
     this.goalDoor;
+    this.goalCover;
     this.grimoire = loadImage(ASSET_PATH + 'images/grimoire.png');
     this.grimoireBackground;
     this.butterflyMarker1;
     this.butterflyMarker2;
+    
 
-    // Continue Button for instructions
-    this.continueButton;
-    this.continueButtonColor = color(97, 64, 38);
-    this.continueFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
+    
+    this.continueButton;  // Continue Button for instructions
+    this.nextButton;      // Next button to go to the next step
+    this.backButton;      // Back button to go to the previous step
+    this.buttonColor = color(97, 64, 38);
+    this.buttonFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
+
+
 
     // State control
     this.state = GrimoireState.INSTRUCTIONS;
@@ -38,32 +44,17 @@ class GrimoireCluesScreen {
     // this.clueDoor1 = this.gameLoop.gameDoors.pop();
     // this.clueDoor2 = this.gameLoop.gameDoors.pop();
     this.clueDoor1 = new DoorObj(-203, -45, 5, 3, 57, 108, 9, null, 0);
-    this.clueDoor2 = new DoorObj(0, -110, 3, 2, 327, 106, 7, null, 0);
-    this.goalDoor = new DoorObj(200, 0, 2, 5, 200, 360, 8, null, 1);
-
-    this.butterflyMarker1 = new ButteryflyMarker(220, 160, PI/4);
-    this.butterflyMarker2 = new ButteryflyMarker(380, 160, -PI/4);
+    this.clueDoor2 = new DoorObj(652, -30, 5, 2, 327, 106, 7, null, 0);
+    this.goalDoor = new DoorObj(200, 500, 2, 5, 200, 360, 8, null, 1);
+    this.goalCover = new DoorObj(200, 0, 2, 5, 200, 360, 6, null, 1);
+    
+    this.butterflyMarker1 = new ButteryflyMarker(mouseX, mouseY, PI/4);
+    this.butterflyMarker2 = new ButteryflyMarker(mouseX, mouseY, PI/4);
     this.grimoireBackground = loadImage(ASSET_PATH + 'images/GrimoireScreenBackground.png'); // Sourced from: https://www.etsy.com/listing/1496891045/vintage-grimoire-paper-blank-spell-pages
-    this.continueButton = new Button(300, 300, 200, 50, "Continue", 25, this.continueFont, this.continueButtonColor)
+    this.continueButton = new Button(300, 300, 200, 50, "Continue", 25, this.buttonFont, this.buttonColor)
   }
 
   update() {
-    // Drag the butterfly markers using the cursor
-    // if(mouseIsPressed) {
-    //   if(dist(this.butterflyMarker1.x, this.butterflyMarker1.y, mouseX, mouseY) < 10) {
-    //     this.butterflyMarker1.x = mouseX;
-    //     this.butterflyMarker1.y = mouseY;
-    //     this.butterflyMarker2.selected = false;
-    //     this.butterflyMarker1.selected = true;
-    //   }
-    //   else if(dist(this.butterflyMarker2.x, this.butterflyMarker2.y, mouseX, mouseY) < 10) {
-    //     this.butterflyMarker2.x = mouseX;
-    //     this.butterflyMarker2.y = mouseY;
-    //     this.butterflyMarker1.selected = false;
-    //     this.butterflyMarker2.selected = true;
-    //   }
-    // }
-
     if(this.state === GrimoireState.INSTRUCTIONS)
       this.handleInstructions();
     else if(this.state === GrimoireState.SHOW_CLUES)
@@ -94,8 +85,11 @@ class GrimoireCluesScreen {
 
     if(this.state === GrimoireState.INSTRUCTIONS)
       this.drawInstructions();
-    else if(this.state === GrimoireState.SHOW_CLUES || this.state === GrimoireState.PLACE_MARKERS)
+    else if(this.state === GrimoireState.SHOW_CLUES)
       this.drawClues();
+    else if(this.state === GrimoireState.PLACE_MARKERS)
+      this.drawMarkers();
+    
   }
 
   handleInstructions(){
@@ -154,9 +148,22 @@ class GrimoireCluesScreen {
 
 
     pop();
+
+    
   }
   
   handleMarkers(){
+    if(this.butterflyMarker1.placed === false)
+      this.butterflyMarker1.update();
+    else if(this.butterflyMarker2.placed === false)
+      this.butterflyMarker2.update();
+  }
 
+  drawMarkers(){
+    this.drawClues();
+    // Draw the markers:
+    this.butterflyMarker1.draw();
+    if(this.butterflyMarker1.placed === true)
+      this.butterflyMarker2.draw();
   }
 }
