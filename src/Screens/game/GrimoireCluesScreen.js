@@ -68,6 +68,8 @@ class GrimoireCluesScreen {
       this.handleInstructions();
     else if(this.state === GrimoireState.SHOW_CLUES)
       this.handleClues();
+    else if(this.state === GrimoireState.PLACE_MARKERS)
+      this.handleMarkers();
     
     
   }
@@ -92,7 +94,7 @@ class GrimoireCluesScreen {
 
     if(this.state === GrimoireState.INSTRUCTIONS)
       this.drawInstructions();
-    else if(this.state === GrimoireState.SHOW_CLUES)
+    else if(this.state === GrimoireState.SHOW_CLUES || this.state === GrimoireState.PLACE_MARKERS)
       this.drawClues();
   }
 
@@ -125,6 +127,16 @@ class GrimoireCluesScreen {
     this.clueDoor1.update();
     this.clueDoor2.update();
     this.goalDoor.update();
+
+    if(
+      this.clueDoor1.x === this.clueDoor1.tx &&
+      this.clueDoor1.y === this.clueDoor1.ty &&
+      this.clueDoor2.x === this.clueDoor2.tx &&
+      this.clueDoor2.y === this.clueDoor2.ty &&
+      this.goalDoor.x === this.goalDoor.tx &&
+      this.goalDoor.y === this.goalDoor.ty      
+    )
+      this.state = GrimoireState.PLACE_MARKERS;
   }
 
   drawClues(){
@@ -144,4 +156,7 @@ class GrimoireCluesScreen {
     pop();
   }
   
+  handleMarkers(){
+
+  }
 }

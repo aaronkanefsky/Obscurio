@@ -42,8 +42,8 @@ let menu, options, instuctions, playerNum, playerSel, game;
 let gameState;
 
 function preload() {
-    cursorDefault = loadImage(ASSET_PATH + 'images/ButterflyMarker.png');
-    cursorPointer = loadImage(ASSET_PATH + 'images/cursor_pointer.png');
+    cursorDefault = loadImage(ASSET_PATH + 'images/cursor_default.png');
+    cursorButterfly = loadImage(ASSET_PATH + 'images/ButterflyMarker.png');
     for (var i = 0; i < 7; i++) {
         charWalk.push(loadImage(ASSET_PATH + "images/char" + i + "walk.png"));
         charSpell.push(loadImage(ASSET_PATH + "images/char" + i + "spellcast.png"));
@@ -103,7 +103,7 @@ function draw() {
 
     // Do for every screen
     noCursor();
-    image(cursorDefault, mouseX - 14, mouseY - 14);
+    showMouse();
 }
 
 function handleMainMenu() {
@@ -187,6 +187,20 @@ function handleGame(){
     game.draw();
 }
 
+
+/////////////////////////////////
+// Mouse Functions
+
+
+function showMouse(){
+    if(gameState === gameStates.GAME && game.gameLoopState.state === GrimoireState.PLACE_MARKERS){
+        
+        image(cursorButterfly, mouseX - 3, mouseY - 3);
+    }
+    else{
+        image(cursorDefault, mouseX - 14, mouseY - 14);
+    }
+}
 
 // Mouse wheel events:
 function mouseWheel(event) {
