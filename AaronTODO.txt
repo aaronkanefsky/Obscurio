@@ -1,4 +1,4 @@
 - Put a continue button in the bottom right after the markers are down
 - Cover the winning door
 - Take a screenshot of the current page, and save it to an image file for later use
-- Advance to the next screen
+- Advance to the next screen (Traitor screen)
