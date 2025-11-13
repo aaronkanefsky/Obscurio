@@ -36,7 +36,7 @@ class ButteryflyMarker {
       // Check if the marker should be placed
       const mouseJustReleased = !mouseIsPressed && this.mouseWasPressed;
 
-      if (mouseJustReleased) {
+      if (mouseJustReleased && this.y < 530) {
         this.placed = true;
       }
 

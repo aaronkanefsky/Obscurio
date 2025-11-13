@@ -190,11 +190,15 @@ class GrimoireCluesScreen {
     else if (this.butterflyMarker2.placed === false)
       // Only one marker is placed
       this.butterflyMarker2.update();
-    else if (this.butterflyMarker1.placed === true && this.butterflyMarker2.placed === true) {
-      // Both are placed
+    if (this.butterflyMarker1.placed === true) {
+      // Once one is placed, they can move on
       if(this.nextButton.released)
         this.state = GrimoireState.HIDE_CLUES;
+      if(this.backButton.released){
+        this.butterflyMarker2.placed = false;
+        this.butterflyMarker1.placed = false;
 
+      }
     }
   }
 
@@ -224,7 +228,7 @@ class GrimoireCluesScreen {
           this.draw();
 
           // Capture the screenshot
-          cluePicture = get(0, 0, 600, 600);
+          cluePicture = get(17, 17, 566, 333);
           cluePicture.save('clue', 'png');
 
           // Bring cursor back

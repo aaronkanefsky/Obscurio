@@ -54,6 +54,10 @@ class GameLoopScreen {
   handleGrimoireCluesScreen() {
     this.grimoireCluesScreen.update();
     this.grimoireCluesScreen.draw();
+    if(this.grimoireCluesScreen.done){
+      // this.gameLoopState = this.traitorPickScreen;
+      background(255,0,0)
+    }
 
     // if(this.grimoireCluesScreen.nextButton.released === true) {
     //   this.gameLoopState.changeState(this.traitorPickScreen);
