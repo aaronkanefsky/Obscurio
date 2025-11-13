@@ -207,9 +207,9 @@ class GrimoireCluesScreen {
     this.nextButton.drawButton();
     this.backButton.drawButton();
 
-    // Draw the markers:
+    // Draw the markers
     this.butterflyMarker1.draw();
-    if (this.butterflyMarker1.placed === true)
+    if ((this.butterflyMarker1.placed === true && this.state === GrimoireState.PLACE_MARKERS) || (this.butterflyMarker2.placed === true))
       this.butterflyMarker2.draw();
   }
 
@@ -229,7 +229,6 @@ class GrimoireCluesScreen {
 
           // Capture the screenshot
           cluePicture = get(17, 17, 566, 333);
-          cluePicture.save('clue', 'png');
 
           // Bring cursor back
           showCursor = true;
