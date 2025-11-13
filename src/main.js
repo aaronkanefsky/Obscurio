@@ -65,8 +65,8 @@ function setup() {
     playerNum = new PlayerNumberScreen(globalGameConfig);
     playerSel = new PlayerSelScreen(globalGameConfig);
     game = new GameLoopScreen(globalGameConfig);
-    win = new WinScreen(globalGameConfig);
-    lose = new LoseScreen(globalGameConfig);
+    // win = new WinScreen(globalGameConfig);
+    // lose = new LoseScreen(globalGameConfig);
 
 
     for (let i = 0; i < 8; i++) {
@@ -104,12 +104,12 @@ function draw() {
         default:
             break;
     }
-    else if(gameState === gameStates.WIN_SCREEN) {
-        handleWin();
-    }
-    else if(gameState === gameStates.LOSE_SCREEN) {
-        handleLose();
-    }
+    // else if(gameState === gameStates.WIN_SCREEN) {
+    //     handleWin();
+    // }
+    // else if(gameState === gameStates.LOSE_SCREEN) {
+    //     handleLose();
+    // }
 
     // Do for every screen
     noCursor();
