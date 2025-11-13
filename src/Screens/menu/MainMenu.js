@@ -64,7 +64,7 @@ class MainMenu{
         
         // Credits
         push();
-        rectMode(CENTER);
+        rectMode(CENTER, CENTER);
         strokeWeight(3);
         fill(this.buttonColor);
         rect(510, 440, 120, 150, 15)
@@ -73,9 +73,9 @@ class MainMenu{
         push();
         textAlign(CENTER);
         textFont(this.menuFont);
-        stroke(0);
+        
         textSize(20);
-        strokeWeight(1)
+        
         text('Created By: Emma Wallace & Aaron Kanefsky', 460, 400, 100, 200)
         pop();
     }
