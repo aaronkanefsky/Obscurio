@@ -40,6 +40,7 @@ var charWalk = [];
 var charSpell = [];
 let menu, options, instuctions, playerNum, playerSel, game;
 let gameState;
+var doorImgs = [];
 
 function preload() {
     cursorDefault = loadImage(ASSET_PATH + 'images/cursor_default.png');
@@ -49,10 +50,16 @@ function preload() {
         charSpell.push(loadImage(ASSET_PATH + "images/char" + i + "spellcast.png"));
     }
 
+    for(i = 5; i < 66; i++) {
+        doorImgs.push(loadImage(ASSET_PATH + "images/door" + i + ".png"));
+    }
+
     instructionText = loadStrings(ASSET_PATH + 'instructions/Instructions.txt');
 }
 
 function setup() {
+    console.log("Door images loaded:", doorImgs.length);
+    for (let i = 0; i < 3; i++) console.log(doorImgs[i]);
     createCanvas(600, 600);
 
     // Game screens and objects
@@ -62,7 +69,7 @@ function setup() {
     instructions = new Instructions(globalGameConfig);
     playerNum = new PlayerNumberScreen(globalGameConfig);
     playerSel = new PlayerSelScreen(globalGameConfig);
-    game = new GameLoopScreen(globalGameConfig);
+    gameLoop = new GameLoopScreen(globalGameConfig, doorImgs);
 
 
     for (let i = 0; i < 8; i++) {
@@ -70,8 +77,10 @@ function setup() {
     }
 
     
-    gameState = gameStates.MAIN_MENU;
-    menu.enter();
+    /*gameState = gameStates.MAIN_MENU;
+    menu.enter();*/
+    gameState = gameStates.GAME;
+    gameLoop.enter();
 }
 
 function draw() {
@@ -96,7 +105,12 @@ function draw() {
         case gameStates.GAME:
             handleGame();
             break;
-        
+        case gameStates.WIN_SCREEN:
+            handleWinScreen();
+            break;
+        case gameStates.LOSE_SCREEN:
+            handleLoseScreen();
+            break;
         default:
             break;
     }
@@ -184,7 +198,7 @@ function handleInstructionsScreen() {
 }
 
 function handleGame(){
-    
+    gameLoop.draw();
 }
 
 

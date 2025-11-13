@@ -1,6 +1,8 @@
 class ExitSelectScreen {
   constructor(gameLoop) {
     this.gameLoop = gameLoop;
+    this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
+    this.buttonColor = color(143, 86, 59);
     this.currLevelDoors = [];
     this.playerInd = 1;
     this.board = loadImage(ASSET_PATH + 'images/game_board_cropped.png');
@@ -35,19 +37,21 @@ class ExitSelectScreen {
 
   enter() {
     this.target = new p5.Vector(0,0);
-    let randDoors = 5 - this.gameLoop.levelDoors;
+    let randDoors = 6 - this.gameLoop.levelDoors.length;
     for(let i = 0; i < randDoors; i++) {
       this.gameLoop.levelDoors.push(new doorObj(false,this.gameLoop.gameDoors.pop()));
     }
     this.currLevelDoors = shuffle(this.gameLoop.levelDoors);
+    console.log("Current Level Doors loaded:",this.currLevelDoors.length);
     this.gameLoop.levelDoors = [];
+    this.cluesShowing = true;
 
     // Initialize buttons
-    this.cluesButton = new Button(390, 10, 80, 40, 'See Clues', 20, this.gameLoop.game.menuFont, this.gameLoop.game.buttonColor);
-    this.closeCluesButton = new Button(515, 110, 25, 25, 'X', 20, this.gameLoop.game.menuFont, this.gameLoop.game.buttonColor);
+    this.cluesButton = new Button(385, 580, 60, 30, 'Clues', 15, this.menuFont, this.buttonColor);
+    this.closeCluesButton = new Button(515, 110, 25, 25, 'X', 20, this.menuFont, this.buttonColor);
 
     // Initialize game board tilemap
-    for(let i = 0; i < this.tilemap.length; i++) {
+    /*for(let i = 0; i < this.tilemap.length; i++) {
       for(let j = 0; j < this.tilemap[i].length; j++) {
         switch(this.tilemap[i][j]) {
           // full wall
@@ -57,7 +61,7 @@ class ExitSelectScreen {
           case 'l': this.walls.push(new wallObj((j*30)+150,(i*30),2));
             break;
           // right half wall
-          case 'r': this.walls.push(new wallObj((j*30)+15+150,(i*30),2));
+          case 'r': this.walls.push(new wallObj((j*30)+165,(i*30),2));
             break;
           // top half wall
           case 't': this.walls.push(new wallObj((j*30)+150,(i*30),3));
@@ -67,12 +71,12 @@ class ExitSelectScreen {
             break;
         }
       }
-    }
+    }*/
 
     // Initialize player location at starting position
-    for(let i = 0; i < this.gameLoop.game.players.length; i ++) {
-      this.gameLoop.game.players.position = new p5.Vector(300,585);
-    }
+    /*for(let i = 0; i < this.gameLoop.game.players.length; i ++) {
+      this.gameLoop.game.players[i].position = new p5.Vector(300,585);
+    }*/
   }
 
   update() {
@@ -89,33 +93,33 @@ class ExitSelectScreen {
       
     }
       // Check door 5
-    else if(dist(mouseX, mouseY, 82, 83) < 80 && this.targetSet == false) {
+    else if(dist(mouseX, mouseY, 82, 83) < 80) {
       
     }
     // Check door 4
-    else if(dist(mouseX, mouseY, 518, 298) < 80 && this.targetSet == false) {
+    else if(dist(mouseX, mouseY, 518, 298) < 80) {
 
     }
     // Check door 3
-    else if(dist(mouseX, mouseY, 82, 298) < 80 && this.targetSet == false) {
+    else if(dist(mouseX, mouseY, 82, 298) < 80) {
 
     }
     // Check door 2
-    else if(dist(mouseX, mouseY, 518, 519) < 80 && this.targetSet == false) {
+    else if(dist(mouseX, mouseY, 518, 519) < 80) {
 
     }
     // Check door 1
-    else if(dist(mouseX, mouseY, 82, 519) < 80 && this.targetSet == false) {
+    else if(dist(mouseX, mouseY, 82, 519) < 80) {
 
     }*/
 
     // Door targets
-    let door6 = p5.Vector(250, 127.5);
-    let door5 = p5.Vector(50, 127.5);
-    let door4 = p5.Vector(250, 315);
-    let door3 = p5.Vector(50, 315);
-    let door2 = p5.Vector(250, 517.5);
-    let door1 = p5.Vector(50, 517.5);
+    let door6 = new p5.Vector(250, 127.5);
+    let door5 = new p5.Vector(50, 127.5);
+    let door4 = new p5.Vector(250, 315);
+    let door3 = new p5.Vector(50, 315);
+    let door2 = new p5.Vector(250, 517.5);
+    let door1 = new p5.Vector(50, 517.5);
     
     if(mouseIsPressed) {
       // Check to see if door has been clicked and which one
@@ -160,14 +164,14 @@ class ExitSelectScreen {
     }
     
     // Once character reaches the door, increment the player index so the next player can go
-    if(this.gameLoop.game.players[this.playerInd - 1].x === this.target.x && this.gameLoop.game.players[this.playerInd - 1].y === this.target.y) {
+    /*if(this.gameLoop.game.players[this.playerInd - 1].x === this.target.x && this.gameLoop.game.players[this.playerInd - 1].y === this.target.y) {
       this.playerInd++;          // change player
       this.targetSet = false;    // reset target
       this.target.set(0,0);  // player starting target
     }
 
     // Update player location
-    this.gameLoop.game.players[playerInd - 1].updatePlayer();
+    this.gameLoop.game.players[this.playerInd - 1].updatePlayer();*/
   }
 
   exit() {
@@ -183,12 +187,12 @@ class ExitSelectScreen {
     this.currLevelDoors = [];
 
     // Reset player positions
-    for(let i = 0; i < this.gameLoop.game.players.length; i ++) {
-      this.gameLoop.game.players.position = null;
-    }
+    /*for(let i = 0; i < this.gameLoop.game.players.length; i ++) {
+      this.gameLoop.game.players[i].position = null;
+    }*/
 
     // Reset player index
-    this.playerInd = 1;
+    //this.playerInd = 1;
 
     // Reset target
     this.target = null;
@@ -249,6 +253,6 @@ class ExitSelectScreen {
     text(`Player ${this.playerInd} pick a door!`, 300, 30);
     pop();
 
-    this.gameLoop.game.players[playerInd - 1].drawPlayer();
+    //this.gameLoop.game.players[this.playerInd - 1].drawPlayer();
   }
 }

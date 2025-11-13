@@ -1,13 +1,13 @@
 class GameLoopScreen {
-  constructor(game) {
+  constructor(game, doorImgs) {
     this.game = game;
+    this.doorImgs = doorImgs;
     this.gameDoors = [];
-    // this.gameDoors = [shuffle(this.doors)];
     this.exit = null;
     this.level = 1;
     this.cohesionTokens = 0;
     this.loopStates = [this.grimoireCluesScreen = new GrimoireCluesScreen(this), this.traitorPickScreen = new TraitorPickScreen(this), this.exitSelectScreen = new ExitSelectScreen(this)];
-    this.gameLoopState = this.grimoireCluesScreen;
+    this.gameLoopState = this.exitSelectScreen;
     this.levelDoors = [];
   }
 
@@ -16,23 +16,27 @@ class GameLoopScreen {
   }
   
   enter() {
+    this.gameDoors = shuffle(this.doorImgs);
+    console.log("Door images loaded to gameDoors:",this.gameDoors.length);
     this.cohesionTokens = (this.game.playerCount * 3) + (this.game.playerCount - 2);    // Formula derived from beginner level cohesion token allocation given in Obscurio instructions
     if(this.game.playerCount === 2) this.cohesionTokens += 6;                           // Adjustment for 2 players
     if(this.game.playerCount === 3) this.cohesionTokens -= 1;                           // Adjustment for 3 players
     this.exit = this.gameDoors.pop();
+    console.log("Exit door:",this.exit);
     this.levelDoors.push(new doorObj(true,this.exit));
+    this.exitSelectScreen.enter();
   }
 
   draw() {
     background(220);
     if(this.gameLoopState === this.grimoireCluesScreen) {
-      handleGrimoireCluesScreen();
+      this.handleGrimoireCluesScreen();
     }
     else if(this.gameLoopState === this.traitorPickScreen) {
-      handleTraitorPickScreen();
+      this.handleTraitorPickScreen();
     }
     else {
-      handleExitSelectScreen();
+      this.handleExitSelectScreen();
     }
   }
 
@@ -73,7 +77,7 @@ class GameLoopScreen {
     this.exitSelectScreen.update();
     this.exitSelectScreen.draw();
 
-    if(this.exitSelectScreen.nextButton.released === true) {
+    /*if(this.exitSelectScreen.nextButton.released === true) {
       this.gameLoopState.changeState(this.grimoireCluesScreen);
       this.exitSelectScreen.exit();
       if(this.level > 6) {
@@ -89,6 +93,6 @@ class GameLoopScreen {
       else {
         this.grimoireCluesScreen.enter();
       }
-    }
+    }*/
   }
 }
