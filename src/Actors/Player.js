@@ -3,5 +3,14 @@ class Player {
     this.playerId = player_num;
     this.character = char_num;
     this.playerType = null;
+    this.position;
+  }
+
+  updatePlayer() {
+
+  }
+
+  drawPlayer() {
+    this.character.walk();
   }
 }
