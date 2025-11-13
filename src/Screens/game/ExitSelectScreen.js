@@ -50,14 +50,19 @@ class ExitSelectScreen {
     for(let i = 0; i < this.tilemap.length; i++) {
       for(let j = 0; j < this.tilemap[i].length; j++) {
         switch(this.tilemap[i][j]) {
+          // full wall
           case 'w': this.walls.push(new wallObj((j*30)+150,(i*30),1));
             break;
+          // left half wall
           case 'l': this.walls.push(new wallObj((j*30)+150,(i*30),2));
             break;
+          // right half wall
           case 'r': this.walls.push(new wallObj((j*30)+15+150,(i*30),2));
             break;
+          // top half wall
           case 't': this.walls.push(new wallObj((j*30)+150,(i*30),3));
             break;
+          // bottom half wall
           case 'b': this.walls.push(new wallObj((j*30)+150,(i*30)+15,3));
             break;
         }
