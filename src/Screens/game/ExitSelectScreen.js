@@ -4,12 +4,8 @@ class ExitSelectScreen {
     this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
     this.buttonColor = color(143, 86, 59);
     this.currLevelDoors = [];
-    this.playerInd = 1;
-    this.board = loadImage(ASSET_PATH + 'images/game_board.png');
-    this.cluesShowing = true;
-    this.cluesButton;
-    this.closeCluesButton;
-    this.walls = [];
+    this.playerInd = 6;
+    this.board = loadImage(ASSET_PATH + 'images/game_board_cropped.png');
     this.target;
     this.targetSet = false;
     this.tilemap = ["wwwwwwwwww",
@@ -33,6 +29,10 @@ class ExitSelectScreen {
                     "wbbr  lbbw",
                     "wwwwlrwwww",
                    ];
+    this.walls = [];
+    this.cluesShowing = true;
+    this.cluesButton;
+    this.closeCluesButton;
   }
 
   enter() {
@@ -173,6 +173,17 @@ class ExitSelectScreen {
 
     // Reset player index
     this.playerInd = 1;
+
+    // Reset target
+    this.target = null;
+    this.targetSet = false;
+
+    // Reset walls
+    this.walls = [];
+
+    // Nullify buttons
+    this.cluesButton = null;
+    this.closeCluesButton = null;
   }
 
   draw() {
