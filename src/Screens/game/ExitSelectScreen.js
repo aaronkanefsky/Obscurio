@@ -107,6 +107,10 @@ class ExitSelectScreen {
       this.cluesShowing = true;
     }
 
+    for(let d of this.currLevelDoors) {
+      d.update();
+    }
+
     // Door targets
     let door6 = new p5.Vector(250, 127.5);
     let door5 = new p5.Vector(50, 127.5);
@@ -206,12 +210,16 @@ class ExitSelectScreen {
     imageMode(CENTER);
     image(this.board, 300, 300, 300, 600);             // draw cropped game board
     // draw doors of current level
-    image(this.currLevelDoors[5].door, 518, 83, 160, 160);
-    image(this.currLevelDoors[4].door, 82, 83, 160, 160);
-    image(this.currLevelDoors[3].door, 518, 298, 160, 160);
-    image(this.currLevelDoors[2].door, 82, 298, 160, 160);
-    image(this.currLevelDoors[1].door, 518, 519, 160, 160);
-    image(this.currLevelDoors[0].door, 82, 519, 160, 160);
+    /*image(this.currLevelDoors[5].image, 518, 83, 160, 160);
+    image(this.currLevelDoors[4].image, 82, 83, 160, 160);
+    image(this.currLevelDoors[3].image, 518, 298, 160, 160);
+    image(this.currLevelDoors[2].image, 82, 298, 160, 160);
+    image(this.currLevelDoors[1].image, 518, 519, 160, 160);
+    image(this.currLevelDoors[0].image, 82, 519, 160, 160);*/
+
+    for(let d of this.currLevelDoors) {
+      d.draw();
+    }
 
     if(this.cluesShowing == true) {
       rectMode(CENTER);
