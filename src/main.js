@@ -203,7 +203,7 @@ function handleGame(){
     gameLoop.draw();
 
     if(gameLoop.exitSelectScreen.playerInd > globalGameConfig.playerCount) {
-        if(gameLoop.level > 6) {
+        if(gameLoop.level > 1) {    // Change to > 6 levels later
             gameState = gameStates.WIN_SCREEN;
             gameLoop.exitSelectScreen.exit();
             //gameLoop.exit();
@@ -229,6 +229,16 @@ function handleWinScreen() {
     }
 }
 
+function handleLoseScreen() {
+    loseScreen.updateLoseScreen();
+    loseScreen.drawLoseScreen();
+
+    if(loseScreen.restartButton.released === true) {
+        gameState = gameStates.MAIN_MENU;
+        loseScreen.exit();
+        menu.enter();
+    }
+}
 
 // Mouse wheel events:
 function mouseWheel(event) {

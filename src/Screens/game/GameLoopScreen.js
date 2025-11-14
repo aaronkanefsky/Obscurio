@@ -76,7 +76,7 @@ class GameLoopScreen {
     
 
     if(this.exitSelectScreen.playerInd > this.game.playerCount) {
-      if(this.level <= 6 && this.cohesionTokens > 0) {
+      if(this.level <= 1 && this.cohesionTokens > 8) {  // change to <= 6 levels and > 0 cohesion tokens
         this.changeState(this.grimoireCluesScreen);
         this.exitSelectScreen.exit();
         this.grimoireCluesScreen.enter();

@@ -64,19 +64,21 @@ class MainMenu{
         
         // Credits
         push();
+        stroke(0);
         rectMode(CENTER);
         strokeWeight(3);
         fill(this.buttonColor);
-        rect(510, 440, 120, 150, 15)
+        rect(510, 440, 120, 150, 15);
         pop();
 
         push();
+        fill(0);
         textAlign(CENTER);
         textFont(this.menuFont);
         stroke(0);
         textSize(20);
-        strokeWeight(1)
-        text('Created By: Emma Wallace & Aaron Kanefsky', 460, 400, 100, 200)
+        noStroke();
+        text('Created By: Emma Wallace & Aaron Kanefsky', 460, 400, 100, 200);
         pop();
     }
 }
