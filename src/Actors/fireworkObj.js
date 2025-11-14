@@ -1,6 +1,6 @@
 class fireworkObj {
   constructor(a) {
-    this.position = new p5.Vector(200, 380);
+    this.position = new p5.Vector(300, 580);
     this.direction = new p5.Vector(0, 0);
     this.target = new p5.Vector(mouseX, mouseY);
     this.step = 0;
@@ -19,7 +19,7 @@ class fireworkObj {
       this.step = 2;
       for (var i = 0; i < this.explosions.length; i++) {
         this.explosions[i].position.set(this.target.x, this.target.y);
-        this.explosions[i].direction.set(random(0, 360), random(-0.3, 0.3));
+        this.explosions[i].direction.set(random(0, 360), random(-0.8, 0.8));
         this.explosions[i].timer = 180;
       }
     }

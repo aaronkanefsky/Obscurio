@@ -2,7 +2,7 @@ class explosionObj {
   constructor(a) {
     this.position = new p5.Vector(0, 0);
     this.direction = new p5.Vector(0, 0);
-    this.size = random(1, 3);
+    this.size = random(3,5);
     if (a === 0) {
       this.c1 = random(0, 250);
     }
