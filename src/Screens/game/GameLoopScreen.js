@@ -4,7 +4,7 @@ class GameLoopScreen {
     this.doorImgs = doorImgs;
     this.gameDoors = [];
     this.exit = null;
-    this.level = 1;
+    this.level = 7;
     this.cohesionTokens = 0;
     this.loopStates = [this.grimoireCluesScreen = new GrimoireCluesScreen(this), this.traitorPickScreen = new TraitorPickScreen(this), this.exitSelectScreen = new ExitSelectScreen(this)];
     this.gameLoopState = this.exitSelectScreen;
@@ -73,25 +73,20 @@ class GameLoopScreen {
   }
 
   handleExitSelectScreen() {
-    this.exitSelectScreen.update();
-    this.exitSelectScreen.draw();
+    
 
     if(this.exitSelectScreen.playerInd > this.game.playerCount) {
-      this.gameLoopState.changeState(this.grimoireCluesScreen);
-      this.exitSelectScreen.exit();
-      if(this.level > 6) {
-        this.game.gameState = this.game.gameStates.WIN_SCREEN;
-        this.exit();
-        this.game.winScreen.enter();
-      }
-      else if(this.cohesionTokens <= 0) {
-        this.game.gameState = this.game.gameStates.LOSE_SCREEN;
-        this.exit();
-        this.game.loseScreen.enter();
-      }
-      else {
+      if(this.level <= 6 && this.cohesionTokens > 0) {
+        this.changeState(this.grimoireCluesScreen);
+        this.exitSelectScreen.exit();
         this.grimoireCluesScreen.enter();
       }
     }
+    else {
+      this.exitSelectScreen.update();
+      this.exitSelectScreen.draw();
+    }
+    
   }
+
 }

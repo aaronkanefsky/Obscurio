@@ -199,6 +199,21 @@ function handleInstructionsScreen() {
 
 function handleGame(){
     gameLoop.draw();
+
+    if(gameLoop.exitSelectScreen.playerInd > globalGameConfig.playerCount) {
+        if(gameLoop.level > 6) {
+            gameState = gameStates.WIN_SCREEN;
+            gameLoop.exitSelectScreen.exit();
+            gameLoop.exit();
+            winScreen.enter();
+        }
+        else if(gameLoop.cohesionTokens <= 0) {
+            gameState = gameStates.LOSE_SCREEN;
+            gameLoop.exitSelectScreen.exit();
+            gameLoop.exit();
+            loseScreen.enter();
+        }
+    }
 }
 
 
