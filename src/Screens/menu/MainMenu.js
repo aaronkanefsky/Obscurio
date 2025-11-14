@@ -64,7 +64,7 @@ class MainMenu{
         
         // Credits
         push();
-        rectMode(CENTER, CENTER);
+        rectMode(CENTER);
         strokeWeight(3);
         fill(this.buttonColor);
         rect(510, 440, 120, 150, 15)
