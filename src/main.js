@@ -104,12 +104,12 @@ function draw() {
         default:
             break;
     }
-    else if(gameState === gameStates.WIN_SCREEN) {
-        handleWin();
-    }
-    else if(gameState === gameStates.LOSE_SCREEN) {
-        handleLose();
-    }
+    // else if(gameState === gameStates.WIN_SCREEN) {
+    //     handleWin();
+    // }
+    // else if(gameState === gameStates.LOSE_SCREEN) {
+    //     handleLose();
+    // }
 
     // Do for every screen
     noCursor();
