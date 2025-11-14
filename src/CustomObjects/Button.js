@@ -5,7 +5,16 @@ const ButtonStates = {
 };
 
 class Button {
-
+  /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} width
+     * @param {number} height
+     * @param {string} bodyText
+     * @param {number} size
+     * @param {p5.Font} font
+     * @param {p5.Color} backgroundColor
+     */
   constructor(x, y, width, height, bodyText, size, font, backgroundColor) {
     // Button details
     this.x = x;
