@@ -11,16 +11,19 @@ class GameLoopScreen {
       this.grimoireCluesScreen = new GrimoireCluesScreen(this),
       this.grimoireReveal = new BufferScreen("Player 1\nYou are the Grimoire", this),
       this.closeEyes = new BufferScreen("All other players close your eyes", this),
-      this.traitorReveal = new BufferScreen("Player " + floor(random(2,this.game.playerCount+1)) + " is the Traitor. Silently indicate to them that they are the traitor!", this),
+      this.traitorReveal = new BufferScreen("Player " + floor(random(2, this.game.playerCount + 1)) + " is the Traitor. Silently indicate to them that they are the traitor!", this),
       this.traitorOpenEyes = new BufferScreen("Grimoire, instruct the traitor to open their eyes. Press 'continue' once they have done so.", this),
       this.openEyes = new BufferScreen("All players open your eyes", this),
       this.traitorPickScreen = new TraitorPickScreen(this),
       this.exitSelectScreen = new ExitSelectScreen(this)
     ];
-    
+    this.characters = [];
     this.gameLoopState = this.grimoireReveal;
     this.levelDoors = [];
-    this.doorArray = [0, 1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    this.doorArray = [];
+    for(let i = 0; i < 66; i++) {
+      this.doorArray.push(i);
+    }
   }
 
   changeState(x) {
@@ -28,6 +31,13 @@ class GameLoopScreen {
   }
 
   enter() {
+
+    for (let i = 0; i < 7; i++) {
+      let c = new Character(i);
+      characters.push(c);           // optional global array
+      game.characters.push(c);      // safe now
+    }
+
     this.gameDoors = shuffle(this.doorImgs);
     this.cohesionTokens = (this.game.playerCount * 3) + (this.game.playerCount - 2);    // Formula derived from beginner level cohesion token allocation given in Obscurio instructions
     if (this.game.playerCount === 2) this.cohesionTokens += 6;                           // Adjustment for 2 players
@@ -40,7 +50,7 @@ class GameLoopScreen {
     this.clueDoors.push(new DoorObj(-203, -45, 5, 3, 57, 108, this.doorArray.pop(), null, 0))
     this.clueDoors.push(new DoorObj(652, -30, 5, 2, 327, 106, this.doorArray.pop(), null, 0))
     this.gameDoors = this.doorArray;
-    
+
   }
 
   draw() {
@@ -101,7 +111,7 @@ class GameLoopScreen {
 
   handleTraitorReveal() {
     this.traitorReveal.draw();
-    if (this.traitorReveal.continueButton.released){
+    if (this.traitorReveal.continueButton.released) {
       this.changeState(this.grimoireCluesScreen);
       this.grimoireCluesScreen.enter();
     }
@@ -109,14 +119,14 @@ class GameLoopScreen {
 
   handleGrimoireCluesScreen() {
     // TODO: Remove this. Debug only
-    
+
     this.grimoireCluesScreen.update();
     this.grimoireCluesScreen.draw();
     if (this.grimoireCluesScreen.done) {
       this.changeState(this.openEyes);
     }
   }
-  handletraitorOpenEyes(){
+  handletraitorOpenEyes() {
 
     this.traitorOpenEyes.draw();
     if (this.traitorOpenEyes.continueButton.released) {
@@ -134,9 +144,10 @@ class GameLoopScreen {
     //   this.traitorPickScreen.exit();
     //   this.exitSelectScreen.enter();
 
-    background(0,0,255)
-    
-;  }
+    background(0, 0, 255)
+
+      ;
+  }
 
   handleOpenEyes() {
     this.openEyes.draw();
@@ -148,7 +159,7 @@ class GameLoopScreen {
     this.exitSelectScreen.update();
     this.exitSelectScreen.draw();
 
-    if(this.exitSelectScreen.playerInd > this.game.playerCount) {
+    if (this.exitSelectScreen.playerInd > this.game.playerCount) {
       this.gameLoopState.changeState(this.grimoireCluesScreen);
       this.exitSelectScreen.exit();
       if (this.level > 6) {

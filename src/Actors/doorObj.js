@@ -10,7 +10,10 @@ class DoorObj {
     this.xDir = x > tx ? 1 : 0;
     this.yDir = y > ty ? 1 : 0;
 
-    this.image = loadImage(ASSET_PATH + 'images/door' + i + '.png');
+    if(i < 0)
+      this.image = loadImage(ASSET_PATH + 'images/door_card_back.png');
+    else
+      this.image = loadImage(ASSET_PATH + 'images/door' + i + '.png');
     
     // Do we need these?
     this.count = 0;

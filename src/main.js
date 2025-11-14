@@ -51,7 +51,7 @@ function preload() {
         charSpell.push(loadImage(ASSET_PATH + "images/char" + i + "spellcast.png"));
     }
 
-    for(i = 5; i < 66; i++) {
+    for (i = 5; i < 66; i++) {
         doorImgs.push(loadImage(ASSET_PATH + "images/door" + i + ".png"));
     }
 
@@ -61,28 +61,28 @@ function preload() {
 function setup() {
     createCanvas(600, 600);
     frameRate(40);
-    // Game screens and objects
+
     globalGameConfig = new GameObject();
+
+    // Populate characters
+    for (let i = 0; i < 7; i++) {
+        let c = new Character(i);
+        globalGameConfig.characters.push(c);  // <--- IMPORTANT
+    }
+
     menu = new MainMenu(globalGameConfig);
     options = new OptionsMenu(globalGameConfig);
     instructions = new Instructions(globalGameConfig);
     playerNum = new PlayerNumberScreen(globalGameConfig);
     playerSel = new PlayerSelScreen(globalGameConfig);
-    gameLoop = new GameLoopScreen(globalGameConfig, doorImgs);
+    game = new GameLoopScreen(globalGameConfig, doorImgs);
 
     showCursor = true;
 
-    for (let i = 0; i < 8; i++) {
-        //globalGameConfig.characters.push(new Character(i, 100, 100));
-        characters.push(new Character(i));
-    }
-
-    
-    /*gameState = gameStates.MAIN_MENU;
-    menu.enter();*/
-    gameState = gameStates.GAME;
-    gameLoop.enter();
+    gameState = gameStates.MAIN_MENU;
+    menu.enter();
 }
+
 
 function draw() {
     background(220);
@@ -198,8 +198,8 @@ function handleInstructionsScreen() {
     }
 }
 
-function handleGame(){
-    gameLoop.draw();
+function handleGame() {
+    game.draw();
 }
 
 
@@ -207,13 +207,13 @@ function handleGame(){
 // Mouse Functions
 
 
-function showMouse(){
-    if(showCursor === true &&
+function showMouse() {
+    if (showCursor === true &&
         game.gameLoopState.state !== GrimoireState.PLACE_MARKERS ||
-        (game.gameLoopState.state === GrimoireState.PLACE_MARKERS && 
-         game.gameLoopState.butterflyMarker1.placed === true && 
-         game.gameLoopState.butterflyMarker2.placed === true)
-    ){
+        (game.gameLoopState.state === GrimoireState.PLACE_MARKERS &&
+            game.gameLoopState.butterflyMarker1.placed === true &&
+            game.gameLoopState.butterflyMarker2.placed === true)
+    ) {
         image(cursorDefault, mouseX - 14, mouseY - 14);
     }
 }
