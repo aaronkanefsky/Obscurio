@@ -9,7 +9,7 @@ class DoorObj {
     this.xDir = x > tx ? 1 : 0;
     this.yDir = y > ty ? 1 : 0;
 
-    if(e === 2)
+    if(e === -1)
       this.image = loadImage(ASSET_PATH + 'images/door_card_back.png');
     else
       this.image = loadImage(ASSET_PATH + 'images/door' + i + '.png');
