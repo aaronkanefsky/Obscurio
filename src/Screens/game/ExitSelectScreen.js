@@ -4,7 +4,7 @@ class ExitSelectScreen {
     this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
     this.buttonColor = color(143, 86, 59);
     this.currLevelDoors = [];
-    this.playerInd = 6;
+    this.playerInd = 1;
     this.board = loadImage(ASSET_PATH + 'images/game_board_cropped.png');
     this.target;
     this.targetSet = false;
