@@ -1,7 +1,6 @@
 class DoorObj {
-  constructor(x, y, dx, dy, tx, ty, i,e,d) {
-    this.index = i;
-    this.tx = tx; // Target y
+  constructor(x,y,dx,dy,tx,ty,e,d) {
+   this.tx = tx; // Target y
     this.ty = ty; // Target x
     this.dx = dx; // Speed of x
     this.dy = dy; // Speed of y
@@ -10,10 +9,10 @@ class DoorObj {
     this.xDir = x > tx ? 1 : 0;
     this.yDir = y > ty ? 1 : 0;
 
-    if(i < 0)
+    /*if(i < 0)
       this.image = loadImage(ASSET_PATH + 'images/door_card_back.png');
     else
-      this.image = loadImage(ASSET_PATH + 'images/door' + i + '.png');
+      this.image = loadImage(ASSET_PATH + 'images/door' + i + '.png');*/
     
     // Do we need these?
     this.count = 0;
@@ -31,7 +30,7 @@ class DoorObj {
     }
 
     if(this.yDir === 0 && this.y < this.ty){
-      this.y += this.dy;
+      this.y += dy;
     }
     else if (this.y > this.ty){
       this.y -= this.dy;
