@@ -51,7 +51,8 @@ function preload() {
         charSpell.push(loadImage(ASSET_PATH + "images/char" + i + "spellcast.png"));
     }
 
-    for (i = 5; i < 66; i++) {
+    // will change to include all 66 doors later
+    for (i = 5; i < 30; i++) {
         doorImgs.push(loadImage(ASSET_PATH + "images/door" + i + ".png"));
     }
 
