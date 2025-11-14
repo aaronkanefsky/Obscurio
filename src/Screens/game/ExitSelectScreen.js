@@ -6,6 +6,33 @@ class ExitSelectScreen {
     this.currLevelDoors = [];
     this.playerInd = 1;
     this.board = loadImage(ASSET_PATH + 'images/game_board.png');
+    this.cluesShowing = true;
+    this.cluesButton;
+    this.closeCluesButton;
+    this.walls = [];
+    this.target;
+    this.targetSet = false;
+    this.tilemap = ["wwwwwwwwww",
+                    "wwww  wwww",
+                    "wwww  wwww",
+                    "w tr  lt w",
+                    "w  rlrl  w",
+                    "wb rlrl bw",
+                    "wwl  r rww",
+                    "www ww www",
+                    "www ww www",
+                    "w tlrw t w",
+                    "w        w",
+                    "w        w",
+                    "wwww   www",
+                    "wwww   rww",
+                    "wwwwlr rww",
+                    "wwwl rlrww",
+                    "w     l  w",
+                    "w  r     w",
+                    "wbbr  lbbw",
+                    "wwwwlrwwww",
+                   ];
   }
 
   enter() {
