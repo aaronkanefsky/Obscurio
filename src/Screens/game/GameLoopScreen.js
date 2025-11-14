@@ -1,6 +1,7 @@
 class GameLoopScreen {
-  constructor(game) {
+  constructor(game, doorImgs) {
     this.game = game;
+    this.doorImgs = doorImgs;
     this.gameDoors = [];
     this.exitDoor = null;
     this.clueDoors = [];
@@ -27,6 +28,7 @@ class GameLoopScreen {
   }
 
   enter() {
+    this.gameDoors = shuffle(this.doorImgs);
     this.cohesionTokens = (this.game.playerCount * 3) + (this.game.playerCount - 2);    // Formula derived from beginner level cohesion token allocation given in Obscurio instructions
     if (this.game.playerCount === 2) this.cohesionTokens += 6;                           // Adjustment for 2 players
     if (this.game.playerCount === 3) this.cohesionTokens -= 1;                           // Adjustment for 3 players
@@ -65,6 +67,7 @@ class GameLoopScreen {
       this.handleOpenEyes();
     }
     else {
+      this.handleExitSelectScreen();
       this.handleExitSelectScreen();
     }
   }
@@ -145,7 +148,7 @@ class GameLoopScreen {
     this.exitSelectScreen.update();
     this.exitSelectScreen.draw();
 
-    if (this.exitSelectScreen.nextButton.released === true) {
+    if(this.exitSelectScreen.playerInd > this.game.playerCount) {
       this.gameLoopState.changeState(this.grimoireCluesScreen);
       this.exitSelectScreen.exit();
       if (this.level > 6) {

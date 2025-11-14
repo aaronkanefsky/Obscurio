@@ -1,9 +1,8 @@
 class Character {
-  constructor(charID,x,y) {
+  constructor(charID) {
     this.characterID = charID;
     this.characterTaken = false;
     this.characterImg = null;
-    this.position = new p5.Vector(x,y);
     this.direction = 2;
     this.frameX = 0;
     this.frameY = 0;
@@ -12,7 +11,7 @@ class Character {
     this.isFlipping = false;
     this.flipProgress = 0;
   }
-  walk() {
+  walk(x,y) {
     if(this.moveFrameCount % 6 === 0) {
       this.frameX = (this.frameX + 1) % 8;
     }
@@ -26,12 +25,12 @@ class Character {
 
     let walkFrame = charWalk[this.characterID].get(x_pos, y_pos, charWalkWidth, charWalkHeight);
 
-    image(walkFrame,this.position.x, this.position.y);
+    image(walkFrame,x,y,30,30);
 
     this.moveFrameCount++;
   }
   
-  spell() {
+  spell(x,y) {
     if(this.moveFrameCount % 6 === 0) {
       this.frameX = (this.frameX + 1) % 7;
     }
@@ -45,7 +44,7 @@ class Character {
 
     let spellFrame = charSpell[this.characterID].get(x_pos, y_pos, charSpellWidth, charSpellHeight);
 
-    image(spellFrame,this.position.x, this.position.y);
+    image(spellFrame,x,y,30,30);
 
     this.moveFrameCount++;
   }
