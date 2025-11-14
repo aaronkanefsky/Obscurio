@@ -15,7 +15,7 @@ class BufferScreen {
         textSize(50);
         textFont(this.buttonFont)
         textAlign(CENTER, CENTER);
-        text(this.text, 300, 300)
+        text(this.text, 0, 0, 580, 580)
         pop();
         this.continueButton.updateButton();
         this.continueButton.drawButton();

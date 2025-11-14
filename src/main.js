@@ -55,7 +55,6 @@ function preload() {
 function setup() {
     createCanvas(600, 600);
     frameRate(40);
-    
     // Game screens and objects
     globalGameConfig = new GameObject();
     menu = new MainMenu(globalGameConfig);
@@ -72,8 +71,8 @@ function setup() {
     }
 
     
-    gameState = gameStates.GAME;
-    game.enter();
+    gameState = gameStates.MAIN_MENU;
+    menu.enter();
 }
 
 function draw() {
@@ -194,25 +193,16 @@ function handleGame(){
 // Mouse Functions
 
 
-function showMouse() {
-
-    if (!game || !game.gameLoopState) return;
-    
-    if (
-        showCursor === true &&
-        (
-            game.gameLoopState.state !== GrimoireState.PLACE_MARKERS ||
-            (
-                game.gameLoopState.state === GrimoireState.PLACE_MARKERS &&
-                game.gameLoopState.butterflyMarker1.placed === true &&
-                game.gameLoopState.butterflyMarker2.placed === true
-            )
-        )
-    ) {
+function showMouse(){
+    if(showCursor === true &&
+        game.gameLoopState.state !== GrimoireState.PLACE_MARKERS ||
+        (game.gameLoopState.state === GrimoireState.PLACE_MARKERS && 
+         game.gameLoopState.butterflyMarker1.placed === true && 
+         game.gameLoopState.butterflyMarker2.placed === true)
+    ){
         image(cursorDefault, mouseX - 14, mouseY - 14);
     }
 }
-
 
 // Mouse wheel events:
 function mouseWheel(event) {
