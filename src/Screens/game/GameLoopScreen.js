@@ -126,6 +126,7 @@ class GameLoopScreen {
     this.grimoireCluesScreen.draw();
     if (this.grimoireCluesScreen.done) {
       this.changeState(this.openEyes);
+      this.grimoireCluesScreen.exit();
     }
   }
   handletraitorOpenEyes() {
