@@ -25,7 +25,7 @@ class GameLoopScreen {
     for(let i = 0; i < 25; i++) {
       this.doorArray.push(i);
     }*/
-    this.grimoireClues = null;
+    this.grimoireClues = loadImage(ASSET_PATH + 'images/grimoire.png');
   }
 
   changeState(x) {
