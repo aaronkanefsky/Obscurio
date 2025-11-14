@@ -8,24 +8,40 @@ class ButteryflyMarker {
     this.x = x;
     this.y = y;
     this.angle = angle;
-    this.selected = false;
-    this.marker = loadImage(ASSET_PATH + 'butterflymarker.png');
+    this.selected = true;
+    this.marker = loadImage(ASSET_PATH + 'images/ButterflyMarker.png');
+    this.placed = false;
   }
 
   draw() {
     push();
-    translate(this.x,this.y);
+    translate(this.x, this.y);
     rotate(this.angle);
-    image(this.marker, 0, 0, 10, 10);
+    image(this.marker, -3, -3)
     pop();
   }
 
   update() {
-    if(this.selected === true && keyIsDown(LEFT_ARROW)) {
-      this.angle -= radians(1);
-    }
-    else if(this.selected === true && keyIsDown(RIGHT_ARROW)) {
-      this.angle += radians(1);
+    if (this.placed === false) {
+      if (this.selected === true && (keyIsDown(LEFT_ARROW) || keyIsDown(65))) {
+        this.angle += radians(1);
+      }
+      else if (this.selected === true && (keyIsDown(RIGHT_ARROW) || keyIsDown(68))) {
+        this.angle -= radians(1);
+      }
+
+      this.x = mouseX;
+      this.y = mouseY;
+
+      // Check if the marker should be placed
+      const mouseJustReleased = !mouseIsPressed && this.mouseWasPressed;
+
+      if (mouseJustReleased && this.y < 530) {
+        this.placed = true;
+      }
+
+      // Store current state for next frame
+      this.mouseWasPressed = mouseIsPressed;
     }
   }
 }

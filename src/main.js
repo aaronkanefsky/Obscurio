@@ -37,7 +37,7 @@ var globalGameConfig;
 let instructionText;
 
 // Cursor images
-let cursorDefault, cursorPointer;
+let cursorDefault, cursorPointer, showCursor;
 var charWalk = [];
 var charSpell = [];
 let menu, options, instuctions, playerNum, playerSel, game, win, lose;
@@ -45,7 +45,7 @@ let gameState;
 
 function preload() {
     cursorDefault = loadImage(ASSET_PATH + 'images/cursor_default.png');
-    cursorPointer = loadImage(ASSET_PATH + 'images/cursor_pointer.png');
+    cursorButterfly = loadImage(ASSET_PATH + 'images/ButterflyMarker.png');
     for (var i = 0; i < 7; i++) {
         charWalk.push(loadImage(ASSET_PATH + "images/char" + i + "walk.png"));
         charSpell.push(loadImage(ASSET_PATH + "images/char" + i + "spellcast.png"));
@@ -56,7 +56,7 @@ function preload() {
 
 function setup() {
     createCanvas(600, 600);
-
+    frameRate(40);
     // Game screens and objects
     globalGameConfig = new GameObject();
     menu = new MainMenu(globalGameConfig);
@@ -68,6 +68,7 @@ function setup() {
     // win = new WinScreen(globalGameConfig);
     // lose = new LoseScreen(globalGameConfig);
 
+    showCursor = true;
 
     for (let i = 0; i < 8; i++) {
         globalGameConfig.characters.push(new Character(i, 100, 100));
@@ -113,7 +114,7 @@ function draw() {
 
     // Do for every screen
     noCursor();
-    image(cursorDefault, mouseX - 14, mouseY - 14);
+    showMouse();
 }
 
 function handleMainMenu() {
@@ -194,7 +195,7 @@ function handleInstructionsScreen() {
 }
 
 function handleGame(){
-    
+    game.draw();
 }
 
 function handleWin() {
@@ -219,6 +220,21 @@ function handleLose() {
     }
 }
 
+
+/////////////////////////////////
+// Mouse Functions
+
+
+function showMouse(){
+    if(showCursor === true &&
+        game.gameLoopState.state !== GrimoireState.PLACE_MARKERS ||
+        (game.gameLoopState.state === GrimoireState.PLACE_MARKERS && 
+         game.gameLoopState.butterflyMarker1.placed === true && 
+         game.gameLoopState.butterflyMarker2.placed === true)
+    ){
+        image(cursorDefault, mouseX - 14, mouseY - 14);
+    }
+}
 
 // Mouse wheel events:
 function mouseWheel(event) {
