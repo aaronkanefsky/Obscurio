@@ -1,9 +1,10 @@
 class Player {
   constructor(player_num, char_num) {
+    this.game = this.game;
     this.playerId = player_num;
     this.character = char_num;
     this.playerType = null;
-    this.position;
+    this.position = new p5.Vector(0,0);
   }
 
   updatePlayer() {
@@ -11,6 +12,6 @@ class Player {
   }
 
   drawPlayer() {
-    this.character.walk();
+    characters[this.character].walk(this.position.x,this.position.y);
   }
 }

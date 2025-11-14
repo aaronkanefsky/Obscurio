@@ -41,6 +41,7 @@ var charSpell = [];
 let menu, options, instuctions, playerNum, playerSel, game;
 let gameState;
 var doorImgs = [];
+var characters = [];
 
 function preload() {
     cursorDefault = loadImage(ASSET_PATH + 'images/cursor_default.png');
@@ -58,8 +59,6 @@ function preload() {
 }
 
 function setup() {
-    console.log("Door images loaded:", doorImgs.length);
-    for (let i = 0; i < 3; i++) console.log(doorImgs[i]);
     createCanvas(600, 600);
 
     // Game screens and objects
@@ -73,7 +72,8 @@ function setup() {
 
 
     for (let i = 0; i < 8; i++) {
-        globalGameConfig.characters.push(new Character(i, 100, 100));
+        //globalGameConfig.characters.push(new Character(i, 100, 100));
+        characters.push(new Character(i));
     }
 
     
