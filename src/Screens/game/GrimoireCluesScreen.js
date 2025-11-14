@@ -51,7 +51,7 @@ class GrimoireCluesScreen {
     this.clueDoor2 = this.gameLoop.clueDoors[1];
     this.goalDoor = this.gameLoop.exitDoor;
     
-    this.goalCover = new DoorObj(200, 500, 2, 5, 200, 360, -1, null, 2);
+    this.goalCover = new DoorObj(200, 500, 2, 5, 200, 360, -1, null);
 
     // Butterfly markers
     this.butterflyMarker1 = new ButteryflyMarker(mouseX, mouseY, PI / 4);
