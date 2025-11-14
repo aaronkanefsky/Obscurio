@@ -152,29 +152,20 @@ class GameLoopScreen {
   handleOpenEyes() {
     this.openEyes.draw();
     if (this.openEyes.continueButton.released)
-      this.changeState();
+      this.changeState(this.exitSelectScreen);
   }
 
   handleExitSelectScreen() {
-    this.exitSelectScreen.update();
-    this.exitSelectScreen.draw();
-
-    if (this.exitSelectScreen.playerInd > this.game.playerCount) {
-      this.gameLoopState.changeState(this.grimoireCluesScreen);
-      this.exitSelectScreen.exit();
-      if (this.level > 6) {
-        this.game.gameState = this.game.gameStates.WIN_SCREEN;
-        this.exit();
-        this.game.winScreen.enter();
-      }
-      else if (this.cohesionTokens <= 0) {
-        this.game.gameState = this.game.gameStates.LOSE_SCREEN;
-        this.exit();
-        this.game.loseScreen.enter();
-      }
-      else {
+    if(this.exitSelectScreen.playerInd > this.game.playerCount) {
+      if(this.level <= 1 && this.cohesionTokens > 8) {  // change to <= 6 levels and > 0 cohesion tokens
+        this.changeState(this.grimoireCluesScreen);
+        this.exitSelectScreen.exit();
         this.grimoireCluesScreen.enter();
       }
+    }
+    else {
+      this.exitSelectScreen.update();
+      this.exitSelectScreen.draw();
     }
   }
 }
