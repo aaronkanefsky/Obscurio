@@ -150,9 +150,10 @@ class GameLoopScreen {
 
   handleOpenEyes() {
     this.openEyes.draw();
-    if (this.openEyes.continueButton.released)
+    if (this.openEyes.continueButton.released) {
       this.changeState(this.exitSelectScreen);
       this.exitSelectScreen.enter();
+    }
   }
 
   handleExitSelectScreen() {
