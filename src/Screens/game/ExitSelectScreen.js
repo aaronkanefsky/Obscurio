@@ -37,7 +37,7 @@ class ExitSelectScreen {
 
   enter() {
     this.target = new p5.Vector(0,0);
-    this.gameLoop.levelDoors.push(this.exitDoor);
+    this.gameLoop.levelDoors.push(new DoorObj(-200,-50,5,2,0,0,1,this.exitDoor.image));
     let randDoors = 6 - this.gameLoop.levelDoors.length;
     for(let i = 0; i < randDoors; i++) {
       this.gameLoop.levelDoors.push(new DoorObj(-200,-50,5,2,0,0,0,this.gameLoop.gameDoors.pop()));
