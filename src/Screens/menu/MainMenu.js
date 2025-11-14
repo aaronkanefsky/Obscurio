@@ -75,7 +75,7 @@ class MainMenu{
         textFont(this.menuFont);
         stroke(0);
         textSize(20);
-        strokeWeight(1)
+        strokeWeight(0)
         text('Created By: Emma Wallace & Aaron Kanefsky', 460, 400, 100, 200)
         pop();
     }
