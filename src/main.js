@@ -28,6 +28,8 @@ const gameStates = {
     PLAYER_NUM: 3,
     PLAYER_SELECT: 4,
     GAME: 5,
+    WIN_SCREEN: 6,
+    LOSE_SCREEN: 7
 }
 
 var globalGameConfig;

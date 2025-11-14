@@ -12,6 +12,8 @@ class LoseScreen {
     this.game = game;
     this.animationStart = 0;
     this.restartButton;
+    this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
+    this.buttonColor = color(143, 86, 59);
   }
 
   /**
@@ -26,9 +28,7 @@ class LoseScreen {
    * @description Behavior while in Lose Screen state
    */
   updateLoseScreen() {
-    if(frameCount - this.animationStart >= 500) {
-      this.restartButton.updateButton();
-    }
+    this.restartButton.updateButton();
   }
 
   /**
@@ -37,25 +37,20 @@ class LoseScreen {
   drawLoseScreen() {
     // Add animation of players leaving the library, then transition to static end screen
     // Current time given for transition between animation and static screen is an estimate
-    if(frameCount - this.animationStart < 500) {
-
-    }
-    else {
-      image(this.game.backgroundImage, 0, 0, 600, 600);
-      this.restartButton.draw();
+    image(this.game.backgroundImage, 0, 0, 600, 600);
+    this.restartButton.draw();
       
-      push();
-      rectMode(CENTER);
-      strokeWeight(3);
-      fill(this.buttonColor);
-      rect(300, 300, 200, 200);
-      fill(0);
-      textFont(this.game.menuFont);
-      textAlign(CENTER,CENTER);
-      textSize(60);
-      text('Oh no! You are now stuck in the library forever and the traitor has won!', 300, 300);
-      pop();
-    }
+    push();
+    rectMode(CENTER);
+    strokeWeight(3);
+    fill(this.buttonColor);
+    rect(300, 300, 200, 200);
+    fill(0);
+    textFont(this.game.menuFont);
+    textAlign(CENTER,CENTER);
+    textSize(60);
+    text('Oh no! You are now stuck in the library forever and the traitor has won!', 300, 300);
+    pop();
   }
 
   /**
