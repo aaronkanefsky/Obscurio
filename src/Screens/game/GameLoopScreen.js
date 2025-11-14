@@ -21,7 +21,7 @@ class GameLoopScreen {
     this.gameLoopState = this.grimoireReveal;
     this.levelDoors = [];
     this.doorArray = [];
-    for(let i = 0; i < 66; i++) {
+    for(let i = 0; i < 25; i++) {
       this.doorArray.push(i);
     }
   }
@@ -77,7 +77,6 @@ class GameLoopScreen {
       this.handleOpenEyes();
     }
     else {
-      this.handleExitSelectScreen();
       this.handleExitSelectScreen();
     }
   }
@@ -153,6 +152,7 @@ class GameLoopScreen {
     this.openEyes.draw();
     if (this.openEyes.continueButton.released)
       this.changeState(this.exitSelectScreen);
+      this.exitSelectScreen.enter();
   }
 
   handleExitSelectScreen() {
