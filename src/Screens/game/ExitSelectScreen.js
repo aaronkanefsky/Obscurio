@@ -37,11 +37,25 @@ class ExitSelectScreen {
 
   enter() {
     this.target = new p5.Vector(0,0);
+    this.gameLoop.levelDoors.push(this.exitDoor);
     let randDoors = 6 - this.gameLoop.levelDoors.length;
     for(let i = 0; i < randDoors; i++) {
-      this.gameLoop.levelDoors.push(new DoorObj(false,this.gameLoop.gameDoors.pop()));
+      this.gameLoop.levelDoors.push(new DoorObj(-200,-50,5,2,0,0,0,this.gameLoop.gameDoors.pop()));
     }
     this.currLevelDoors = shuffle(this.gameLoop.levelDoors);
+    this.currLevelDoors[5].tx = 518;
+    this.currLevelDoors[5].ty = 83;
+    this.currLevelDoors[4].tx = 82;
+    this.currLevelDoors[4].ty = 83;
+    this.currLevelDoors[3].tx = 518;
+    this.currLevelDoors[3].ty = 298;
+    this.currLevelDoors[2].tx = 82;
+    this.currLevelDoors[2].ty = 298;
+    this.currLevelDoors[1].tx = 518;
+    this.currLevelDoors[1].ty = 519;
+    this.currLevelDoors[0].tx = 82;
+    this.currLevelDoors[0].ty = 519;
+    
     this.gameLoop.levelDoors = [];
     this.cluesShowing = true;
 
