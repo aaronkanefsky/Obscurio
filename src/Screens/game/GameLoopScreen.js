@@ -48,7 +48,7 @@ class GameLoopScreen {
       this.handleGrimoireCluesScreen();
     }
     else if(this.gameLoopState === this.closeEyes){
-      
+      background(0,255,0);
     }
     else if(this.gameLoopState === this.traitorReveal){
       
@@ -90,7 +90,7 @@ class GameLoopScreen {
     this.grimoireCluesScreen.update();
     this.grimoireCluesScreen.draw();
     if(this.grimoireCluesScreen.done){
-      this.gameLoopState = this.grimoireReveal;
+      this.changeState(this.closeEyes);
     }
   }
 

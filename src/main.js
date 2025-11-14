@@ -194,16 +194,25 @@ function handleGame(){
 // Mouse Functions
 
 
-function showMouse(){
-    if(showCursor === true &&
-        game.gameLoopState.state !== GrimoireState.PLACE_MARKERS ||
-        (game.gameLoopState.state === GrimoireState.PLACE_MARKERS && 
-         game.gameLoopState.butterflyMarker1.placed === true && 
-         game.gameLoopState.butterflyMarker2.placed === true)
-    ){
+function showMouse() {
+
+    if (!game || !game.gameLoopState) return;
+    
+    if (
+        showCursor === true &&
+        (
+            game.gameLoopState.state !== GrimoireState.PLACE_MARKERS ||
+            (
+                game.gameLoopState.state === GrimoireState.PLACE_MARKERS &&
+                game.gameLoopState.butterflyMarker1.placed === true &&
+                game.gameLoopState.butterflyMarker2.placed === true
+            )
+        )
+    ) {
         image(cursorDefault, mouseX - 14, mouseY - 14);
     }
 }
+
 
 // Mouse wheel events:
 function mouseWheel(event) {
