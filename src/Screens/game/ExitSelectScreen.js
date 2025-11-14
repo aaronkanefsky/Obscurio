@@ -12,7 +12,7 @@ class ExitSelectScreen {
     this.target = new p5.Vector(0,0);
     let randDoors = 6 - this.gameLoop.levelDoors.length;
     for(let i = 0; i < randDoors; i++) {
-      this.gameLoop.levelDoors.push(new doorObj(false,this.gameLoop.gameDoors.pop()));
+      this.gameLoop.levelDoors.push(new DoorObj(false,this.gameLoop.gameDoors.pop()));
     }
     this.currLevelDoors = shuffle(this.gameLoop.levelDoors);
     this.gameLoop.levelDoors = [];

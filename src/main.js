@@ -38,7 +38,7 @@ let instructionText;
 let cursorDefault, cursorPointer, showCursor;
 var charWalk = [];
 var charSpell = [];
-let menu, options, instuctions, playerNum, playerSel, game;
+let menu, options, instuctions, playerNum, playerSel, gameLoop;
 let gameState;
 var doorImgs = [];
 var characters = [];
