@@ -12,12 +12,11 @@ class DoorObj {
     if(e === -1)
       this.image = loadImage(ASSET_PATH + 'images/door_card_back.png');
     else
-      this.image = loadImage(ASSET_PATH + 'images/door' + i + '.png');
+      this.image = d;
     
     // Do we need these?
     this.count = 0;
     this.exitCard = e;
-    this.door = d;
   }
 
 
