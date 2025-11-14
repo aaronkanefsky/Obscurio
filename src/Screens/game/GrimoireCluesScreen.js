@@ -46,13 +46,10 @@ class GrimoireCluesScreen {
   }
 
   enter() {
-    // this.clueDoor1 = this.gameLoop.gameDoors.pop();
-    // this.clueDoor2 = this.gameLoop.gameDoors.pop();
-
     // Doors
-    this.clueDoor1 = new DoorObj(-203, -45, 5, 3, 57, 108, random(this.randomDoorList), null, 0);
-    this.clueDoor2 = new DoorObj(652, -30, 5, 2, 327, 106, random(this.randomDoorList), null, 0);
-    this.goalDoor = new DoorObj(200, 500, 2, 5, 200, 360, random(this.randomDoorList), null, 1);
+    this.clueDoor1 = this.gameLoop.clueDoors[0];
+    this.clueDoor2 = this.gameLoop.clueDoors[1];
+    this.goalDoor = this.gameLoop.exitDoor;
     this.goalCover = new DoorObj(200, 500, 2, 5, 200, 360, 14, null, 2);
 
     // Butterfly markers

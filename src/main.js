@@ -55,6 +55,7 @@ function preload() {
 function setup() {
     createCanvas(600, 600);
     frameRate(40);
+    
     // Game screens and objects
     globalGameConfig = new GameObject();
     menu = new MainMenu(globalGameConfig);

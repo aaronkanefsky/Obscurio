@@ -70,7 +70,7 @@ class TraitorPickScreen {
    */
   draw() {
     textSize(40);
-    textMode(CENTER);
+    textAlign(CENTER);
     text(`Traitor you can select up to ${2 - this.doorsPicked} more doors!`, 300, 50);
     for(let d of this.folioDoors) {
       if(d.selected === true) {

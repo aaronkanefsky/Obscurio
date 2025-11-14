@@ -38,7 +38,7 @@ class ExitSelectScreen {
   draw() {
     image(this.board,150,217,300,300);
     textSize(30);
-    textMode(CENTER);
+    textAlign(CENTER);
     text(`Player ${this.playerInd} pick a door!`, 100, 300);
   }
 }
