@@ -25,6 +25,7 @@ class GameLoopScreen {
     for(let i = 0; i < 25; i++) {
       this.doorArray.push(i);
     }*/
+    this.grimoireClues = null;
   }
 
   changeState(x) {
