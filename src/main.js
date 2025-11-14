@@ -78,10 +78,10 @@ function setup() {
     }
 
     
-    /*gameState = gameStates.MAIN_MENU;
-    menu.enter();*/
-    gameState = gameStates.GAME;
-    gameLoop.enter();
+    gameState = gameStates.MAIN_MENU;
+    menu.enter();
+    /*gameState = gameStates.GAME;
+    gameLoop.enter();*/
 }
 
 function draw() {
