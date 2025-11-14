@@ -16,7 +16,6 @@ class DoorObj {
     
     // Do we need these?
     this.count = 0;
-    this.exitCard = e;
     this.door = d;
   }
 

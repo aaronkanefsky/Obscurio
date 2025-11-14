@@ -6,7 +6,7 @@ class GameLoopScreen {
     this.clueDoors = [];
     this.level = 1;
     this.cohesionTokens = 0;
-    this.game.playerCount = 9; // TODO: THIS IS DEBUG. REMOVE THIS
+    // this.game.playerCount = 9; // TODO: THIS IS DEBUG. REMOVE THIS
     this.loopStates = [
       this.grimoireCluesScreen = new GrimoireCluesScreen(this),
       this.grimoireReveal = new BufferScreen("Player 1\nYou are the Grimoire", this),
@@ -17,9 +17,15 @@ class GameLoopScreen {
       this.exitSelectScreen = new ExitSelectScreen(this)
     ];
 
-    this.gameLoopState = this.grimoireReveal;
+    // TODO: FOR TESTING ONLY
+    this.gameLoopState = this.traitorPickScreen;
+    this.traitorPickScreen.enter();
+    // this.gameLoopState = this.grimoireReveal;
     this.levelDoors = [];
-    this.doorArray = [0, 1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    this.doorArray = [];
+    for(let i = 0; i < 66; i++){
+      this.doorArray.push(i);
+    }
   }
 
   changeState(x) {
@@ -35,8 +41,16 @@ class GameLoopScreen {
     // Randomize the order of doors to be used
     this.doorArray = shuffle(this.doorArray);
     this.exitDoor = new DoorObj(200, 500, 2, 5, 200, 360, this.doorArray.pop(), null, 1);
-    this.clueDoors.push(new DoorObj(-203, -45, 5, 3, 57, 108, this.doorArray.pop(), null, 0))
-    this.clueDoors.push(new DoorObj(652, -30, 5, 2, 327, 106, this.doorArray.pop(), null, 0))
+    this.clueDoors.push(new DoorObj(-203, -45, 5, 3, 57, 108, this.doorArray.pop(), null, 0));
+    this.clueDoors.push(new DoorObj(652, -30, 5, 2, 327, 106, this.doorArray.pop(), null, 0));
+    // Add 8 doors to the folio
+    for(let i = 0; i < 8; i++){
+      if(i < 4)
+        this.traitorPickScreen.folioDoors.push(new FolioObj(70 + (150*i), 280, this.doorArray.pop()))
+      else
+        this.traitorPickScreen.folioDoors.push(new FolioObj(70 + (150*(i-4)), 450,this.doorArray.pop()))
+    }
+
     this.gameDoors = this.doorArray;
     
   }
@@ -130,8 +144,8 @@ class GameLoopScreen {
     //   this.gameLoopState.changeState(this.exitSelectScreen);
     //   this.traitorPickScreen.exit();
     //   this.exitSelectScreen.enter();
-
-    background(0,0,255)
+    this.traitorPickScreen.update();
+    this.traitorPickScreen.draw()
     
 ;  }
 

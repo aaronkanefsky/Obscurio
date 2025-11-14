@@ -75,8 +75,9 @@ function setup() {
     }
 
     
-    gameState = gameStates.MAIN_MENU;
-    menu.enter();
+    // TODO: FOR TESTING ONLY
+    gameState = gameStates.GAME;
+    game.enter();
 }
 
 function draw() {
