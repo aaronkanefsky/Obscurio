@@ -29,7 +29,7 @@ class DoorObj {
     }
 
     if(this.yDir === 0 && this.y < this.ty){
-      this.y += dy;
+      this.y += this.dy;
     }
     else if (this.y > this.ty){
       this.y -= this.dy;
