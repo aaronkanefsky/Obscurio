@@ -190,6 +190,8 @@ class PlayerSelScreen {
         // Reset all player choices
         for (let i = 0; i < 7; i++) {
             this.game.characters[i].characterTaken = false;
+            this.game.characters[i].flipped = false;
+            this.game.characters[i].flipProgress = 0;
         }
     }
 
