@@ -37,24 +37,18 @@ class ExitSelectScreen {
 
   enter() {
     this.target = new p5.Vector(0,0);
-    this.gameLoop.levelDoors.push(new DoorObj(-200,-50,5,2,0,0,1,this.gameLoop.exitImg));
+    this.gameLoop.levelDoors.push(new DoorObj(this.gameLoop,0,0,0,0,0,0,1,this.gameLoop.exitDoor.image));
     let randDoors = 6 - this.gameLoop.levelDoors.length;
     for(let i = 0; i < randDoors; i++) {
-      this.gameLoop.levelDoors.push(new DoorObj(-200,-50,5,2,0,0,0,this.gameLoop.gameDoors.pop()));
+      this.gameLoop.levelDoors.push(new DoorObj(this.gameLoop,0,0,0,0,0,0,0,this.gameLoop.gameDoors.pop()));
     }
     this.currLevelDoors = shuffle(this.gameLoop.levelDoors);
-    this.currLevelDoors[5].tx = 518;
-    this.currLevelDoors[5].ty = 83;
-    this.currLevelDoors[4].tx = 82;
-    this.currLevelDoors[4].ty = 83;
-    this.currLevelDoors[3].tx = 518;
-    this.currLevelDoors[3].ty = 298;
-    this.currLevelDoors[2].tx = 82;
-    this.currLevelDoors[2].ty = 298;
-    this.currLevelDoors[1].tx = 518;
-    this.currLevelDoors[1].ty = 519;
-    this.currLevelDoors[0].tx = 82;
-    this.currLevelDoors[0].ty = 519;
+    this.currLevelDoors[5].set(800,83,3,0,518,83);
+    this.currLevelDoors[4].set(-200,83,3,0,82,83);
+    this.currLevelDoors[3].set(800,298,3,0,518,298);
+    this.currLevelDoors[2].set(-200,298,3,0,82,298);
+    this.currLevelDoors[1].set(800,519,3,0,518,519);
+    this.currLevelDoors[0].set(-200,519,3,0,82,519);
     
     this.gameLoop.levelDoors = [];
     this.cluesShowing = true;
@@ -68,19 +62,19 @@ class ExitSelectScreen {
       for(let j = 0; j < this.tilemap[i].length; j++) {
         switch(this.tilemap[i][j]) {
           // full wall
-          case 'w': this.walls.push(new wallObj((j*30)+150,(i*30),1));
+          case 'w': this.walls.push(new WallObj((j*30)+150,(i*30),1));
             break;
           // left half wall
-          case 'l': this.walls.push(new wallObj((j*30)+150,(i*30),2));
+          case 'l': this.walls.push(new WallObj((j*30)+150,(i*30),2));
             break;
           // right half wall
-          case 'r': this.walls.push(new wallObj((j*30)+165,(i*30),2));
+          case 'r': this.walls.push(new WallObj((j*30)+165,(i*30),2));
             break;
           // top half wall
-          case 't': this.walls.push(new wallObj((j*30)+150,(i*30),3));
+          case 't': this.walls.push(new WallObj((j*30)+150,(i*30),3));
             break;
           // bottom half wall
-          case 'b': this.walls.push(new wallObj((j*30)+150,(i*30)+15,3));
+          case 'b': this.walls.push(new WallObj((j*30)+150,(i*30)+15,3));
             break;
         }
       }
@@ -88,7 +82,8 @@ class ExitSelectScreen {
 
     // Initialize player location at starting position
     for(let i = 0; i < this.gameLoop.game.players.length; i ++) {
-      this.gameLoop.game.players[i].position.set(300,585);
+      this.gameLoop.game.players[i].x = 285;
+      this.gameLoop.game.players[i].y = 570;
     }
   }
 
@@ -128,36 +123,42 @@ class ExitSelectScreen {
         this.currLevelDoors[5].count++;
         this.target = door6;
         this.targetSet = true;
+        //this.gameLoop.game.players[this.playerInd - 1].recalculatePathToDoor();
       }
       // Check door 5
       else if(dist(mouseX, mouseY, 82, 83) < 80 && this.targetSet == false) {
         this.currLevelDoors[4].count++;
         this.target = door5;
         this.targetSet = true;
+        //this.gameLoop.game.players[this.playerInd - 1].recalculatePathToDoor();
       }
       // Check door 4
       else if(dist(mouseX, mouseY, 518, 298) < 80 && this.targetSet == false) {
         this.currLevelDoors[3].count++;
         this.target = door4;
         this.targetSet = true;
+        //this.gameLoop.game.players[this.playerInd - 1].recalculatePathToDoor();
       }
       // Check door 3
       else if(dist(mouseX, mouseY, 82, 298) < 80 && this.targetSet == false) {
         this.currLevelDoors[2].count++;
         this.target = door3;
         this.targetSet = true;
+        //this.gameLoop.game.players[this.playerInd - 1].recalculatePathToDoor();
       }
       // Check door 2
       else if(dist(mouseX, mouseY, 518, 519) < 80 && this.targetSet == false) {
         this.currLevelDoors[1].count++;
         this.target = door2;
         this.targetSet = true;
+        //this.gameLoop.game.players[this.playerInd - 1].recalculatePathToDoor();
       }
       // Check door 1
       else if(dist(mouseX, mouseY, 82, 519) < 80 && this.targetSet == false) {
         this.currLevelDoors[0].count++;
         this.target = door1;
         this.targetSet = true;
+        //this.gameLoop.game.players[this.playerInd - 1].recalculatePathToDoor();
       }
     }
     
@@ -205,18 +206,13 @@ class ExitSelectScreen {
   }
 
   draw() {
+    background(0);
     push();
     noStroke();
     imageMode(CENTER);
     image(this.board, 300, 300, 300, 600);             // draw cropped game board
+    
     // draw doors of current level
-    /*image(this.currLevelDoors[5].image, 518, 83, 160, 160);
-    image(this.currLevelDoors[4].image, 82, 83, 160, 160);
-    image(this.currLevelDoors[3].image, 518, 298, 160, 160);
-    image(this.currLevelDoors[2].image, 82, 298, 160, 160);
-    image(this.currLevelDoors[1].image, 518, 519, 160, 160);
-    image(this.currLevelDoors[0].image, 82, 519, 160, 160);*/
-
     for(let d of this.currLevelDoors) {
       d.draw();
     }
@@ -255,8 +251,8 @@ class ExitSelectScreen {
     fill(0);
     textSize(20);
     text(`Player ${this.playerInd} pick a door!`, 300, 30);
+    pop();
 
     this.gameLoop.game.players[this.playerInd - 1].drawPlayer();
-    pop();
   }
 }
