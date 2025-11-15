@@ -71,8 +71,7 @@ class GrimoireCluesScreen {
     this.clueDoor1 = null;
     this.clueDoor2 = null;
 
-    // Take screenshot of grimoire clues setup to display in following screens
-    this.gameLoop.grimoireClues = get(200, 50, 200, 100);
+    
     console.log("Grimoire Clues Image:", this.gameLoop.grimoireClues);
     this.grimoire = null;
     this.butterflyMarker1 = null;
@@ -236,6 +235,8 @@ class GrimoireCluesScreen {
 
       this.done = true;
     }
+    // Take screenshot of grimoire clues setup to display in following screens
+    this.gameLoop.grimoireClues = get(200, 50, 200, 100);
   }
 
   handleReady(){
