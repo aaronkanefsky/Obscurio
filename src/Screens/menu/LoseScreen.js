@@ -14,13 +14,14 @@ class LoseScreen {
     this.restartButton;
     this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
     this.buttonColor = color(143, 86, 59);
+    this.torches = [new Torch(250,370), new Torch(300,370), new Torch(350,370)];
   }
 
   /**
    * @description Behavior on state entry
    */
   enter() {
-    this.restartButton = new Button(430, 570, 100, 40, 'Play Again!', 20, this.menuFont, this.buttonColor);
+    this.restartButton = new Button(430, 570, 120, 40, 'Play Again!', 20, this.menuFont, this.buttonColor);
     this.animationStart = frameCount;
   }
 
@@ -37,20 +38,44 @@ class LoseScreen {
   drawLoseScreen() {
     // Add animation of players leaving the library, then transition to static end screen
     // Current time given for transition between animation and static screen is an estimate
-    image(this.game.backgroundImage, 0, 0, 600, 600);
-    this.restartButton.draw();
-      
+    background(110);
+    strokeWeight(2);
+  
+    fill(18, 112, 43);
+    quad(200,350,400,350,420,330,220,330);
+    
+    
+    this.restartButton.drawButton();
+    for(let t of this.torches) {
+      t.update();
+    }
+
     push();
+    stroke(0);
     rectMode(CENTER);
     strokeWeight(3);
     fill(this.buttonColor);
-    rect(300, 300, 200, 200);
+    rect(300, 100, 520, 100, 15);
     fill(0);
-    textFont(this.game.menuFont);
+    noStroke();
+    textFont(this.menuFont);
     textAlign(CENTER,CENTER);
-    textSize(60);
-    text('Oh no! You are now stuck in the library forever and the traitor has won!', 300, 300);
+    textSize(30);
+    text('Oh no! You are now stuck in the library', 300, 75);
+    text('forever and the traitor has won!', 300, 125);
     pop();
+
+    strokeWeight(2);
+    stroke(0);
+    fill(21, 133, 51);
+    rect(200,350,200,100);
+    quad(400,350,420,330,420,440,400,450);
+    fill(18, 112, 43);
+    strokeWeight(1);
+    rect(220,370,10,60,15);
+    rect(270,370,10,60,15);
+    rect(320,370,10,60,15);
+    rect(370,370,10,60,15);
   }
 
   /**
@@ -59,6 +84,7 @@ class LoseScreen {
   exit() {
     this.restartButton = null;
     this.animationStart = 0;
+    this.torches = [];
     this.game = null;
   }
 }
