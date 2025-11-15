@@ -13,7 +13,9 @@ function draw() {
 }
 
 class Torch {
-    constructor() {
+    constructor(x,y) {
+        this.x = x;
+        this.y = y;
         this.smoke = [];
         this.fire = [];
     }
@@ -22,7 +24,7 @@ class Torch {
         //fill smoke array
         //can generate more particles at once by adjusting the i< 
         for (let i = 0; i < 5; i++) {
-            let s = new Smoke();
+            let s = new Smoke(this.x,this.y);
             this.smoke.push(s);
 
         }
@@ -44,7 +46,7 @@ class Torch {
         //can generate more particles at once by adjusting the i< 
         for (let i = 0; i < 10; i++) {
 
-            let f = new Fire();
+            let f = new Fire(this.x,this.y);
             this.fire.push(f);
 
         }
@@ -67,9 +69,9 @@ class Torch {
 
 class Fire {
 
-    constructor() {
-        this.fx = random(280, 320);
-        this.fy = 380;
+    constructor(x,y) {
+        this.fx = x + (random(-20, 20));
+        this.fy = y;
         this.fvx = random(-1, 1);
         this.fvy = random(-3, -1);
         this.alpha = 155;
@@ -111,10 +113,10 @@ class Fire {
 class Smoke {
 
 
-    constructor() {
+    constructor(x,y) {
         //particles start at the bottom
-        this.x = 300;
-        this.y = 380;
+        this.x = x;
+        this.y = y;
         //change this to make particles go random left and right
         this.vx = random(-1, 1);
         //change this in the negative to make the particles go up randomly
