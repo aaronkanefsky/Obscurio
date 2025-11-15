@@ -109,7 +109,7 @@ class PlayerSelScreen {
         if (char.flipped && !char.isFlipping){
             push();
             translate(x - w * 0.8, y - h * 0.5); // center above card
-            char.spell(100,100); // character draws itself relative to this position
+            char.spell(); // character draws itself relative to this position
             pop();
         }
     }
