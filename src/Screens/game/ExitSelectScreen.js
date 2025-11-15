@@ -82,7 +82,8 @@ class ExitSelectScreen {
 
     // Initialize player location at starting position
     for(let i = 0; i < this.gameLoop.game.players.length; i ++) {
-      this.gameLoop.game.players[i].position.set(285,570);
+      this.gameLoop.game.players[i].x = 285;
+      this.gameLoop.game.players[i].y = 570;
     }
   }
 
