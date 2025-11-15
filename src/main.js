@@ -54,7 +54,7 @@ function preload() {
     }
 
     // will change to include all 66 doors later
-    for (i = 5; i < 30; i++) {
+    for (i = 5; i < 28; i++) {
         doorImgs.push(loadImage(ASSET_PATH + "images/door" + i + ".png"));
     }
 
