@@ -1,4 +1,4 @@
-class explosionObj {
+class ExplosionObj {
   constructor(a) {
     this.position = new p5.Vector(0, 0);
     this.direction = new p5.Vector(0, 0);
