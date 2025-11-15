@@ -106,11 +106,13 @@ class PlayerNumberScreen {
         push();
         image(this.backgroundImage, 0, 0, 600, 600)
         push();
+        stroke(0);
         strokeWeight(3)
         fill(this.buttonColor);
         rectMode(CENTER);
-        rect(300, 40, 300, 40, 8)
+        rect(300, 40, 300, 40, 8);
         pop();
+        noStroke();
         fill(0);
         textSize(30);
         textAlign(CENTER);
