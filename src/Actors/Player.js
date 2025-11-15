@@ -94,8 +94,8 @@ class Player {
       } else {
         const node = this.path[this.pathPosIndex];
         //const target = tileCenter(node.col, node.row);
-        const vx = game.exitSelectScreen.target.x - this.x;
-        const vy = game.exitSelectScreen.target.y - this.y;
+        const vx = this.target.x - this.x;
+        const vy = this.target.y - this.y;
         const distTo = Math.hypot(vx, vy);
         if (distTo < 1.2) {
           this.pathPosIndex++;
