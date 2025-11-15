@@ -23,7 +23,7 @@ class WinScreen {
   enter() {
     this.restartButton = new Button(430, 570, 100, 40, 'Play Again!', 20, this.menuFont, this.buttonColor);
     this.animationStart = frameCount;
-    this.firework = [new fireworkObj(0), new fireworkObj(1), new fireworkObj(2), new fireworkObj(0), new fireworkObj(1), new fireworkObj(2)];
+    this.firework = [new FireworkObj(0), new FireworkObj(1), new FireworkObj(2), new FireworkObj(0), new FireworkObj(1), new FireworkObj(2)];
   }
 
   /**

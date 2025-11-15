@@ -1,4 +1,4 @@
-class fireworkObj {
+class FireworkObj {
   constructor(a) {
     this.position = new p5.Vector(300, 580);
     this.direction = new p5.Vector(0, 0);
@@ -6,7 +6,7 @@ class fireworkObj {
     this.step = 0;
     this.explosions = [];
     for (var i = 0; i < 200; i++) {
-      this.explosions.push(new explosionObj(a));
+      this.explosions.push(new ExplosionObj(a));
     }
   }
 
@@ -24,4 +24,4 @@ class fireworkObj {
       }
     }
   }
-} // fireworkObj
+} // FireworkObj

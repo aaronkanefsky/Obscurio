@@ -4,7 +4,7 @@ class ExitSelectScreen {
     this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
     this.buttonColor = color(143, 86, 59);
     this.currLevelDoors = [];
-    this.playerInd = 6;
+    this.playerInd = 1;
     this.board = loadImage(ASSET_PATH + 'images/game_board_cropped.png');
     this.target;
     this.targetSet = false;
@@ -37,11 +37,25 @@ class ExitSelectScreen {
 
   enter() {
     this.target = new p5.Vector(0,0);
+    this.gameLoop.levelDoors.push(new DoorObj(-200,-50,5,2,0,0,1,this.gameLoop.exitImg));
     let randDoors = 6 - this.gameLoop.levelDoors.length;
     for(let i = 0; i < randDoors; i++) {
-      this.gameLoop.levelDoors.push(new doorObj(false,this.gameLoop.gameDoors.pop()));
+      this.gameLoop.levelDoors.push(new DoorObj(-200,-50,5,2,0,0,0,this.gameLoop.gameDoors.pop()));
     }
     this.currLevelDoors = shuffle(this.gameLoop.levelDoors);
+    this.currLevelDoors[5].tx = 518;
+    this.currLevelDoors[5].ty = 83;
+    this.currLevelDoors[4].tx = 82;
+    this.currLevelDoors[4].ty = 83;
+    this.currLevelDoors[3].tx = 518;
+    this.currLevelDoors[3].ty = 298;
+    this.currLevelDoors[2].tx = 82;
+    this.currLevelDoors[2].ty = 298;
+    this.currLevelDoors[1].tx = 518;
+    this.currLevelDoors[1].ty = 519;
+    this.currLevelDoors[0].tx = 82;
+    this.currLevelDoors[0].ty = 519;
+    
     this.gameLoop.levelDoors = [];
     this.cluesShowing = true;
 
@@ -91,6 +105,10 @@ class ExitSelectScreen {
     }
     else if(this.cluesButton.released === true && this.cluesShowing === false) {
       this.cluesShowing = true;
+    }
+
+    for(let d of this.currLevelDoors) {
+      d.update();
     }
 
     // Door targets
@@ -192,12 +210,16 @@ class ExitSelectScreen {
     imageMode(CENTER);
     image(this.board, 300, 300, 300, 600);             // draw cropped game board
     // draw doors of current level
-    image(this.currLevelDoors[5].door, 518, 83, 160, 160);
-    image(this.currLevelDoors[4].door, 82, 83, 160, 160);
-    image(this.currLevelDoors[3].door, 518, 298, 160, 160);
-    image(this.currLevelDoors[2].door, 82, 298, 160, 160);
-    image(this.currLevelDoors[1].door, 518, 519, 160, 160);
-    image(this.currLevelDoors[0].door, 82, 519, 160, 160);
+    /*image(this.currLevelDoors[5].image, 518, 83, 160, 160);
+    image(this.currLevelDoors[4].image, 82, 83, 160, 160);
+    image(this.currLevelDoors[3].image, 518, 298, 160, 160);
+    image(this.currLevelDoors[2].image, 82, 298, 160, 160);
+    image(this.currLevelDoors[1].image, 518, 519, 160, 160);
+    image(this.currLevelDoors[0].image, 82, 519, 160, 160);*/
+
+    for(let d of this.currLevelDoors) {
+      d.draw();
+    }
 
     if(this.cluesShowing == true) {
       rectMode(CENTER);

@@ -99,8 +99,9 @@ class PlayerSelScreen {
             image(this.playerChoices[charID], 0, 0, w, h);
         } else {
             // Backside
-            fill(30);
-            noStroke();
+            fill(this.buttonColor);
+            strokeWeight(3);
+            stroke(0);
             rectMode(CENTER);
             rect(0, 0, w, h, 15);
         }

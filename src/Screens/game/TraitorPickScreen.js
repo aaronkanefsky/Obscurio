@@ -11,6 +11,7 @@ class TraitorPickScreen {
   constructor(gameLoop) {
     this.gameLoop = gameLoop;
     this.folioDoors = [];
+    this.buttonColor = color(97, 64, 38);
     for(let i = 0; i < 8; i++) {
       if(i < 4) {
         this.folioDoors.push(new folioObj((i*50),200,this.gameLoop.gameDoors.pop()));
@@ -27,7 +28,7 @@ class TraitorPickScreen {
    * @description Behavior on state entry
    */
   enter() {
-    this.nextButton = new Button(430, 570, 100, 40, 'Next', 20, this.gameLoop.game.menuFont, this.gameLoop.game.buttonColor);
+    this.nextButton = new Button(430, 570, 100, 40, 'Next', 20, this.gameLoop.game.menuFont, this.buttonColor);
   }
 
   /**
@@ -70,14 +71,14 @@ class TraitorPickScreen {
    */
   draw() {
     textSize(40);
-    textMode(CENTER);
+    textAlign(CENTER);
     text(`Traitor you can select up to ${2 - this.doorsPicked} more doors!`, 300, 50);
-    for(let d of this.folioDoors) {
-      if(d.selected === true) {
-          fill(255,255,0);
-          circle(d.x + 25, d.y + 25, 54);
-      }
-      image(d.door, d.x, d.y, 50, 50);
-    }
+    // for(let d of this.folioDoors) {
+    //   if(d.selected === true) {
+    //       fill(255,255,0);
+    //       circle(d.x + 25, d.y + 25, 54);
+    //   }
+    //   image(d.door, d.x, d.y, 50, 50);
+    // }
   }
 }
