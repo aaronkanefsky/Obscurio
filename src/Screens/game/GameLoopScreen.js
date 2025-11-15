@@ -21,10 +21,6 @@ class GameLoopScreen {
     this.gameLoopState = this.grimoireReveal;
     this.levelDoors = [];
     this.exitImg = null;
-    /*this.doorArray = [];
-    for(let i = 0; i < 25; i++) {
-      this.doorArray.push(i);
-    }*/
     this.grimoireClues = loadImage(ASSET_PATH + 'images/grimoire.png');
   }
 

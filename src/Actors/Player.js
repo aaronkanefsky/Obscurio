@@ -1,6 +1,6 @@
 // Global variables
 const tileWidth = 30;
-const screenCols = 20;
+const screenCols = 10;
 const screenRows = 20;
 const screenWidth = tileWidth * screenCols;
 const screenHeight = tileWidth * screenRows;
@@ -14,6 +14,7 @@ class Player {
     this.y = 0;
     this.target = new p5.Vector(0,0);
     this.direction = 2;
+    this.speed = 1;
     this.frameX = 0;
     this.frameY = 0;
     this.moveFrameCount = 0;
@@ -59,18 +60,26 @@ class Player {
     this.moveFrameCount++;
   }
 
+  /**
+    * @description Behavior when changing direction
+    */
   updateDirection() {
-    if(this.y > this.target.y) {
-      this.direction = 0;
+    if(game.exitSelectScreen.targetSet === true) {
+      if(this.y > this.target.y) {
+        this.direction = 0;   // faces upwards direction
+      }
+      else if(this.x > this.target.x) {
+        this.direction = 1;   // faces left
+      }
+      else if(this.y < this.target.y) {
+        this.direction = 2;   // faces downward direction
+      }
+      else if(this.x < this.target.x) {
+        this.direction = 3;   // faces right
+      }
     }
-    else if(this.x > this.target.x) {
-      this.direction = 1;
-    }
-    else if(this.y < this.target.y) {
-      this.direction = 2;
-    }
-    else if(this.x < this.target.x) {
-      this.direction = 3;
+    else {
+      this.direction = 2;   // faces out
     }
   }
   
