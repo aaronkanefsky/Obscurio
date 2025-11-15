@@ -211,10 +211,11 @@ class PlayerSelScreen {
 
         push();
         rectMode(CENTER);
+        stroke(0);
         strokeWeight(3);
         fill(this.buttonColor);
-        rect(300, 35, 300, 40);
-        textAlign(CENTER);
+        rect(300, 35, 300, 40,8);
+        textAlign(CENTER,CENTER);
         textFont(this.menuFont);
         fill(0);
         noStroke();
