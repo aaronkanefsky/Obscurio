@@ -51,7 +51,7 @@ class GrimoireCluesScreen {
     this.clueDoor2 = this.gameLoop.clueDoors[1];
     this.goalDoor = this.gameLoop.exitDoor;
     
-    this.goalCover = new DoorObj(200, 500, 2, 5, 200, 360, -1, null);
+    this.goalCover = new DoorObj(this.gameLoop,200, 500, 2, 5, 200, 360, -1, null);
 
     // Butterfly markers
     this.butterflyMarker1 = new ButteryflyMarker(mouseX, mouseY, PI / 4);
@@ -226,7 +226,7 @@ class GrimoireCluesScreen {
           this.draw();
 
           // Capture the screenshot
-          cluePicture = get(17, 17, 566, 333);
+          this.gameLoop.grimoireClues = get(17, 17, 566, 333);
 
           // Bring cursor back
           showCursor = true;
@@ -235,8 +235,6 @@ class GrimoireCluesScreen {
 
       this.done = true;
     }
-    // Take screenshot of grimoire clues setup to display in following screens
-    this.gameLoop.grimoireClues = get(200, 50, 200, 100);
   }
 
   handleReady(){
