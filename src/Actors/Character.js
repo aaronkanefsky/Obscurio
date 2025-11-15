@@ -10,8 +10,8 @@ class Character {
     this.flipped = false;
     this.isFlipping = false;
     this.flipProgress = 0;
-    this.x = 100;
-    this.y = 100;
+    this.x = 40;
+    this.y = 60;
   }
   walk() {
     if(this.moveFrameCount % 6 === 0) {
@@ -27,7 +27,7 @@ class Character {
 
     let walkFrame = charWalk[this.characterID].get(x_pos, y_pos, charWalkWidth, charWalkHeight);
 
-    image(walkFrame,this.x,this.y,40,60);
+    image(walkFrame,this.x,this.y,100,100);
 
     this.moveFrameCount++;
   }
@@ -46,7 +46,7 @@ class Character {
 
     let spellFrame = charSpell[this.characterID].get(x_pos, y_pos, charSpellWidth, charSpellHeight);
 
-    image(spellFrame,this.x,this.y,40,60);
+    image(spellFrame,this.x,this.y,100,100);
 
     this.moveFrameCount++;
   }
