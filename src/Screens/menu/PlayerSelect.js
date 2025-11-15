@@ -220,7 +220,7 @@ class PlayerSelScreen {
         fill(0);
         noStroke();
         textSize(20);
-        text(`Pick your character player ${this.num + 1}`, 300, 40)
+        text(`Pick your character player ${this.num + 1}`, 300, 35)
         pop();
     }
 }
