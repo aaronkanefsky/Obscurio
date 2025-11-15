@@ -10,8 +10,8 @@ class Character {
     this.flipped = false;
     this.isFlipping = false;
     this.flipProgress = 0;
-    this.x = 80;
-    this.y = 80;
+    this.x = 90;
+    this.y = 90;
   }
   walk() {
     if(this.moveFrameCount % 6 === 0) {
