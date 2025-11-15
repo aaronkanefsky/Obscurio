@@ -37,23 +37,24 @@ var globalGameConfig;
 let instructionText;
 
 // Cursor images
-let cursorDefault, cursorPointer;
+let cursorDefault, cursorPointer, showCursor;
 var charWalk = [];
 var charSpell = [];
-let menu, options, instructions, playerNum, playerSel, gameLoop, winScreen, loseScreen;
+let menu, options, instuctions, playerNum, playerSel, game, winScreen, loseScreen;
 let gameState;
 var doorImgs = [];
 var characters = [];
 
 function preload() {
     cursorDefault = loadImage(ASSET_PATH + 'images/cursor_default.png');
-    cursorPointer = loadImage(ASSET_PATH + 'images/cursor_pointer.png');
+    cursorButterfly = loadImage(ASSET_PATH + 'images/ButterflyMarker.png');
     for (var i = 0; i < 7; i++) {
         charWalk.push(loadImage(ASSET_PATH + "images/char" + i + "walk.png"));
         charSpell.push(loadImage(ASSET_PATH + "images/char" + i + "spellcast.png"));
     }
 
-    for(i = 5; i < 66; i++) {
+    // will change to include all 66 doors later
+    for (i = 5; i < 28; i++) {
         doorImgs.push(loadImage(ASSET_PATH + "images/door" + i + ".png"));
     }
 
@@ -62,30 +63,31 @@ function preload() {
 
 function setup() {
     createCanvas(600, 600);
+    frameRate(40);
 
-    // Game screens and objects
     globalGameConfig = new GameObject();
+
+    // Populate characters
+    for (let i = 0; i < 7; i++) {
+        let c = new Character(i);
+        globalGameConfig.characters.push(c);  // <--- IMPORTANT
+    }
+
     menu = new MainMenu(globalGameConfig);
     options = new OptionsMenu(globalGameConfig);
     instructions = new Instructions(globalGameConfig);
     playerNum = new PlayerNumberScreen(globalGameConfig);
     playerSel = new PlayerSelScreen(globalGameConfig);
-    gameLoop = new GameLoopScreen(globalGameConfig, doorImgs);
+    game = new GameLoopScreen(globalGameConfig, doorImgs);
     winScreen = new WinScreen(globalGameConfig);
     loseScreen = new LoseScreen(globalGameConfig);
 
+    showCursor = true;
 
-    for (let i = 0; i < 8; i++) {
-        //globalGameConfig.characters.push(new Character(i, 100, 100));
-        characters.push(new Character(i));
-    }
-
-    
-    /*gameState = gameStates.MAIN_MENU;
-    menu.enter();*/
-    gameState = gameStates.GAME;
-    gameLoop.enter();
+    gameState = gameStates.MAIN_MENU;
+    menu.enter();
 }
+
 
 function draw() {
     background(220);
@@ -121,7 +123,7 @@ function draw() {
 
     // Do for every screen
     noCursor();
-    image(cursorDefault, mouseX - 14, mouseY - 14);
+    showMouse();
 }
 
 function handleMainMenu() {
@@ -202,19 +204,19 @@ function handleInstructionsScreen() {
 }
 
 function handleGame(){
-    gameLoop.draw();
+    game.draw();
 
-    if(gameLoop.exitSelectScreen.playerInd > globalGameConfig.playerCount) {
-        if(gameLoop.level > 1) {    // Change to > 6 levels later
+    if(game.exitSelectScreen.playerInd > globalGameConfig.playerCount) {
+        if(game.level > 1) {    // Change to > 6 levels later
             gameState = gameStates.WIN_SCREEN;
-            gameLoop.exitSelectScreen.exit();
-            //gameLoop.exit();
+            game.exitSelectScreen.exit();
+            //game.exit();
             winScreen.enter();
         }
-        else if(gameLoop.cohesionTokens <= 0) {
+        else if(game.cohesionTokens <= 0) {
             gameState = gameStates.LOSE_SCREEN;
-            gameLoop.exitSelectScreen.exit();
-            //gameLoop.exit();
+            game.exitSelectScreen.exit();
+            //game.exit();
             loseScreen.enter();
         }
     }
@@ -239,6 +241,22 @@ function handleLoseScreen() {
         gameState = gameStates.MAIN_MENU;
         loseScreen.exit();
         menu.enter();
+    }
+}
+
+
+/////////////////////////////////
+// Mouse Functions
+
+
+function showMouse() {
+    if (showCursor === true &&
+        game.gameLoopState.state !== GrimoireState.PLACE_MARKERS ||
+        (game.gameLoopState.state === GrimoireState.PLACE_MARKERS &&
+            game.gameLoopState.butterflyMarker1.placed === true &&
+            game.gameLoopState.butterflyMarker2.placed === true)
+    ) {
+        image(cursorDefault, mouseX - 14, mouseY - 14);
     }
 }
 

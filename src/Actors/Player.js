@@ -1,10 +1,10 @@
 class Player {
   constructor(player_num, char_num) {
-    this.game = this.game;
     this.playerId = player_num;
     this.character = char_num;
     this.playerType = null;
     this.position = new p5.Vector(0,0);
+    this.target = new p5.Vector(0,0);
     this.direction = 2;
     this.frameX = 0;
     this.frameY = 0;
@@ -25,7 +25,7 @@ class Player {
 
     let walkFrame = charWalk[this.character].get(x_pos, y_pos, charWalkWidth, charWalkHeight);
 
-    image(walkFrame,this.position.x,this.position.y,60,60);
+    image(walkFrame,this.position.x,this.position.y,30,30);
 
     this.moveFrameCount++;
   }
@@ -44,19 +44,31 @@ class Player {
 
     let spellFrame = charSpell[this.character].get(x_pos, y_pos, charSpellWidth, charSpellHeight);
 
-    image(spellFrame,this.x,this.y,60,60);
+    image(spellFrame,this.x,this.y,30,30);
 
     this.moveFrameCount++;
   }
+
+  updateDirection() {
+    if(this.position.y > this.target.y) {
+      this.direction = 0;
+    }
+    else if(this.position.x > this.target.x) {
+      this.direction = 1;
+    }
+    else if(this.position.y < this.target.y) {
+      this.direction = 2;
+    }
+    else if(this.position.x < this.target.x) {
+      this.direction = 3;
+    }
+  }
   
   updatePlayer() {
-
+    this.updateDirection();
   }
 
   drawPlayer() {
-    push();
-    translate(this.position.x,this.position.y);
-    this.walk(0,0);
-    pop();
+    this.walk();
   }
 }

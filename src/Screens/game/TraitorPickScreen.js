@@ -14,10 +14,10 @@ class TraitorPickScreen {
     this.buttonColor = color(97, 64, 38);
     for(let i = 0; i < 8; i++) {
       if(i < 4) {
-        this.folioDoors.push(new folioObj((i*50),200,this.gameLoop.gameDoors.pop()));
+        this.folioDoors.push(new FolioObj((i*50),200,this.gameLoop.gameDoors.pop()));
       }
       else {
-        this.folioDoors.push(new folioObj((i*50),400,this.gameLoop.gameDoors.pop()));
+        this.folioDoors.push(new FolioObj((i*50),400,this.gameLoop.gameDoors.pop()));
       }
     }
     this.doorPicks = 0;
@@ -58,7 +58,7 @@ class TraitorPickScreen {
     // find the selected doors and add them to level doors, then replace them in te folio with new doors for next level's traitor pick
     for(let i = 0; i < this.folioDoors.length; i++) {
       if(this.folioDoors[i].selected === true) {
-        this.gameLoop.levelDoors.push(new doorObj(false,this.folioDoors[i].door));
+        this.gameLoop.levelDoors.push(new DoorObj(-200,-50,5,2,0,0,0,this.folioDoors[i].door));
         this.folioDoors.splice(i,1,this.gameLoop.gameDoors.pop());
       }
     }

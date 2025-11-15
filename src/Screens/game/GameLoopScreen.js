@@ -47,13 +47,9 @@ class GameLoopScreen {
 
 
     // Randomize the order of doors to be used
-    //this.doorArray = shuffle(this.doorArray);
-    this.exitImg = this.gameDoors.pop();
-    this.exitDoor = new DoorObj(200, 500, 2, 5, 200, 360, 1, this.exitImg);
-    this.clueDoors.push(new DoorObj(-203, -45, 5, 3, 57, 108, 0, this.gameDoors.pop()))
-    this.clueDoors.push(new DoorObj(652, -30, 5, 2, 327, 106, 0, this.gameDoors.pop()))
-    //this.gameDoors = this.doorArray;
-
+    this.exitDoor = new DoorObj(this,200, 500, 2, 5, 200, 360, 1, this.gameDoors.pop());
+    this.clueDoors.push(new DoorObj(this,-203, -45, 5, 3, 57, 108, 0, this.gameDoors.pop()))
+    this.clueDoors.push(new DoorObj(this,652, -30, 5, 2, 327, 106, 0, this.gameDoors.pop()))
   }
 
   draw() {
