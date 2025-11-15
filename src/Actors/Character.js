@@ -27,7 +27,7 @@ class Character {
 
     let walkFrame = charWalk[this.characterID].get(x_pos, y_pos, charWalkWidth, charWalkHeight);
 
-    image(walkFrame,this.x,this.y,100,100);
+    image(walkFrame,this.x,this.y,40,60);
 
     this.moveFrameCount++;
   }
@@ -46,7 +46,7 @@ class Character {
 
     let spellFrame = charSpell[this.characterID].get(x_pos, y_pos, charSpellWidth, charSpellHeight);
 
-    image(spellFrame,this.x,this.y,100,100);
+    image(spellFrame,this.x,this.y,40,60);
 
     this.moveFrameCount++;
   }
