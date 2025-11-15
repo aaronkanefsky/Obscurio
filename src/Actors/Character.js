@@ -10,8 +10,10 @@ class Character {
     this.flipped = false;
     this.isFlipping = false;
     this.flipProgress = 0;
+    this.x = 100;
+    this.y = 100;
   }
-  walk(x,y) {
+  walk() {
     if(this.moveFrameCount % 6 === 0) {
       this.frameX = (this.frameX + 1) % 8;
     }
@@ -25,12 +27,12 @@ class Character {
 
     let walkFrame = charWalk[this.characterID].get(x_pos, y_pos, charWalkWidth, charWalkHeight);
 
-    image(walkFrame,x,y,30,30);
+    image(walkFrame,this.x,this.y,60,60);
 
     this.moveFrameCount++;
   }
   
-  spell(x,y) {
+  spell() {
     if(this.moveFrameCount % 6 === 0) {
       this.frameX = (this.frameX + 1) % 7;
     }
@@ -44,7 +46,7 @@ class Character {
 
     let spellFrame = charSpell[this.characterID].get(x_pos, y_pos, charSpellWidth, charSpellHeight);
 
-    image(spellFrame,x,y,30,30);
+    image(spellFrame,this.x,this.y,60,60);
 
     this.moveFrameCount++;
   }
