@@ -203,17 +203,17 @@ function handleInstructionsScreen() {
     }
 }
 
-function handleGame(){
+function handleGame() {
     game.draw();
 
-    if(game.exitSelectScreen.playerInd > globalGameConfig.playerCount) {
-        if(game.level > 1) {    // Change to > 6 levels later
+    if (game.exitSelectScreen.playerInd > globalGameConfig.playerCount) {
+        if (game.level > 1) {    // Change to > 6 levels later
             gameState = gameStates.WIN_SCREEN;
             game.exitSelectScreen.exit();
             //game.exit();
             winScreen.enter();
         }
-        else if(game.cohesionTokens <= 0) {
+        else if (game.cohesionTokens <= 0) {
             gameState = gameStates.LOSE_SCREEN;
             game.exitSelectScreen.exit();
             //game.exit();
@@ -226,7 +226,7 @@ function handleWinScreen() {
     winScreen.updateWinScreen();
     winScreen.drawWinScreen();
 
-    if(winScreen.restartButton.released === true) {
+    if (winScreen.restartButton.released === true) {
         gameState = gameStates.MAIN_MENU;
         winScreen.exit();
         menu.enter();
@@ -237,7 +237,7 @@ function handleLoseScreen() {
     loseScreen.updateLoseScreen();
     loseScreen.drawLoseScreen();
 
-    if(loseScreen.restartButton.released === true) {
+    if (loseScreen.restartButton.released === true) {
         gameState = gameStates.MAIN_MENU;
         loseScreen.exit();
         menu.enter();
@@ -272,5 +272,14 @@ function mouseWheel(event) {
     ) {
         instructions.textbox.handleScroll(event);
         return false; // prevents page from scrolling in some browsers
+    }
+}
+
+function keyPressed() {
+    if (key >= '1' && key <= '6') {
+        const idx = int(key) - 1;
+        if (window._exitSelectScreenInstance && typeof window._exitSelectScreenInstance.selectDoorByIndex === 'function') {
+            window._exitSelectScreenInstance.selectDoorByIndex(idx);
+        }
     }
 }
