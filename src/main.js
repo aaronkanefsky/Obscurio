@@ -275,11 +275,8 @@ function mouseWheel(event) {
     }
 }
 
-function keyPressed() {
-    if (key >= '1' && key <= '6') {
-        const idx = int(key) - 1;
-        if (window._exitSelectScreenInstance && typeof window._exitSelectScreenInstance.selectDoorByIndex === 'function') {
-            window._exitSelectScreenInstance.selectDoorByIndex(idx);
-        }
-    }
+function mousePressed() {
+  if (window._exitSelectScreenInstance) {
+    window._exitSelectScreenInstance.handleMousePressed();
+  }
 }

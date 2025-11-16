@@ -20,6 +20,8 @@ class DoorObj {
     this.exitCard = e;
   }
 
+  
+
   set(x,y,dx,dy,tx,ty) {
     this.x = x;
     this.y = y;

@@ -36,7 +36,7 @@ class Player {
 
     let walkFrame = charWalk[this.character].get(x_pos, y_pos, charWalkWidth, charWalkHeight);
 
-    image(walkFrame,this.x,this.y,30,30);
+    image(walkFrame,this.x - charWalkWidth/4,this.y - charWalkWidth/4,30,30);
 
     this.moveFrameCount++;
   }
