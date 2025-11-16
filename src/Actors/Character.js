@@ -12,7 +12,16 @@ class Character {
     this.flipProgress = 0;
     this.x = 90;
     this.y = 90;
+    this.size = 80;
   }
+
+  set(x,y,s,d) {
+    this.x = x;
+    this.y = y;
+    this.size = s;
+    this.direction = d;
+  }
+
   walk() {
     if(this.moveFrameCount % 6 === 0) {
       this.frameX = (this.frameX + 1) % 8;
@@ -27,7 +36,7 @@ class Character {
 
     let walkFrame = charWalk[this.characterID].get(x_pos, y_pos, charWalkWidth, charWalkHeight);
 
-    image(walkFrame,this.x,this.y,80,80);
+    image(walkFrame,this.x,this.y,this.size,this.size);
 
     this.moveFrameCount++;
   }
@@ -46,7 +55,7 @@ class Character {
 
     let spellFrame = charSpell[this.characterID].get(x_pos, y_pos, charSpellWidth, charSpellHeight);
 
-    image(spellFrame,this.x,this.y,80,80);
+    image(spellFrame,90,90,80,80);
 
     this.moveFrameCount++;
   }
