@@ -29,6 +29,18 @@ class Pathfinder {
     let dx = targetX - player.x;
     let dy = targetY - player.y;
     let dist = Math.hypot(dx, dy);
+    if(dy < 0) {
+      player.direction = 0;   // faces upwards direction
+    }
+    else if(dx < 0) {
+      player.direction = 1;   // faces left
+    }
+    else if(dy >= 0) {
+      player.direction = 2;   // faces downward direction
+    }
+    else if(dx > 0) {
+      player.direction = 3;   // faces right
+    }
 
     if (dist <= this.speed) {
       // snap to tile center and advance
