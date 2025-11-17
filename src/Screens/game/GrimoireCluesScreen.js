@@ -71,8 +71,6 @@ class GrimoireCluesScreen {
     this.clueDoor1 = null;
     this.clueDoor2 = null;
 
-    
-    console.log("Grimoire Clues Image:", this.gameLoop.grimoireClues);
     this.grimoire = null;
     this.butterflyMarker1 = null;
     this.butterflyMarker2 = null;
@@ -96,7 +94,6 @@ class GrimoireCluesScreen {
 
 
   draw() {
-
     image(this.grimoireBackground, 0, 0, 600, 600);
     image(this.grimoire, 0, 0, 600, 391);
 
@@ -110,12 +107,6 @@ class GrimoireCluesScreen {
       this.drawMarkers();
       this.goalCover.draw();
     }
-    else {
-      // image(cluePicture, 0, 0);
-
-    }
-
-
   }
 
   handleInstructions() {

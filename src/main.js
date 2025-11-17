@@ -1,5 +1,5 @@
 /**
- * Obscurio (Milestone 1)
+ * Obscurio (Milestone 2)
  * 
  * 
  * Created by L'Atelier
@@ -68,10 +68,10 @@ function setup() {
     globalGameConfig = new GameObject();
 
     // Populate characters
-    for (let i = 0; i < 7; i++) {
+    /*for (let i = 0; i < 7; i++) {
         let c = new Character(i);
         globalGameConfig.characters.push(c);  // <--- IMPORTANT
-    }
+    }*/
 
     menu = new MainMenu(globalGameConfig);
     options = new OptionsMenu(globalGameConfig);
@@ -203,30 +203,21 @@ function handleInstructionsScreen() {
     }
 }
 
-function handleGame(){
-    game.draw();
-
-    if(game.exitSelectScreen.playerInd > globalGameConfig.playerCount) {
-        if(game.level > 1) {    // Change to > 6 levels later
-            gameState = gameStates.WIN_SCREEN;
-            game.exitSelectScreen.exit();
-            //game.exit();
-            winScreen.enter();
-        }
-        else if(game.cohesionTokens <= 0) {
-            gameState = gameStates.LOSE_SCREEN;
-            game.exitSelectScreen.exit();
-            //game.exit();
-            loseScreen.enter();
-        }
+function handleGame() {
+    if (game.level > 1) {    // Change to > 6 levels later
+      game.exit();
     }
+    else if (game.cohesionTokens <= 10) {
+      game.exit();
+    }
+    game.draw();
 }
 
 function handleWinScreen() {
     winScreen.updateWinScreen();
     winScreen.drawWinScreen();
 
-    if(winScreen.restartButton.released === true) {
+    if (winScreen.restartButton.released === true) {
         gameState = gameStates.MAIN_MENU;
         winScreen.exit();
         menu.enter();
@@ -237,7 +228,7 @@ function handleLoseScreen() {
     loseScreen.updateLoseScreen();
     loseScreen.drawLoseScreen();
 
-    if(loseScreen.restartButton.released === true) {
+    if (loseScreen.restartButton.released === true) {
         gameState = gameStates.MAIN_MENU;
         loseScreen.exit();
         menu.enter();
@@ -272,5 +263,11 @@ function mouseWheel(event) {
     ) {
         instructions.textbox.handleScroll(event);
         return false; // prevents page from scrolling in some browsers
+    }
+}
+
+function mousePressed() {
+    if (window._exitSelectScreenInstance) {
+        window._exitSelectScreenInstance.handleMousePressed();
     }
 }

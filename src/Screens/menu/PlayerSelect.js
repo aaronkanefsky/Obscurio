@@ -190,6 +190,8 @@ class PlayerSelScreen {
         // Reset all player choices
         for (let i = 0; i < 7; i++) {
             this.game.characters[i].characterTaken = false;
+            this.game.characters[i].flipped = false;
+            this.game.characters[i].flipProgress = 0;
         }
     }
 
@@ -211,15 +213,16 @@ class PlayerSelScreen {
 
         push();
         rectMode(CENTER);
+        stroke(0);
         strokeWeight(3);
         fill(this.buttonColor);
-        rect(300, 35, 300, 40);
-        textAlign(CENTER);
+        rect(300, 35, 300, 40,8);
+        textAlign(CENTER,CENTER);
         textFont(this.menuFont);
         fill(0);
         noStroke();
         textSize(20);
-        text(`Pick your character player ${this.num + 1}`, 300, 40)
+        text(`Pick your character player ${this.num + 1}`, 300, 35)
         pop();
     }
 }
