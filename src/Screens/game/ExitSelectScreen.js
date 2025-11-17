@@ -185,13 +185,15 @@ class ExitSelectScreen {
   update() {
     if (this.cluesShowing === false) {
       this.cluesButton.updateButton();
-    } else {
+    } 
+    else {
       this.closeCluesButton.updateButton();
     }
 
     if (this.closeCluesButton.released === true && this.cluesShowing === true) {
       this.cluesShowing = false;
-    } else if (this.cluesButton.released === true && this.cluesShowing === false) {
+    } 
+    else if (this.cluesButton.released === true && this.cluesShowing === false) {
       this.cluesShowing = true;
     }
 
@@ -208,45 +210,44 @@ class ExitSelectScreen {
     if (!this.pathfinder.active()) {
       for (let d of this.currLevelDoors) {
         if (dist(player.x, player.y, d.exitX, d.exitY) < 30) {
-          console.log("Player reached door:", d.exitCard);
-
-          if (d.exitCard === 1) {
-            console.log("WIN: Correct door selected");
-            this.gameLoop.winScreen.enter();
-            this.gameLoop.changeState(this.gameLoop.winScreen);
-          } else {
-            console.log("LOSS: Wrong door selected");
-            this.gameLoop.changeState(this.gameLoop.loseScreen);
-          }
-
+          this.playerInd++;
+          this.targetSet = false;
+          this.target.set(0, 0);
           this.pathfinder.setPath([]);
           return; // stop update early
         }
       }
     }
-
-
   }
-
-
 
   // inside ExitSelectScreen class
   handleMousePressed() {
     if (!this.currLevelDoors || this.currLevelDoors.length === 0) return;
 
-    for (let i = 0; i < this.currLevelDoors.length; i++) {
-      const d = this.currLevelDoors[i];
-      // use door's "final position" as center for click detection
-      const doorX = this.doorGoalMap[i].x * 30 + 150; // convert tile to world X
-      const doorY = this.doorGoalMap[i].y * 30;       // convert tile to world Y
-
-      if (dist(mouseX, mouseY, doorX, doorY) <= 90) {
-        this.selectDoorByIndex(i);
-        break; // only select one door per click
-      }
+    if(dist(mouseX, mouseY, 82, 83) <= 80 && this.cluesShowing == false) {
+      this.selectDoorByIndex(4);
+    }
+    // Check door 5
+    else if(dist(mouseX, mouseY, 518, 83) <= 80 && this.cluesShowing == false) {
+      this.selectDoorByIndex(5);
+    }
+    // Check door 4
+    else if(dist(mouseX, mouseY, 82, 298) <= 80 && this.cluesShowing == false) {
+      this.selectDoorByIndex(2);
+    }
+    // Check door 3
+    else if(dist(mouseX, mouseY, 518, 298) <= 80 && this.cluesShowing == false) {
+      this.selectDoorByIndex(3);
+    }
+    // Check door 2
+    else if(dist(mouseX, mouseY, 82, 519) <= 80 && this.cluesShowing == false) {
+      this.selectDoorByIndex(0);
+    }
+    // Check door 1
+    else if(dist(mouseX, mouseY, 518, 519) <= 80 && this.cluesShowing == false) {
+      this.selectDoorByIndex(1);
     }
   }
-
 
   draw() {
     background(0);
@@ -270,6 +271,7 @@ class ExitSelectScreen {
       textSize(30);
       textFont(this.menuFont);
       text('Grimoire Clues', 300, 125);
+      text(`Cohesion Tokens:`+ this.gameLoop.cohesionTokens, 300, 465);
       imageMode(CENTER);
       image(this.gameLoop.grimoireClues, 300, 300, 450, 265);
     } else this.cluesButton.drawButton();
@@ -279,56 +281,57 @@ class ExitSelectScreen {
     stroke(0);
     fill(this.buttonColor);
     rect(300, 30, 200, 50, 15);
+    noStroke();
+    fill(0);
     textSize(20);
+    textFont(this.menuFont);
     textAlign(CENTER, CENTER);
     text(`Player ${this.playerInd} pick a door!`, 300, 30);
     pop();
 
-    // DEBUG: Draw clickable regions for ALL doors using exitCard
-    push();
-    noFill();
-    strokeWeight(2);
-
     // Build a list of every door that exists
+
+
     const doors = [];
     if (this.gameLoop.exitDoor) doors.push(this.gameLoop.exitDoor);
     if (this.gameLoop.clueDoors) doors.push(...this.gameLoop.clueDoors);
 
-    // DEBUG: draw a circle at every door exit location
-    push();
-    noFill();
-    strokeWeight(3);
-
-    for (let d of this.currLevelDoors) {
-      if (d.exitCard === 1) {
-        stroke(0, 255, 0); // correct door
-      } else {
-        stroke(255, 0, 0); // wrong door
-      }
-      circle(d.exitX, d.exitY, 30);
-    }
-    pop();
-
-
-
-    // for (let w of this.walls) {
-    //   fill(255, 0, 0);
-    //   if (w.type === 1) rect(w.x, w.y, 30, 30);
-    //   else if (w.type === 2) rect(w.x, w.y, 15, 30);
-    //   else if (w.type === 3) rect(w.x, w.y, 30, 15);
-    // }
-    // if (this.pathfinder.path.length) {
-    //   push();
-    //   noFill();
-    //   stroke(0, 255, 0);
-    //   strokeWeight(2);
-    //   for (let n of this.pathfinder.path) {
-    //     rect(n.x * 30 + 150, n.y * 30, 30, 30);
-    //   }
-    //   pop();
-    // }
-
     this.gameLoop.game.players[this.playerInd - 1].drawPlayer();
+  }
 
+  exit() {
+    for(let d of this.currLevelDoors) {
+      console.log("Door: exitCard =",d.exitCard,", count =",d.count);
+      if(d.exitCard === 0 && d.count > 0) {
+        this.gameLoop.cohesionTokens -= d.count;
+      }
+      else if(d.exitCard === 1 && d.count > 0) {
+        this.gameLoop.level++;
+      }
+    }
+    
+    // Remove doors used in this level from memory
+    this.currLevelDoors = [];
+
+    // Reset player positions
+    for(let i = 0; i < this.gameLoop.game.players.length; i ++) {
+      this.gameLoop.game.players[i].x = 0;
+      this.gameLoop.game.players[i].y = 0;
+    }
+
+    // Reset player index
+    this.playerInd = 1;
+
+    // Reset target
+    this.target = null;
+    this.targetSet = false;
+
+    // Reset walls
+    this.walls = [];
+
+    // Nullify buttons
+    this.cluesButton = null;
+    this.closeCluesButton = null;
   }
 }
+
