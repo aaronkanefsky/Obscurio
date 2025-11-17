@@ -11,6 +11,7 @@ class BufferScreen {
         background(0);
         push();
         stroke(255);
+        noStroke();
         fill(255);
         textSize(50);
         textFont(this.buttonFont)
