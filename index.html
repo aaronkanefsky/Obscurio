@@ -1,55 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8" />
 
-  </head>
-  <body>
-    <main>
-    </main>
-    <!-- Config file for pathing -->
-    <script src="src/config.js"></script>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
 
-    <!-- UI Elements and behavior -->
-    <script src="src/CustomObjects/Button.js"></script>
-    <script src="src/CustomObjects/ScrollableTextBox.js"></script>
+  <!-- Favicon image -->
+  <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="assets/favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 
-    <!-- Game Object and Support -->
-    <script src="src/Actors/Player.js"></script>
-    <script src="src/Actors/Character.js"></script>
-    <script src="src/Actors/GameObject.js"></script>
-    <script src="src/Actors/ButteryflyMarker.js"></script>
-    <script src="src/Actors/DoorObj.js"></script>
-    <script src="src/Actors/FolioObj.js"></script>
-    <script src="src/Actors/WallObj.js"></script>
-    <script src="src/Actors/Torch.js"></script>
-    <script src="src/Actors/ExplosionObj.js"></script>
-    <script src="src/Actors/FireworkObj.js"></script>
-    
+  <!-- Tab title -->
+  <title>Obscurio</title>
+</head>
 
-    <!-- Main Menu Screens -->
-    <script src="src/Screens/menu/BlankScreen.js"></script>
-    <script src="src/Screens/menu/OptionsMenu.js"></script>
-    <script src="src/Screens/menu/Instructions.js"></script>
-    <script src="src/Screens/menu/PlayerNumber.js"></script>
-    <script src="src/Screens/menu/PlayerSelect.js"></script>
-    <script src="src/Screens/menu/MainMenu.js"></script>
-    <script src="src/Screens/game/GameLoopScreen.js"></script>
-    <script src="src/Screens/menu/WinScreen.js"></script>
-    <script src="src/Screens/menu/LoseScreen.js"></script>
+<body>
+  <main>
+  </main>
+  <!-- Config file for pathing -->
+  <script src="src/config.js"></script>
 
-    <!-- Game States -->
-     <script src="src/Screens/game/Pathfinder.js"></script>
-    <script src="src/Screens/game/BufferScreenObj.js"></script>
-    <script src="src/Screens/game/ExitSelectScreen.js"></script>
-    <script src="src/Screens/game/GrimoireCluesScreen.js"></script>
-    <script src="src/Screens/game/TraitorPickScreen.js"></script>
-    
+  <!-- UI Elements and behavior -->
+  <script src="src/CustomObjects/Button.js"></script>
+  <script src="src/CustomObjects/ScrollableTextBox.js"></script>
 
-    <!-- Main game loop -->
-    <script src="src/main.js"></script>
-  </body>
+  <!-- Game Object and Support -->
+  <script src="src/Actors/Player.js"></script>
+  <script src="src/Actors/Character.js"></script>
+  <script src="src/Actors/GameObject.js"></script>
+  <script src="src/Actors/ButteryflyMarker.js"></script>
+  <script src="src/Actors/DoorObj.js"></script>
+  <script src="src/Actors/FolioObj.js"></script>
+  <script src="src/Actors/WallObj.js"></script>
+  <script src="src/Actors/Torch.js"></script>
+  <script src="src/Actors/ExplosionObj.js"></script>
+  <script src="src/Actors/FireworkObj.js"></script>
+
+
+  <!-- Main Menu Screens -->
+  <script src="src/Screens/menu/BlankScreen.js"></script>
+  <script src="src/Screens/menu/OptionsMenu.js"></script>
+  <script src="src/Screens/menu/Instructions.js"></script>
+  <script src="src/Screens/menu/PlayerNumber.js"></script>
+  <script src="src/Screens/menu/PlayerSelect.js"></script>
+  <script src="src/Screens/menu/MainMenu.js"></script>
+  <script src="src/Screens/game/GameLoopScreen.js"></script>
+  <script src="src/Screens/menu/WinScreen.js"></script>
+  <script src="src/Screens/menu/LoseScreen.js"></script>
+
+  <!-- Game States -->
+  <script src="src/Screens/game/Pathfinder.js"></script>
+  <script src="src/Screens/game/BufferScreenObj.js"></script>
+  <script src="src/Screens/game/ExitSelectScreen.js"></script>
+  <script src="src/Screens/game/GrimoireCluesScreen.js"></script>
+  <script src="src/Screens/game/TraitorPickScreen.js"></script>
+
+
+  <!-- Main game loop -->
+  <script src="src/main.js"></script>
+</body>
+
 </html>
