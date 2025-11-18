@@ -81,13 +81,16 @@ class GameLoopScreen {
   }
 
   exit() {
-    
     this.gameDoors = [];
-    this.exit = null;
+    this.exitDoor = null;
+    this.clueDoors = [];
     this.level = 1;
-
+    this.cohesionTokens = 0;
     this.loopStates = [];
-    this.gameLoopState = 0;
+    this.characters = [];
+    this.levelDoors = [];
+    this.exitImg = null;
+    this.gameLoopState = this.grimoireReveal;
   }
 
 

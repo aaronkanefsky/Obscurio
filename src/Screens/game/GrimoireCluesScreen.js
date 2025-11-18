@@ -67,17 +67,24 @@ class GrimoireCluesScreen {
   }
 
   exit() {
-
+    // Doors
     this.clueDoor1 = null;
     this.clueDoor2 = null;
-
+    this.goalDoor = null;
     
-    console.log("Grimoire Clues Image:", this.gameLoop.grimoireClues);
-    this.grimoire = null;
+    this.goalCover = null;
+
+    // Butterfly markers
     this.butterflyMarker1 = null;
     this.butterflyMarker2 = null;
-    this.continueButton = null;
+
+    // Screen Background
     this.grimoireBackground = null;
+
+    // Buttons
+    this.continueButton = null;
+    this.nextButton = null;
+    this.backButton = null;
   }
 
   update() {
