@@ -84,7 +84,7 @@ class LoseScreen {
   exit() {
     this.restartButton = null;
     this.animationStart = 0;
-    this.torches = [];
+    this.torches = null;
     this.game = null;
   }
 }

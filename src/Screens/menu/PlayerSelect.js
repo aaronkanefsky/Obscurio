@@ -43,6 +43,8 @@ class PlayerSelScreen {
         this.playerChoices[6] = loadImage(ASSET_PATH + 'images/character6.png');
 
         this.num = 0;
+        //this.num = 1;
+        //this.game.players.push(0, 7);
     }
 
     /**

@@ -67,15 +67,24 @@ class GrimoireCluesScreen {
   }
 
   exit() {
-
+    // Doors
     this.clueDoor1 = null;
     this.clueDoor2 = null;
+    this.goalDoor = null;
+    
+    this.goalCover = null;
 
-    this.grimoire = null;
+    // Butterfly markers
     this.butterflyMarker1 = null;
     this.butterflyMarker2 = null;
-    this.continueButton = null;
+
+    // Screen Background
     this.grimoireBackground = null;
+
+    // Buttons
+    this.continueButton = null;
+    this.nextButton = null;
+    this.backButton = null;
   }
 
   update() {
@@ -94,6 +103,7 @@ class GrimoireCluesScreen {
 
 
   draw() {
+
     image(this.grimoireBackground, 0, 0, 600, 600);
     image(this.grimoire, 0, 0, 600, 391);
 
@@ -107,6 +117,12 @@ class GrimoireCluesScreen {
       this.drawMarkers();
       this.goalCover.draw();
     }
+    else {
+      // image(cluePicture, 0, 0);
+
+    }
+
+
   }
 
   handleInstructions() {

@@ -40,7 +40,7 @@ let instructionText;
 let cursorDefault, cursorPointer, showCursor;
 var charWalk = [];
 var charSpell = [];
-let menu, options, instuctions, playerNum, playerSel, game, winScreen, loseScreen;
+let menu, options, instructions, playerNum, playerSel, game, winScreen, loseScreen;
 let gameState;
 var doorImgs = [];
 var characters = [];
@@ -218,9 +218,7 @@ function handleWinScreen() {
     winScreen.drawWinScreen();
 
     if (winScreen.restartButton.released === true) {
-        gameState = gameStates.MAIN_MENU;
-        winScreen.exit();
-        menu.enter();
+        resetGame();
     }
 }
 
@@ -229,11 +227,26 @@ function handleLoseScreen() {
     loseScreen.drawLoseScreen();
 
     if (loseScreen.restartButton.released === true) {
-        gameState = gameStates.MAIN_MENU;
-        loseScreen.exit();
-        menu.enter();
+        resetGame();
     }
 }
+
+function resetGame() {
+    globalGameConfig = new GameObject();
+
+    menu = new MainMenu(globalGameConfig);
+    options = new OptionsMenu(globalGameConfig);
+    instructions = new Instructions(globalGameConfig);
+    playerNum = new PlayerNumberScreen(globalGameConfig);
+    playerSel = new PlayerSelScreen(globalGameConfig);
+    game = new GameLoopScreen(globalGameConfig, doorImgs);
+    winScreen = new WinScreen(globalGameConfig);
+    loseScreen = new LoseScreen(globalGameConfig);
+
+    gameState = gameStates.MAIN_MENU;
+    menu.enter();
+}
+
 
 
 /////////////////////////////////
