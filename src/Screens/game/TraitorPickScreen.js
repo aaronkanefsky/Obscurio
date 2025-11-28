@@ -73,12 +73,10 @@ class TraitorPickScreen {
         if((dist(mouseX,mouseY,this.folioDoors[k].x,this.folioDoors[k].y) <= 80) && this.folioDoors[k].selected === false && this.doorPicks < 2) {
           this.folioDoors[k].selected = true;
           this.doorPicks++;
-          console.log("Door", k, "selected");
         }
         else if((dist(mouseX,mouseY,this.folioDoors[k].x,this.folioDoors[k].y) <= 80) && this.folioDoors[k].selected === true) {
           this.folioDoors[k].selected = false;
           this.doorPicks--;
-          console.log("Door", k, "deselected");
         }
       }
     }
@@ -95,7 +93,6 @@ class TraitorPickScreen {
     // find the selected doors and add them to level doors, then replace them in te folio with new doors for next level's traitor pick
     for(let i = 0; i < this.folioDoors.length; i++) {
       if(this.folioDoors[i].selected === true) {
-        console.log("Door", i, "selected");
         this.gameLoop.levelDoors.push(new DoorObj(this.gameLoop, 0, 0, 0, 0, 0, 0, 0, this.folioDoors[i].door));
         if(i < 3) {
           this.folioDoors.splice(i,1,new FolioObj((i*180) + 120,170,this.gameLoop.gameDoors.pop()));
