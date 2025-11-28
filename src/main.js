@@ -42,7 +42,7 @@ var charWalk = [];
 var charSpell = [];
 let menu, options, instructions, playerNum, playerSel, game, winScreen, loseScreen;
 let gameState;
-var doorImgs = [];
+//var doorImgs = [];
 var characters = [];
 
 function preload() {
@@ -54,9 +54,9 @@ function preload() {
     }
 
     // will change to include all 66 doors later
-    for (i = 5; i < 28; i++) {
+    /*for (i = 0; i < 28; i++) {
         doorImgs.push(loadImage(ASSET_PATH + "images/door" + i + ".png"));
-    }
+    }*/
 
     instructionText = loadStrings(ASSET_PATH + 'instructions/Instructions.txt');
 }
@@ -67,18 +67,12 @@ function setup() {
 
     globalGameConfig = new GameObject();
 
-    // Populate characters
-    /*for (let i = 0; i < 7; i++) {
-        let c = new Character(i);
-        globalGameConfig.characters.push(c);  // <--- IMPORTANT
-    }*/
-
     menu = new MainMenu(globalGameConfig);
     options = new OptionsMenu(globalGameConfig);
     instructions = new Instructions(globalGameConfig);
     playerNum = new PlayerNumberScreen(globalGameConfig);
     playerSel = new PlayerSelScreen(globalGameConfig);
-    game = new GameLoopScreen(globalGameConfig, doorImgs);
+    game = new GameLoopScreen(globalGameConfig);
     winScreen = new WinScreen(globalGameConfig);
     loseScreen = new LoseScreen(globalGameConfig);
 
@@ -204,10 +198,10 @@ function handleInstructionsScreen() {
 }
 
 function handleGame() {
-    if (game.level > 1) {    // Change to > 6 levels later
+    if (game.level > 6) {    // Change to > 6 levels later
       game.exit();
     }
-    else if (game.cohesionTokens <= 10) {
+    else if (game.cohesionTokens <= 0) {
       game.exit();
     }
     game.draw();
@@ -239,7 +233,7 @@ function resetGame() {
     instructions = new Instructions(globalGameConfig);
     playerNum = new PlayerNumberScreen(globalGameConfig);
     playerSel = new PlayerSelScreen(globalGameConfig);
-    game = new GameLoopScreen(globalGameConfig, doorImgs);
+    game = new GameLoopScreen(globalGameConfig);
     winScreen = new WinScreen(globalGameConfig);
     loseScreen = new LoseScreen(globalGameConfig);
 
