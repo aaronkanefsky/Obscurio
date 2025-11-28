@@ -105,8 +105,15 @@ class GameLoopScreen {
 
   handleCloseEyes() {
     this.closeEyes.draw();
-    if (this.closeEyes.continueButton.released)
-      this.changeState(this.traitorReveal);
+    if (this.closeEyes.continueButton.released) {
+      if(this.game.playerCount > 3) {
+        this.changeState(this.traitorReveal);
+      }
+      else {
+        this.changeState(this.grimoireCluesScreen);
+        this.grimoireCluesScreen.enter();
+      }
+    }
   }
 
   handleTraitorReveal() {
@@ -118,34 +125,34 @@ class GameLoopScreen {
   }
 
   handleGrimoireCluesScreen() {
-    // TODO: Remove this. Debug only
-
     this.grimoireCluesScreen.update();
     this.grimoireCluesScreen.draw();
     if (this.grimoireCluesScreen.done) {
-      this.changeState(this.openEyes);
+      if(this.game.playerCount > 3) {
+        this.changeState(this.traitorOpenEyes);
+      }
+      else {
+        this.changeState(this.openEyes);
+      }
     }
   }
-  handletraitorOpenEyes() {
 
+  handletraitorOpenEyes() {
     this.traitorOpenEyes.draw();
     if (this.traitorOpenEyes.continueButton.released) {
       this.changeState(this.traitorPickScreen);
+      this.traitorPickScreen.enter();
     }
   }
 
   handleTraitorPickScreen() {
-    // this.traitorPickScreen.update();
-    // this.traitorPickScreen.draw();
+    this.traitorPickScreen.update();
+    this.traitorPickScreen.draw();
 
-    // if (this.traitorPickScreen.nextButton.released === true) {
-    //   this.gameLoopState.changeState(this.exitSelectScreen);
-    //   this.traitorPickScreen.exit();
-    //   this.exitSelectScreen.enter();
-
-    background(0, 0, 255)
-
-      ;
+    if (this.traitorPickScreen.nextButton.released) {
+      this.changeState(this.openEyes);
+      this.traitorPickScreen.exit();
+    }
   }
 
   handleOpenEyes() {

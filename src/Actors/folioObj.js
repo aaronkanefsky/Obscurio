@@ -8,5 +8,18 @@ class FolioObj {
     this.x = x;
     this.y = y;
     this.door = d;
+    this.selected = false;
+  }
+
+  draw(){
+    push();
+    translate(this.x, this.y)
+    if(this.selected === true) {
+      drawingContext.shadowBlur = 80;
+      drawingContext.shadowColor = color(255, 0, 0);
+    }
+    imageMode(CENTER);
+    image(this.door, 0, 0, 150, 150);
+    pop();
   }
 }
