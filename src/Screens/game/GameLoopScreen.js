@@ -2,7 +2,7 @@ class GameLoopScreen {
   constructor(game) {
     this.game = game;
     this.gameDoors = [];
-    for (let i = 0; i < 66; i++) {
+    for (let i = 0; i < 64; i++) {
         this.gameDoors.push(loadImage(ASSET_PATH + "images/door" + i + ".png"));
     }
     this.exitDoor = null;
