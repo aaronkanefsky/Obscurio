@@ -97,7 +97,15 @@ class TraitorPickScreen {
       if(this.folioDoors[i].selected === true) {
         console.log("Door", i, "selected");
         this.gameLoop.levelDoors.push(new DoorObj(this.gameLoop, 0, 0, 0, 0, 0, 0, 0, this.folioDoors[i].door));
-        this.folioDoors.splice(i,1);
+        if(i < 3) {
+          this.folioDoors.splice(i,1,new FolioObj((i*180) + 120,170,this.gameLoop.gameDoors.pop()));
+        }
+        else if(i < 6) {
+          this.folioDoors.splice(i,1,new FolioObj(((i-3)*180) + 120,340,this.gameLoop.gameDoors.pop()));
+        }
+        else {
+          this.folioDoors.splice(i,1,new FolioObj(((i-6)*180) + 120,510,this.gameLoop.gameDoors.pop()));
+        }
       }
     }
     
