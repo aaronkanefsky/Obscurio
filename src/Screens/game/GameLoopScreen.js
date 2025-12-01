@@ -1,8 +1,10 @@
 class GameLoopScreen {
-  constructor(game, doorImgs) {
+  constructor(game) {
     this.game = game;
-    this.doorImgs = doorImgs;
     this.gameDoors = [];
+    for (let i = 0; i < 66; i++) {
+        this.gameDoors.push(loadImage(ASSET_PATH + "images/door" + i + ".png"));
+    }
     this.exitDoor = null;
     this.clueDoors = [];
     this.level = 1;
@@ -20,13 +22,6 @@ class GameLoopScreen {
   }
 
   enter() {
-
-    for (let i = 0; i < 7; i++) {
-      let c = new Character(i);
-      characters.push(c);           // optional global array
-      game.characters.push(c);      // safe now
-    }
-
     this.loopStates = [
       this.grimoireCluesScreen = new GrimoireCluesScreen(this),
       this.grimoireReveal = new BufferScreen("Player 1\nYou are the Grimoire", this),
@@ -36,11 +31,9 @@ class GameLoopScreen {
       this.openEyes = new BufferScreen("All players open your eyes", this),
       this.traitorPickScreen = new TraitorPickScreen(this),
       this.exitSelectScreen = new ExitSelectScreen(this),
-      this.winScreen = new WinScreen(this),
-      this.loseScreen = new LoseScreen(this)
     ];
 
-    this.gameDoors = shuffle(this.doorImgs);
+    this.gameDoors = shuffle(this.gameDoors);
     this.cohesionTokens = (this.game.playerCount * 3) + (this.game.playerCount - 2);    // Formula derived from beginner level cohesion token allocation given in Obscurio instructions
     if (this.game.playerCount === 2) this.cohesionTokens += 6;                           // Adjustment for 2 players
     if (this.game.playerCount === 3) this.cohesionTokens -= 1;                           // Adjustment for 3 players
@@ -48,8 +41,8 @@ class GameLoopScreen {
 
     // Randomize the order of doors to be used
     this.exitDoor = new DoorObj(this, 200, 500, 2, 5, 200, 360, 1, this.gameDoors.pop());
-    this.clueDoors.push(new DoorObj(this, -203, -45, 5, 3, 57, 108, 0, this.gameDoors.pop()))
-    this.clueDoors.push(new DoorObj(this, 652, -30, 5, 2, 327, 106, 0, this.gameDoors.pop()))
+    this.clueDoors.push(new DoorObj(this, -203, -45, 5, 3, 57, 108, 0, this.gameDoors.pop()));
+    this.clueDoors.push(new DoorObj(this, 652, -30, 5, 2, 327, 106, 0, this.gameDoors.pop()));
     this.gameLoopState = this.grimoireReveal;
   }
 
@@ -79,17 +72,29 @@ class GameLoopScreen {
     else if (this.gameLoopState === this.exitSelectScreen) {
       this.handleExitSelectScreen();
     }
-    else if (this.gameLoopState === this.winScreen) {
-      this.winScreen.drawWinScreen();
-    }
-    else if (this.gameLoopState === this.loseScreen) {
-      this.loseScreen.drawLoseScreen();
-    }
   }
 
   exit() {
-  
-}
+    this.grimoireCluesScreen = null;
+    this.grimoireReveal = null;
+    this.closeEyes = null;
+    this.traitorReveal = null;
+    this.traitorOpenEyes = null;
+    this.openEyes = null;
+    this.traitorPickScreen = null;
+    this.exitSelectScreen = null;
+    this.winScreen = null;
+    this.loseScreen = null;
+    this.loopStates = [];
+    this.gameDoors = [];
+    this.cohesionTokens = null;
+
+
+    // Randomize the order of doors to be used
+    this.exitDoor = null;
+    this.clueDoors = [];
+    this.gameLoopState = null;
+  }
 
 
 
@@ -167,16 +172,15 @@ class GameLoopScreen {
     this.exitSelectScreen.update();
     if (this.exitSelectScreen.playerInd > this.game.playerCount) {
       this.exitSelectScreen.exit();
-      if (this.level <= 1 && this.cohesionTokens > 11) {  // change to <= 6 levels and > 0 cohesion tokens
-        this.changeState(this.grimoireCluesScreen);
-        this.grimoireCluesScreen.enter();
+      if (this.level <= 6 && this.cohesionTokens > 0) {  // change to <= 6 levels and > 0 cohesion tokens
+        this.handleNewLevel();
       }
-      else if (this.level > 1) {
+      else if (this.level > 6) {
         gameState = gameStates.WIN_SCREEN;
         winScreen.enter();
         this.gameLoopState = this.grimoireReveal;
       }
-      else if (this.cohesionTokens <= 11) {
+      else if (this.cohesionTokens <= 0) {
         gameState = gameStates.LOSE_SCREEN;
         loseScreen.enter();
         this.gameLoopState = this.grimoireReveal;
@@ -185,5 +189,15 @@ class GameLoopScreen {
     else {
       this.exitSelectScreen.draw();
     }
+  }
+
+  handleNewLevel() {
+    this.grimoireCluesScreen = new GrimoireCluesScreen(this);
+    this.exitSelectScreen = new ExitSelectScreen(this);
+    this.exitDoor = new DoorObj(this, 200, 500, 2, 5, 200, 360, 1, this.gameDoors.pop());
+    this.clueDoors = [];
+    this.clueDoors.push(new DoorObj(this, -203, -45, 5, 3, 57, 108, 0, this.gameDoors.pop()));
+    this.clueDoors.push(new DoorObj(this, 652, -30, 5, 2, 327, 106, 0, this.gameDoors.pop()));
+    this.gameLoopState = this.grimoireReveal;
   }
 }

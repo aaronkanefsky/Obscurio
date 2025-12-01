@@ -150,10 +150,7 @@ class ExitSelectScreen {
 
       door.exitX = OFFSET_X + goal.x * TILE + TILE / 2;
       door.exitY = goal.y * TILE + TILE / 2;
-
-      console.log(`Door ${i}: exitCard=${door.exitCard}, target=(${door.exitX},${door.exitY})`);
     }
-
   }
 
   selectDoorByIndex(i) {
@@ -301,7 +298,6 @@ class ExitSelectScreen {
 
   exit() {
     for(let d of this.currLevelDoors) {
-      console.log("Door: exitCard =",d.exitCard,", count =",d.count);
       if(d.exitCard === 0 && d.count > 0) {
         this.gameLoop.cohesionTokens -= d.count;
       }

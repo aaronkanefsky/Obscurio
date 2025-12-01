@@ -1,9 +1,3 @@
-// Global variables
-const tileWidth = 30;
-const screenCols = 10;
-const screenRows = 20;
-const screenWidth = tileWidth * screenCols;
-const screenHeight = tileWidth * screenRows;
 
 class Player {
   constructor(player_num, char_num) {
