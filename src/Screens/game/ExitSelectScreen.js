@@ -176,8 +176,6 @@ class ExitSelectScreen {
       this.target = createVector(goal.x * TILE + OFFSET_X, goal.y * TILE);
       this.targetSet = true;
     }
-
-    this.currLevelDoors[i].count++;
   }
 
   update() {
@@ -208,6 +206,7 @@ class ExitSelectScreen {
     if (!this.pathfinder.active()) {
       for (let d of this.currLevelDoors) {
         if (dist(player.x, player.y, d.exitX, d.exitY) < 30) {
+          d.count++;
           this.playerInd++;
           this.targetSet = false;
           this.target.set(0, 0);
