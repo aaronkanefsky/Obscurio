@@ -130,7 +130,17 @@ class TraitorPickScreen {
     textFont(this.menuFont);
     textSize(30);
     textAlign(CENTER, CENTER);
-    text(`Traitor you can select up to ${2 - this.doorPicks} more doors!`, 300, 40);
+
+
+    // Traitor door pick status message
+    if(2 - this.doorPicks === 2)
+      text(`Traitor, you can select up to 2 more doors!`, 300, 40);
+    else if(2 - this.doorPicks === 1)
+      text(`Traitor, you can select up to 1 more door!`, 300, 40);
+    else
+      text(`Traitor, you have selected both doors!`, 300, 40);
+
+
     for(let k = 0; k < this.folioDoors.length; k++) {
       stroke(0);
       rectMode(CENTER);

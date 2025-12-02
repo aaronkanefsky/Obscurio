@@ -138,15 +138,19 @@ class GrimoireCluesScreen {
     this.continueButton.drawButton();
 
     push();
-    stroke(97, 64, 38);
-    fill(255, 250, 214);
+    stroke(0);
+    fill(97, 64, 38);
     strokeWeight(3)
-    rect(5, 375, 590, 220)
+    rect(5, 375, 590, 220, 7)
     textSize(19);
     textAlign(LEFT);
-    stroke(41, 25, 13);
-    text("In the next screen, the traitor will have the chance to pick up to 2 doors to include in this level. Step (1) All players except the Grimoire should now close their eyes. Step (2) Grimoire count down from 3 and ask the traitor to open their eyes. Step (3) On the next screen the traitor will indicate the number of the card with their fingers and the Grimoire will select the door they choose with the mouse. Step (4) When the traitor is finished selecting doors, they should close their eyes and the Grimoire should select next on the screen.",
-      20, 380, 580);
+    stroke(0);
+    strokeWeight(0.3);
+    textFont("Helvetica Neue")
+    textStyle(BOLD);
+    fill(0);
+    text("In the next part, the Grimoire will select up to two clues to give to the other players. Please note that the Traitor and Wizards will all be using these clues when picking their exit door. Use the left and right arrow keys to rotate the Butterfly Marker, giving the players a better chance to understand your clue. Once you have the proper place, left click to stick the marker to the clues. Good luck!",
+    15, 390, 585);
 
     pop();
   }
