@@ -96,8 +96,7 @@ class GrimoireCluesScreen {
       this.handleMarkers();
     else if (this.state === GrimoireState.HIDE_CLUES)
       this.coverWinningDoor();
-    else if (this.state === GrimoireState.READY)
-      this.handleReady();
+  
   }
 
 
@@ -116,10 +115,6 @@ class GrimoireCluesScreen {
     else if (this.state === GrimoireState.HIDE_CLUES) {
       this.drawMarkers();
       this.goalCover.draw();
-    }
-    else {
-      // image(cluePicture, 0, 0);
-
     }
 
 
@@ -246,18 +241,6 @@ class GrimoireCluesScreen {
 
       this.done = true;
     }
-  }
-
-  handleReady(){
-    // Check if the continue button is hit
-
-
-    // If the back button is hit, go back to placing the markers
-
-  }
-
-  drawReady(){
-    // Draw the buttons
   }
 
 }
