@@ -1,10 +1,9 @@
 /**
- * @class OptionsMenu
+ * @class CreditsMenu
  * 
- * @description Container for Obscurio's main menu, as well as handling
- * moving to different states
+ * @description Container for Obscurio's image credits
  */
-class OptionsMenu{
+class CreditsMenu{
     /**
      * 
      * @param {Game} game Reference to current game
