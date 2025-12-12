@@ -24,7 +24,7 @@
 const gameStates = {
     MAIN_MENU: 0,
     INSTRUCTIONS: 1,
-    CREDITS: 2,
+    CREDITS_SCREEN: 2,
     PLAYER_NUM: 3,
     PLAYER_SELECT: 4,
     GAME: 5,
@@ -40,7 +40,7 @@ let instructionText;
 let cursorDefault, cursorPointer, showCursor;
 var charWalk = [];
 var charSpell = [];
-let menu, options, instructions, playerNum, playerSel, game, winScreen, loseScreen;
+let menu, credits, instructions, playerNum, playerSel, game, winScreen, loseScreen;
 let gameState;
 //var doorImgs = [];
 var characters = [];
@@ -59,6 +59,7 @@ function preload() {
     }*/
 
     instructionText = loadStrings(ASSET_PATH + 'instructions/Instructions.txt');
+    creditsText = loadStrings(ASSET_PATH + 'credits/Credits.txt');
 }
 
 function setup() {
