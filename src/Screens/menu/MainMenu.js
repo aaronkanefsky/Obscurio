@@ -13,7 +13,7 @@ class MainMenu{
         this.backgroundImage = loadImage(ASSET_PATH + 'images/title_screen.png')
         this.game = game;
         this.instructionsButton;
-        this.optionsButton;
+        this.creditsButton;
         this.playButton;
         this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
         this.buttonColor = color(143, 86, 59);
@@ -25,7 +25,7 @@ class MainMenu{
     enter() {
         // Init all buttons
         this.instructionsButton = new Button(350, 570, 160, 40, 'Instructions', 20, this.menuFont, this.buttonColor);
-        this.optionsButton = new Button(170, 570, 100, 40, 'Options', 20, this.menuFont, this.buttonColor);
+        this.creditsButton = new Button(170, 570, 100, 40, 'Credits', 20, this.menuFont, this.buttonColor);
         this.playButton = new Button(300, 240, 100, 40, 'Play', 20, this.menuFont, this.buttonColor);
 
         for(let c of this.game.characters) {
@@ -38,7 +38,7 @@ class MainMenu{
      */
     updateMainMenu(){
         this.instructionsButton.updateButton();
-        this.optionsButton.updateButton();
+        this.creditsButton.updateButton();
         this.playButton.updateButton();
     }
 
@@ -48,7 +48,7 @@ class MainMenu{
     exit(){
         // Turn all buttons to null to remove them from memory
         this.instructionsButton = null;
-        this.optionsButton = null;
+        this.creditsButton = null;
         this.playButton = null;
         for(let c of this.game.characters) {
             c.direction = 2;
@@ -76,7 +76,7 @@ class MainMenu{
         }
 
         this.instructionsButton.drawButton();
-        this.optionsButton.drawButton();
+        this.creditsButton.drawButton();
         this.playButton.drawButton();
             
         // Credits
