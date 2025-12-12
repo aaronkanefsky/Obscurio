@@ -28,7 +28,7 @@ class CreditsMenu{
     /**
      * @description Behavior while in Main Menu state
      */
-    updateOptionsMenu(){
+    updateCreditsMenu(){
         this.backButton.updateButton();
     }
 
@@ -44,7 +44,7 @@ class CreditsMenu{
     /**
      * @description Draws the main menu to the screen
      */
-    drawOptionsMenu(){
+    drawCreditsMenu(){
         image(this.backgroundImage, 0, 0, 600, 600)
         this.backButton.drawButton();
     }
