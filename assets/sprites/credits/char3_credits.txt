@@ -1,0 +1,244 @@
+body/bodies/teen/amber.png
+	- Note: see details at https://opengameart.org/content/lpc-character-bases; 'Thick' Male Revised Run/Climb by JaidynReiman (based on ElizaWy's LPC Revised)
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- bluecarrot16
+		- Evert
+		- TheraHedwig
+		- Benjamin K. Smith (BenCreating)
+		- MuffinElZangano
+		- Durrani
+		- Pierre Vigier (pvigier)
+		- Eliza Wyatt (ElizaWy)
+		- Matthew Krohn (makrohn)
+		- Johannes Sjölund (wulax)
+		- Stephen Challener (Redshrike)
+	- Links:
+		- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+		- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+		- https://opengameart.org/content/lpc-ladies
+		- https://opengameart.org/content/lpc-teen-unisex-base-clothes
+		- https://opengameart.org/content/lpc-jump-expanded
+		- https://opengameart.org/content/lpc-revised-character-basics
+		- https://opengameart.org/content/lpc-be-seated
+		- https://gitlab.com/vagabondgame/lpc-characters
+		- https://opengameart.org/content/lpc-male-jumping-animation-by-durrani
+		- https://opengameart.org/content/lpc-jump-expanded
+
+head/heads/human/male_small/amber.png
+	- Note: original head by Redshrike, reduced size head by ElizaWy
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY
+	- Authors:
+		- ElizaWy
+		- Stephen Challener (Redshrike)
+	- Links:
+		- 
+
+head/faces/male/neutral/amber.png
+	- Note: Original by Redshrike, Expressions by ElizaWy, mapped to all frames by JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- JaidynReiman
+		- ElizaWy
+		- Stephen Challener (Redshrike)
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Head
+		- https://opengameart.org/content/ulpc-expanded-expressions
+
+eyes/human/adult/neutral/blue.png
+	- Note: original by Redshrike, mapped to all frames by Matthew Krohn & JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+		- Matthew Krohn (makrohn)
+		- Stephen Challener (Redshrike)
+	- Links:
+		- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+
+head/nose/button/adult/amber.png
+	- Note: 
+	- Licenses:
+		- GPL 3.0
+		- CC-BY-SA 3.0
+	- Authors:
+		- Thane Brimhall (pennomi)
+		- laetissima
+		- Matthew Krohn (makrohn)
+	- Links:
+		- https://opengameart.org/content/lpc-base-character-expressions
+
+eyes/eyebrows/thin/adult/strawberry.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Hair
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+hair/mop/adult/strawberry.png
+	- Note: (george)
+	- Licenses:
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- Radomir Dopieralski
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/alternate-lpc-character-sprites-george
+		- https://opengameart.org/content/lpc-hair
+
+neck/cravat/male/green.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+		- GPL 3.0
+	- Authors:
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-pirates
+
+arms/armour/plate/female/bronze.png
+	- Note: original by wulax, adapted to female by makrohn, recolors by bigbeargames; adapted to v3 bases and further recolors by bluecarrot16
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- Michael Whitlock (bigbeargames)
+		- Matthew Krohn (makrohn)
+		- Johannes Sjölund (wulax)
+	- Links:
+		- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+		- https://opengameart.org/content/lpc-combat-armor-for-women
+		- http://opengameart.org/content/lpc-clothing-updates
+
+arms/gloves/female/leather.png
+	- Note: metal gloves by wulax, extended to female base by makrohn, recolors by bigbeargames, adapted to v3 bases by bluecarrot16, added to expanded animations by JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- Michael Whitlock (bigbeargames)
+		- Matthew Krohn (makrohn)
+		- Johannes Sjölund (wulax)
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+		- http://opengameart.org/content/lpc-clothing-updates
+
+torso/clothes/longsleeve/longsleeve/teen/tan.png
+	- Note: body by Redshrike, shirt by ElizaWy derived from base, edited by bluecarrot16 to v3 bases; cleanup and climb/jump/run/sit/emote/revised combat adapted from LPC Revised by JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+		- GPL 3.0
+	- Authors:
+		- bluecarrot16
+		- ElizaWy
+		- JaidynReiman
+		- Stephen Challener (Redshrike)
+		- Johannes Sjölund (wulax)
+	- Links:
+		- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+		- https://opengameart.org/content/lpc-teen-unisex-base-clothes
+		- http://opengameart.org/content/lpc-clothing-updates
+		- https://opengameart.org/content/lpc-revised-character-basics
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+		- https://opengameart.org/content/lpc-expanded-simple-shirts
+
+torso/waist/belt_leather/male/leather.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- bluecarrot16
+		- Johannes Sjölund (wulax)
+		- Matthew Krohn (makrohn)
+	- Links:
+		- https://opengameart.org/content/lpc-combat-armor-for-women
+		- https://opengameart.org/content/lpc-pirates
+
+legs/leggings2/thin/walnut.png
+	- Note: original by ElizaWy, remaining frames
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy
+		- JaidynReiman
+		- Johannes Sjölund (wulax)
+		- Stephen Challener (Redshrike)
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+		- https://opengameart.org/content/lpc-expanded-pants
+
+feet/boots/fold/thin/green.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0+
+		- CC-BY 3.0+
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+	- Links:
+		- https://opengameart.org/content/lpc-kimono-relm
+		- https://opengameart.org/content/lpc-expanded-socks-shoes
+
+weapon/magic/crystal/universal/foreground/blue.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0+
+		- GPL 3.0
+		- CC-BY 4.0
+	- Authors:
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-more-weapons
+
+weapon/magic/crystal/universal/background/blue.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0+
+		- GPL 3.0
+		- CC-BY 4.0
+	- Authors:
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-more-weapons
+
+weapon/magic/crystal/thrust/foreground/blue.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0+
+		- GPL 3.0
+		- CC-BY 4.0
+	- Authors:
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-more-weapons
+
+weapon/magic/crystal/thrust/background/blue.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0+
+		- GPL 3.0
+		- CC-BY 4.0
+	- Authors:
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-more-weapons
+
