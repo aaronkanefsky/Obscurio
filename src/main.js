@@ -24,7 +24,7 @@
 const gameStates = {
     MAIN_MENU: 0,
     INSTRUCTIONS: 1,
-    OPTIONS_SCREEN: 2,
+    CREDITS: 2,
     PLAYER_NUM: 3,
     PLAYER_SELECT: 4,
     GAME: 5,
@@ -68,7 +68,7 @@ function setup() {
     globalGameConfig = new GameObject();
 
     menu = new MainMenu(globalGameConfig);
-    options = new OptionsMenu(globalGameConfig);
+    credits = new CreditsMenu(globalGameConfig);
     instructions = new Instructions(globalGameConfig);
     playerNum = new PlayerNumberScreen(globalGameConfig);
     playerSel = new PlayerSelScreen(globalGameConfig);
@@ -90,8 +90,8 @@ function draw() {
         case gameStates.MAIN_MENU:
             handleMainMenu();
             break;
-        case gameStates.OPTIONS_SCREEN:
-            handleOptionsScreen();
+        case gameStates.CREDITS_SCREEN:
+            handleCreditsScreen();
             break;
         case gameStates.INSTRUCTIONS:
             handleInstructionsScreen();
@@ -128,8 +128,8 @@ function handleMainMenu() {
         menu.exit();
         playerNum.enter();
     }
-    else if (menu.optionsButton.released === true) {
-        gameState = gameStates.OPTIONS_SCREEN;
+    else if (menu.creditsButton.released === true) {
+        gameState = gameStates.CREDITS_SCREEN;
         menu.exit();
         options.enter();
     }
@@ -175,13 +175,13 @@ function handlePlayerSelScreen() {
 
 }
 
-function handleOptionsScreen() {
-    options.updateOptionsMenu();
-    options.drawOptionsMenu();
+function handleCreditsScreen() {
+    credits.updateCreditsMenu();
+    credits.drawCreditsMenu();
 
-    if (options.backButton.released === true) {
+    if (credits.backButton.released === true) {
         gameState = gameStates.MAIN_MENU;
-        options.exit();
+        credits.exit();
         menu.enter();
     }
 }
@@ -229,7 +229,7 @@ function resetGame() {
     globalGameConfig = new GameObject();
 
     menu = new MainMenu(globalGameConfig);
-    options = new OptionsMenu(globalGameConfig);
+    credits = new CreditsMenu(globalGameConfig);
     instructions = new Instructions(globalGameConfig);
     playerNum = new PlayerNumberScreen(globalGameConfig);
     playerSel = new PlayerSelScreen(globalGameConfig);
