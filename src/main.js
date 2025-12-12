@@ -132,7 +132,7 @@ function handleMainMenu() {
     else if (menu.creditsButton.released === true) {
         gameState = gameStates.CREDITS_SCREEN;
         menu.exit();
-        options.enter();
+        credits.enter();
     }
     else if (menu.instructionsButton.released === true) {
         gameState = gameStates.INSTRUCTIONS;
