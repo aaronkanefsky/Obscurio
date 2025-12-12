@@ -12,8 +12,11 @@ class CreditsMenu{
         this.backgroundImage = loadImage(ASSET_PATH + 'images/backgroundBlurred.png')
         this.game = game;
         this.backButton;
-        this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf')
+        this.menuFont = loadFont(ASSET_PATH + 'fonts/Firlest-Regular.otf');
+        this.bodyTextFont = loadFont(ASSET_PATH + 'fonts/MountainKingRegular-woBYn.ttf')
         this.buttonColor = color(143, 86, 59);
+        this.textBackgroundColor = color(230);
+        this.textbox;
     }
 
     /**
@@ -23,6 +26,14 @@ class CreditsMenu{
         
         // Init all buttons
         this.backButton = new Button(170, 570, 100, 40, 'Back', 20, this.menuFont, this.buttonColor);
+
+        // Join preloaded text lines and make textbox
+        const fullText = creditsText.join('\n');
+
+        // Init the textbox
+        this.textbox = new ScrollableTextBox(
+            80, 30, 440, 500, fullText, 16, this.textBackgroundColor, 10
+        );
     }
 
     /**
@@ -30,6 +41,7 @@ class CreditsMenu{
      */
     updateCreditsMenu(){
         this.backButton.updateButton();
+        this.textbox.doDrag();
     }
 
     /**
@@ -38,7 +50,7 @@ class CreditsMenu{
     exit(){
         // Turn all buttons to null to remove them from memory
         this.backButton = null;
-
+        this.textbox = null;
     }
 
     /**
@@ -47,5 +59,6 @@ class CreditsMenu{
     drawCreditsMenu(){
         image(this.backgroundImage, 0, 0, 600, 600)
         this.backButton.drawButton();
+        this.textbox.draw();
     }
 }
